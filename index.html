@@ -1,781 +1,279 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Function — Brand Strategy by John Winterkorn</title>
-<meta name="description" content="Function is the independent brand strategy practice of John Winterkorn, drawing on work for Church &amp; Dwight, Anthem, Nespresso, and American Express.">
+<meta name="robots" content="noindex">
+<title>Function — Coming Soon</title>
+<meta name="description" content="Function is becoming something new. More soon.">
 
+<!-- Real, self-hosted type — same files/paths as index.html and the
+     Palantir-direction mockup this page is built from. -->
 <link rel="preload" href="assets/fonts/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/BlenderPro-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="tokens.css">
 
 <style>
-  /* ===========================================================
-     FUNCTION — HOMEPAGE
-     Consumes tokens.css + fonts.css only. No raw hex below this
-     line, no third-party font/script/stylesheet requests.
-     =========================================================== */
+/* ===========================================================
+   Coming-soon teaser. Same foundation as index-palantir-mockup.html
+   (tokens.css + fonts.css only, semantic tokens throughout) — trimmed
+   to hero + one motif, nothing that promises a page that isn't built
+   yet. Fox/hedgehog plates and alt text carried over verbatim from
+   philosophy.html so this page previews the real one rather than
+   inventing a separate visual language.
+   =========================================================== */
+:root{ --ease:cubic-bezier(.2,.7,.3,1); }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font-body);
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
 
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+h1,h2{font-family:var(--font-display);font-weight:700;letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.04}
+h2{font-size:clamp(22px,3vw,30px);line-height:1.1}
+p{margin:0 0 14px;max-width:58ch}
+.eyebrow{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-accent);margin:0 0 16px}
+.muted{color:var(--n-500)}
 
-  body{
-    background:var(--surface);
-    color:var(--text);
-    font-family:var(--font-body);
-    font-size:16px;
-    line-height:1.5;
-    -webkit-font-smoothing:antialiased;
-  }
+section{padding:96px 0}
 
-  a{color:inherit; text-decoration:none;}
-  img,svg{display:block; max-width:100%;}
-  .wrap{max-width:1240px; margin:0 auto; padding-left:clamp(24px,5vw,72px); padding-right:clamp(24px,5vw,72px);}
-  ::selection{background:var(--accent); color:var(--on-accent);}
-  :focus-visible{outline:2px solid var(--focus); outline-offset:3px;}
+header{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--rule)}
+.navrow{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;max-width:1120px;margin:0 auto}
+.wordmark{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em;text-decoration:none}
+.brandmark{display:inline-flex;align-items:center;color:var(--text)}
+.brandmark svg{height:20px;width:auto;display:block}
 
-  /* graph paper texture — light ground only */
-  .graph-bg{
-    background-image:
-      linear-gradient(var(--rule) 1px, transparent 1px),
-      linear-gradient(90deg, var(--rule) 1px, transparent 1px);
-    background-size:64px 64px;
-    background-position:center top;
-    opacity:1;
-  }
+/* hero — sticky content fades as the page scrolls past it */
+.hero{height:130vh;position:relative}
+.hero-inner{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;
+  will-change:opacity, transform}
+.hero-bg{position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;z-index:0;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-bg::after{content:"";position:absolute;inset:0;background:var(--surface);opacity:.88}
+.hero-copy{position:relative;z-index:1}
+.hero h1{max-width:17ch}
+.hero .lede{font-size:19px;max-width:50ch;margin-top:22px}
+.scrolltip{position:absolute;bottom:40px;left:28px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--n-500);display:flex;align-items:center;gap:8px}
+.scrolltip .bar{width:1px;height:28px;background:var(--rule-strong);animation:tip 1.8s ease-in-out infinite}
+@keyframes tip{0%,100%{transform:scaleY(1);opacity:.4}50%{transform:scaleY(.4);opacity:1}}
+@media (prefers-reduced-motion:reduce){ .scrolltip .bar{animation:none} }
 
-  /* ---------- eyebrow / kicker ---------- */
-  /* text-accent (not accent) — accent/red-500 is documented in tokens.css as
-     "display sizes only" (4.0:1 on paper); eyebrows run ~12.5px, so they need
-     the body-size-safe accent token, which correctly steps to red-300 on ink
-     via .is-ink's own token cascade. */
-  .eyebrow{
-    font-family:var(--font-display);
-    font-weight:500;
-    font-size:12.5px;
-    letter-spacing:.16em;
-    text-transform:uppercase;
-    color:var(--text-accent);
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .eyebrow::before{
-    content:"";
-    width:22px;
-    height:1px;
-    background:var(--text-accent);
-    display:inline-block;
-  }
+/* parable intro */
+.parable-intro p{font-size:17px}
 
-  /* ---------- nav ---------- */
-  header{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:var(--surface);
-    border-bottom:1px solid var(--rule);
-  }
-  .nav{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    height:72px;
-  }
-  .wordmark{
-    font-family:var(--font-display);
-    font-weight:700;
-    font-size:19px;
-    letter-spacing:-.01em;
-    color:var(--text);
-    white-space:nowrap;
-  }
-  .fn-logo{
-    display:inline;
-    height:.78em;
-    width:auto;
-    max-width:none;
-    vertical-align:-.08em;
-  }
-  .nav-links{
-    display:flex;
-    align-items:center;
-    gap:clamp(20px, 3vw, 40px);
-    font-family:var(--font-display);
-    font-size:14px;
-    font-weight:500;
-  }
-  .nav-links a{
-    position:relative;
-    padding:4px 0;
-    color:var(--text);
-    transition:color .2s ease;
-  }
-  .nav-links a:hover{color:var(--text-accent);}
-  .nav-links a::after{
-    content:"";
-    position:absolute;
-    left:0; bottom:0;
-    width:0%;
-    height:1px;
-    background:var(--accent);
-    transition:width .25s ease;
-  }
-  .nav-links a:hover::after{width:100%;}
-  .nav-cta{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:13.5px;
-    color:var(--text) !important;
-    border:1px solid var(--text);
-    padding:9px 18px;
-    border-radius:2px;
-    transition:background .2s ease, color .2s ease;
-  }
-  .nav-cta:hover{background:var(--text); color:var(--surface) !important;}
-  .nav-cta::after{display:none;}
-  .nav-toggle{display:none;}
+/* plates — side by side on desktop, two full stacked bands on mobile */
+.plates{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px}
+@media (max-width:760px){
+  .plates{grid-template-columns:1fr;gap:0}
+  .plate-fig{padding:56px 0}
+  .plate-fig + .plate-fig{border-top:1px solid var(--rule)}
+}
+.plate-fig{margin:0}
+.plate-mount{position:relative;background:var(--surface-raised);padding:clamp(10px,1.4vw,16px)}
+.plate-mount img{width:100%;height:auto}
+.plate-mount .hair{position:absolute;inset:clamp(10px,1.4vw,16px);border:1px solid var(--rule-strong);
+  pointer-events:none}
+.platecap{display:flex;flex-wrap:wrap;gap:5px 16px;align-items:baseline;margin-top:16px}
+.platecap .fig{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-accent)}
+.platecap .cap{font-size:14px;line-height:1.45;color:var(--n-500);max-width:38ch;margin:0}
 
-  /* ---------- hero ---------- */
-  .hero{
-    position:relative;
-    background:var(--surface);
-    color:var(--text);
-    overflow:hidden;
-    padding-top:clamp(64px, 10vw, 110px);
-    padding-bottom:clamp(48px, 8vw, 90px);
-  }
-  .hero-grid{
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:48px;
-    align-items:end;
-  }
-  .hero .eyebrow{margin-bottom:26px;}
-  .hero h1{
-    font-family:var(--font-display);
-    font-weight:700;
-    color:var(--text);
-    font-size:clamp(40px, 5.6vw, 78px);
-    line-height:1.03;
-    letter-spacing:-.02em;
-  }
-  .hero h1 em{
-    font-style:normal;
-    color:var(--accent);
-  }
-  .hero .line{display:block; overflow:hidden;}
-  .hero .line span{
-    display:block;
-    transform:translateY(110%);
-    animation:riseUp .9s cubic-bezier(.2,.8,.2,1) forwards;
-  }
-  .hero .line:nth-child(1) span{animation-delay:.05s;}
-  .hero .line:nth-child(2) span{animation-delay:.2s;}
-  @keyframes riseUp{to{transform:translateY(0);}}
+.foodband{margin-top:56px;padding-top:24px;border-top:1px solid var(--rule)}
+.thoughts{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:24px}
+@media (max-width:760px){ .thoughts{grid-template-columns:1fr;gap:32px} }
+.thought{margin:0}
+.thought q{quotes:none;display:block;font-family:var(--font-display);font-weight:500;
+  font-size:15px;line-height:1.42;margin:0 0 8px}
+.thought .gloss{display:block;font-size:13px;font-style:italic;color:var(--n-500);margin:0 0 8px}
+.thought .src{display:block;font-family:var(--font-display);font-weight:700;font-size:11px;
+  letter-spacing:.04em;color:var(--n-500)}
 
-  .hero-sub{
-    margin-top:28px;
-    max-width:480px;
-    font-size:16.5px;
-    line-height:1.65;
-    color:var(--text-muted);
-  }
-  .hero-actions{
-    margin-top:38px;
-    display:flex;
-    align-items:center;
-    gap:26px;
-    flex-wrap:wrap;
-  }
-  /* accent-press (red-700), not accent — the button sits inside .is-ink,
-     where --accent steps down to red-400 (~3.7:1 for white text, below the
-     4.5:1 floor at 14px). accent-press isn't redefined by .is-ink, so it
-     stays a stable, always-safe fill for white text in either context. */
-  .btn-primary{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:14px;
-    background:var(--accent-press);
-    color:var(--on-accent);
-    padding:14px 26px;
-    border-radius:2px;
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    transition:transform .2s ease, filter .2s ease;
-  }
-  .btn-primary:hover{filter:brightness(1.12); transform:translateY(-1px);}
-  .link-quiet{
-    font-family:var(--font-display);
-    font-weight:500;
-    font-size:14px;
-    color:var(--text-muted);
-    border-bottom:1px solid var(--rule);
-    padding-bottom:2px;
-    transition:color .2s ease, border-color .2s ease;
-  }
-  .link-quiet:hover{color:var(--text); border-color:var(--text);}
+/* reveal-on-scroll */
+[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease), transform .6s var(--ease)}
+[data-reveal].is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none}
+  .hero-inner{opacity:1 !important;transform:none !important}
+}
 
-  /* hero plot */
-  .plot-wrap{position:relative;}
-  .plot-caption{
-    font-family:var(--font-display);
-    font-size:11.5px;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--text-muted);
-    text-align:right;
-    margin-bottom:10px;
-  }
-  .plot-caption b{color:var(--accent); font-weight:600;}
-  #heroPlot .fit{
-    fill:none;
-    stroke:var(--plot-primary);
-    stroke-width:2.25;
-    stroke-linecap:round;
-    stroke-dasharray:700;
-    stroke-dashoffset:700;
-    animation:draw 1.9s cubic-bezier(.2,.7,.2,1) .5s forwards;
-  }
-  @keyframes draw{to{stroke-dashoffset:0;}}
-  #heroPlot .baseline{stroke:var(--plot-secondary); stroke-width:1.5;}
-  #heroPlot .tick{stroke:var(--axis); stroke-width:1;}
-  #heroPlot .gridline{stroke:var(--grid); stroke-width:1;}
-  #heroPlot .axislabel{font-family:var(--font-display); font-size:11px; fill:var(--text-muted);}
-  #heroPlot .scatter{fill:var(--text-muted);}
-  #heroPlot .scatter.far{opacity:.5;}
-  #heroPlot .node-fill{fill:var(--surface);}
-  #heroPlot .node-ring{fill:none; stroke:var(--plot-primary); stroke-width:1.5;}
+footer{border-top:1px solid var(--rule);padding:40px 0;font-size:13px;color:var(--n-500)}
+.footrow{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+footer a{color:var(--n-500);text-decoration:none;border-bottom:1px solid var(--rule-strong);transition:color .2s ease, border-color .2s ease}
+footer a:hover{color:var(--text);border-color:var(--text)}
 
-  /* ---------- statement band ---------- */
-  .statement{padding:clamp(84px, 12vw, 150px) 0;}
-  .statement .eyebrow{margin-bottom:28px;}
-  .statement blockquote{
-    font-family:var(--font-display);
-    font-weight:500;
-    font-size:clamp(26px, 3.6vw, 46px);
-    line-height:1.22;
-    letter-spacing:-.01em;
-    max-width:920px;
-    color:var(--text);
-  }
-  .statement blockquote b{font-weight:600; color:var(--accent);}
-
-  .stat-strip{
-    margin-top:64px;
-    padding-top:36px;
-    border-top:1px solid var(--rule);
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:32px;
-  }
-  .stat .num{
-    font-family:var(--font-display);
-    font-weight:700;
-    font-size:clamp(30px, 3vw, 42px);
-    letter-spacing:-.01em;
-    color:var(--accent);
-  }
-  /* text-accent, not the inherited accent — at .42em the sup drops below
-     the large-text exemption even though its parent qualifies for one */
-  .stat .num sup{font-size:.42em; top:-.7em; margin-left:2px; color:var(--text-accent);}
-  .stat .label{
-    margin-top:8px;
-    font-size:13.5px;
-    color:var(--text);
-    max-width:26ch;
-  }
-
-  /* ---------- approach ---------- */
-  .approach{padding:clamp(80px, 11vw, 140px) 0;}
-  .approach-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:24px;
-    margin-bottom:64px;
-    flex-wrap:wrap;
-  }
-  .approach-head h2{
-    font-family:var(--font-display);
-    font-weight:700;
-    font-size:clamp(30px, 3.6vw, 46px);
-    letter-spacing:-.015em;
-    max-width:640px;
-    color:var(--text);
-  }
-  .approach-head p{max-width:340px; color:var(--text); font-size:14.5px; line-height:1.6;}
-
-  .discipline{
-    display:grid;
-    grid-template-columns:110px 1fr 1fr;
-    gap:24px;
-    align-items:baseline;
-    padding:30px 0;
-    border-top:1px solid var(--rule);
-    transition:padding-left .3s ease;
-  }
-  .discipline:last-child{border-bottom:1px solid var(--rule);}
-  .discipline:hover{padding-left:12px;}
-  .discipline .idx{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:14px;
-    color:var(--coord);
-    letter-spacing:.02em;
-  }
-  .discipline h3{
-    font-family:var(--font-display);
-    font-weight:700;
-    font-size:clamp(20px, 2.2vw, 27px);
-    letter-spacing:-.01em;
-    color:var(--text);
-  }
-  .discipline p{color:var(--text); font-size:14.5px; line-height:1.65; max-width:42ch;}
-
-  /* ---------- proof / logo wall ---------- */
-  .proof-section{padding:clamp(70px, 10vw, 120px) 0;}
-  .proof-section .eyebrow{margin-bottom:44px;}
-  .logo-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:1px;
-    background:var(--rule);
-    border:1px solid var(--rule);
-  }
-  .logo-slot{
-    background:var(--surface);
-    aspect-ratio:2.2/1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:var(--font-display);
-    font-size:13px;
-    color:var(--text);
-    letter-spacing:.02em;
-    text-align:center;
-    padding:8px;
-  }
-  .proof-ambient{
-    margin-top:26px;
-    font-size:13px;
-    line-height:1.6;
-    color:var(--text);
-    max-width:60ch;
-  }
-
-  /* ---------- philosophy ---------- */
-  .philosophy{
-    background:var(--surface);
-    color:var(--text);
-    padding:clamp(100px, 14vw, 170px) 0;
-    position:relative;
-    overflow:hidden;
-  }
-  .philosophy .eyebrow{justify-content:center; margin:0 auto 40px;}
-  .philosophy blockquote{
-    font-family:var(--font-display);
-    font-weight:500;
-    font-size:clamp(28px, 4.4vw, 54px);
-    line-height:1.2;
-    letter-spacing:-.015em;
-    text-align:center;
-    max-width:980px;
-    margin:0 auto;
-    color:var(--text);
-  }
-  .philosophy blockquote b{font-weight:600; color:var(--accent);}
-  .philo-body{
-    text-align:center;
-    max-width:640px;
-    margin:26px auto 0;
-    font-size:16px;
-    line-height:1.65;
-    color:var(--text-muted);
-  }
-  .philosophy cite{
-    display:block;
-    text-align:center;
-    font-style:normal;
-    font-family:var(--font-body);
-    font-size:14px;
-    color:var(--text-muted);
-    margin-top:34px;
-  }
-  .philo-link{
-    display:block;
-    text-align:center;
-    width:fit-content;
-    margin:22px auto 0;
-  }
-  .philo-plot{
-    position:absolute;
-    bottom:-40px; left:50%;
-    transform:translateX(-50%);
-    width:min(1100px, 130%);
-    opacity:.55;
-    pointer-events:none;
-  }
-  .philo-plot .drawn{fill:none; stroke:var(--rule-strong); stroke-width:1.4;}
-  .philo-plot .drift{fill:none; stroke:var(--rule); stroke-width:1.2; stroke-dasharray:5 7;}
-
-  /* ---------- contact ---------- */
-  .contact{padding:clamp(90px, 12vw, 150px) 0 clamp(60px, 8vw, 90px);}
-  .contact-inner{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    gap:32px;
-    flex-wrap:wrap;
-    padding-bottom:52px;
-    border-bottom:1px solid var(--rule);
-  }
-  .contact h2{
-    font-family:var(--font-display);
-    font-weight:700;
-    font-size:clamp(32px, 5vw, 64px);
-    letter-spacing:-.02em;
-    max-width:640px;
-    color:var(--text);
-  }
-  .contact h2 em{font-style:normal; color:var(--accent);}
-  .contact-right{text-align:right;}
-  .contact-right a.email{
-    font-family:var(--font-display);
-    font-weight:600;
-    font-size:clamp(18px, 2vw, 22px);
-    color:var(--text);
-    border-bottom:1px solid var(--text);
-    padding-bottom:3px;
-  }
-  .contact-right .avail{display:block; margin-top:14px; font-size:12.5px; color:var(--text);}
-
-  footer{
-    padding-top:30px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:16px;
-    font-family:var(--font-display);
-    font-size:12.5px;
-    color:var(--text);
-    letter-spacing:.02em;
-  }
-  footer .foot-links{display:flex; gap:22px;}
-  footer a:hover{color:var(--text-accent);}
-
-  /* ---------- reveal on scroll ---------- */
-  [data-reveal]{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
-  [data-reveal].is-visible{opacity:1; transform:translateY(0);}
-
-  @media (prefers-reduced-motion: reduce){
-    .hero .line span{animation:none; transform:translateY(0);}
-    #heroPlot .fit{animation:none; stroke-dashoffset:0;}
-    [data-reveal]{opacity:1; transform:none; transition:none;}
-  }
-
-  /* ---------- responsive ---------- */
-  @media (max-width:900px){
-    .hero-grid{grid-template-columns:1fr; gap:64px;}
-    .plot-wrap{order:-1;}
-    .stat-strip{grid-template-columns:1fr; gap:26px;}
-    .discipline{grid-template-columns:1fr; gap:8px;}
-    .logo-grid{grid-template-columns:repeat(2, 1fr);}
-  }
-  @media (max-width:720px){
-    .nav-links{
-      position:fixed;
-      inset:72px 0 0 0;
-      background:var(--surface);
-      flex-direction:column;
-      align-items:flex-start;
-      padding:32px clamp(24px,5vw,72px);
-      gap:26px;
-      transform:translateX(100%);
-      transition:transform .35s ease;
-      font-size:18px;
-    }
-    .nav-links.open{transform:translateX(0);}
-    .nav-toggle{display:flex; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:8px;}
-    .nav-toggle span{width:20px; height:1.5px; background:var(--text);}
-    .contact-inner{flex-direction:column; align-items:flex-start;}
-    .contact-right{text-align:left;}
-  }
+@media (max-width:640px){ section{padding:64px 0} }
 </style>
 </head>
 <body>
 
-<svg aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
-<symbol id="logo-function" viewBox="0 0 391.07 100">
-<path id="fnlogo-f" d="M.40800477 .5220032H.1230011V.33900453H.39300538V.2610016H.1230011V0H.041000368V.6000061H.40800477V.5220032Z"/>
-<path id="fnlogo-u" d="M.45799256 .13400269C.45799256 .1126709 .45332847 .095336917 .44400025 .08200073 .43799845 .07266235 .42699687 .06016032 .41099549 .04449463 .3949941 .02882894 .38199363 .0179952 .37199403 .011993408 .35199485 .0006612142 .33299766-.005004883 .31500245-.005004883H.18099976C.16233318-.005004883 .14300029 .0006612142 .1230011 .011993408 .1130015 .0179952 .100001018 .02882894 .083999637 .04449463 .06799825 .06016032 .056996664 .07266235 .050994874 .08200073 .04099528 .09666952 .035995485 .1140035 .035995485 .13400269V.6000061H.117996219V.13600159C.117996219 .12933858 .12582906 .118504848 .14149475 .103500369 .15716045 .08849589 .16932678 .07899475 .17799378 .07499695 .18066915 .073664348 .18333943 .07299805 .18600464 .07299805H.30999757C.31333415 .07299805 .31633506 .073664348 .31900025 .07499695 .32766725 .07899475 .3393351 .08849589 .3540039 .103500369 .3686727 .118504848 .37600709 .12933858 .37600709 .13600159V.6000061H.45799256V.13400269Z"/>
-<path id="fnlogo-n" d="M.46899415 0H.37399293L.12199402 .45799256V0H.041000368V.6000061H.13800049L.3880005 .13699341V.6000061H.46899415V0Z"/>
-<path id="fnlogo-c" d="M.46299745 .12800598C.45433045 .106664028 .44499717 .08933004 .43499757 .07600403 .3916626 .021998087 .35066224-.005004883 .31199647-.005004883H.17999268C.1613261-.005004883 .14199321 .0006612142 .12199402 .011993408 .11199442 .0179952 .098993938 .02882894 .08299255 .04449463 .06700134 .06016032 .05600484 .07266235 .05000305 .08200073 .04000346 .09666952 .035003663 .11433411 .035003663 .1349945V.46499635C.035003663 .4849955 .04000346 .5023295 .05000305 .5169983 .056666059 .52633669 .06799825 .5391693 .083999637 .5554962 .100001018 .5718333 .11266581 .58266708 .12199402 .58799746 .14199321 .59932968 .16099549 .6049957 .17900086 .6049957H.31199647C.35332743 .6049957 .3943278 .57799789 .43499757 .5240021 .44233195 .5153351 .45166526 .4983368 .46299745 .4730072L.3829956 .44999696C.3723348 .47999574 .3503367 .5053304 .31700135 .526001 .31433616 .5266622 .31167094 .5269928 .30900575 .5269928H.18400574C.18066915 .5269928 .17766826 .5263265 .17500305 .5249939 .16766866 .5209961 .15816753 .5133311 .14649964 .5019989 .13483174 .49066673 .1259969 .48033143 .11999512 .47099305 .118662517 .46899925 .117996219 .46466575 .117996219 .45799256V.13600159C.117996219 .1279958 .12516277 .116994228 .13949585 .102996829 .15382894 .08899943 .16566468 .07966614 .17500305 .07499695 .17766826 .073664348 .18066915 .07299805 .18400574 .07299805H.30900575C.31300355 .07299805 .31633506 .073664348 .31900025 .07499695 .33100382 .08167013 .343338 .09200541 .3560028 .10600281 .3686676 .120000209 .3776652 .1343333 .3829956 .14900208L.46299745 .12800598Z"/>
-<path id="fnlogo-t" d="M.43200685 .5220032H.2610016V0H.17900086V.5220032H.0079956059V.6000061H.43200685V.5220032Z"/>
-<path id="fnlogo-i" d="M.12199402 0H.039993287V.6000061H.12199402V0Z"/>
-<path id="fnlogo-o" d="M.4830017 .1349945C.4830017 .11433411 .47800193 .09666952 .46800233 .08200073 .46200053 .07266235 .45099894 .06016032 .43499757 .04449463 .41899619 .02882894 .4059957 .0179952 .3959961 .011993408 .37599693 .0006612142 .35666404-.005004883 .33799745-.005004883H.17999268C.16199748-.005004883 .14300029 .0006612142 .1230011 .011993408 .1130015 .0179952 .09983317 .02882894 .083496097 .04449463 .06716919 .06016032 .05600484 .07266235 .05000305 .08200073 .040664674 .095336917 .035995485 .1130015 .035995485 .1349945V.46400453C.035995485 .48599754 .040664674 .5036621 .05000305 .5169983 .05600484 .52633669 .06716919 .53900149 .083496097 .5549927 .09983317 .5709941 .1130015 .58199569 .1230011 .58799746 .14300029 .59932968 .16199748 .6049957 .17999268 .6049957H.33799745C.35666404 .6049957 .37599693 .59932968 .3959961 .58799746 .40533448 .58266708 .41799928 .5718333 .43399049 .5554962 .44999186 .5391693 .46132914 .52633669 .46800233 .5169983 .47800193 .5023295 .4830017 .48466493 .4830017 .46400453V.1349945M.40100099 .13600159V.46200563C.40100099 .46533204 .4003347 .46832786 .39900209 .47099305 .39367167 .48033143 .38500468 .49066673 .3730011 .5019989 .36099754 .5133311 .35132853 .5209961 .34399415 .5249939 .34132896 .5263265 .33833314 .5269928 .3350067 .5269928H.18499756C.18166097 .5269928 .17866008 .5263265 .17599488 .5249939 .16666667 .5203349 .15466817 .51067098 .13999939 .4960022 .12533061 .4813334 .117996219 .47000123 .117996219 .46200563V.13600159C.117996219 .12933858 .12549336 .118504848 .14048767 .103500369 .15549214 .08849589 .16732788 .07899475 .17599488 .07499695 .17866008 .073664348 .18166097 .07299805 .18499756 .07299805H.3350067C.33833314 .07299805 .34132896 .073664348 .34399415 .07499695 .35333253 .07966614 .36516825 .08899943 .37950135 .102996829 .39383445 .116994228 .40100099 .1279958 .40100099 .13600159Z"/>
-<g fill="currentColor">
-<use href="#fnlogo-f" transform="matrix(96,0,0,-96,2.0000,78.8000)"/>
-<use href="#fnlogo-u" transform="matrix(96,0,0,-96,48.9440,78.8000)"/>
-<use href="#fnlogo-n" transform="matrix(96,0,0,-96,102.1280,78.8000)"/>
-<use href="#fnlogo-c" transform="matrix(96,0,0,-96,156.9440,78.8000)"/>
-<use href="#fnlogo-t" transform="matrix(96,0,0,-96,208.8800,78.8000)"/>
-<use href="#fnlogo-i" transform="matrix(96,0,0,-96,257.2640,78.8000)"/>
-<use href="#fnlogo-o" transform="matrix(96,0,0,-96,278.6720,78.8000)"/>
-<use href="#fnlogo-n" transform="matrix(96,0,0,-96,334.2560,78.8000)"/>
-</g>
-</symbol>
-</svg>
-
 <header>
-  <nav class="nav wrap">
-    <a href="#" class="wordmark">ƒ(<svg class="fn-logo" viewBox="0 0 391.07 100" role="img" aria-label="Function"><use href="#logo-function"></use></svg>)</a>
-    <div class="nav-links" id="navLinks">
-      <a href="#approach">Approach</a>
-      <a href="#work">Work</a>
-      <a href="philosophy.html">Philosophy</a>
-      <a href="#contact" class="nav-cta">Start a project</a>
-    </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+  <div class="navrow">
+    <a class="brandmark" href="#top" aria-label="Function">
+      <svg viewBox="0 0 391.07 100.00" role="img" aria-hidden="true">
+        <defs>
+          <path id="lf" d="M.40800477 .5220032H.1230011V.33900453H.39300538V.2610016H.1230011V0H.041000368V.6000061H.40800477V.5220032Z"/>
+          <path id="lu" d="M.45799256 .13400269C.45799256 .1126709 .45332847 .095336917 .44400025 .08200073 .43799845 .07266235 .42699687 .06016032 .41099549 .04449463 .3949941 .02882894 .38199363 .0179952 .37199403 .011993408 .35199485 .0006612142 .33299766-.005004883 .31500245-.005004883H.18099976C.16233318-.005004883 .14300029 .0006612142 .1230011 .011993408 .1130015 .0179952 .100001018 .02882894 .083999637 .04449463 .06799825 .06016032 .056996664 .07266235 .050994874 .08200073 .04099528 .09666952 .035995485 .1140035 .035995485 .13400269V.6000061H.117996219V.13600159C.117996219 .12933858 .12582906 .118504848 .14149475 .103500369 .15716045 .08849589 .16932678 .07899475 .17799378 .07499695 .18066915 .073664348 .18333943 .07299805 .18600464 .07299805H.30999757C.31333415 .07299805 .31633506 .073664348 .31900025 .07499695 .32766725 .07899475 .3393351 .08849589 .3540039 .103500369 .3686727 .118504848 .37600709 .12933858 .37600709 .13600159V.6000061H.45799256V.13400269Z"/>
+          <path id="ln" d="M.46899415 0H.37399293L.12199402 .45799256V0H.041000368V.6000061H.13800049L.3880005 .13699341V.6000061H.46899415V0Z"/>
+          <path id="lc" d="M.46299745 .12800598C.45433045 .106664028 .44499717 .08933004 .43499757 .07600403 .3916626 .021998087 .35066224-.005004883 .31199647-.005004883H.17999268C.1613261-.005004883 .14199321 .0006612142 .12199402 .011993408 .11199442 .0179952 .098993938 .02882894 .08299255 .04449463 .06700134 .06016032 .05600484 .07266235 .05000305 .08200073 .04000346 .09666952 .035003663 .11433411 .035003663 .1349945V.46499635C.035003663 .4849955 .04000346 .5023295 .05000305 .5169983 .056666059 .52633669 .06799825 .5391693 .083999637 .5554962 .100001018 .5718333 .11266581 .58266708 .12199402 .58799746 .14199321 .59932968 .16099549 .6049957 .17900086 .6049957H.31199647C.35332743 .6049957 .3943278 .57799789 .43499757 .5240021 .44233195 .5153351 .45166526 .4983368 .46299745 .4730072L.3829956 .44999696C.3723348 .47999574 .3503367 .5053304 .31700135 .526001 .31433616 .5266622 .31167094 .5269928 .30900575 .5269928H.18400574C.18066915 .5269928 .17766826 .5263265 .17500305 .5249939 .16766866 .5209961 .15816753 .5133311 .14649964 .5019989 .13483174 .49066673 .1259969 .48033143 .11999512 .47099305 .118662517 .46899925 .117996219 .46466575 .117996219 .45799256V.13600159C.117996219 .1279958 .12516277 .116994228 .13949585 .102996829 .15382894 .08899943 .16566468 .07966614 .17500305 .07499695 .17766826 .073664348 .18066915 .07299805 .18400574 .07299805H.30900575C.31300355 .07299805 .31633506 .073664348 .31900025 .07499695 .33100382 .08167013 .343338 .09200541 .3560028 .10600281 .3686676 .120000209 .3776652 .1343333 .3829956 .14900208L.46299745 .12800598Z"/>
+          <path id="lt" d="M.43200685 .5220032H.2610016V0H.17900086V.5220032H.0079956059V.6000061H.43200685V.5220032Z"/>
+          <path id="li" d="M.12199402 0H.039993287V.6000061H.12199402V0Z"/>
+          <path id="lo" d="M.4830017 .1349945C.4830017 .11433411 .47800193 .09666952 .46800233 .08200073 .46200053 .07266235 .45099894 .06016032 .43499757 .04449463 .41899619 .02882894 .4059957 .0179952 .3959961 .011993408 .37599693 .0006612142 .35666404-.005004883 .33799745-.005004883H.17999268C.16199748-.005004883 .14300029 .0006612142 .1230011 .011993408 .1130015 .0179952 .09983317 .02882894 .083496097 .04449463 .06716919 .06016032 .05600484 .07266235 .05000305 .08200073 .040664674 .095336917 .035995485 .1130015 .035995485 .1349945V.46400453C.035995485 .48599754 .040664674 .5036621 .05000305 .5169983 .05600484 .52633669 .06716919 .53900149 .083496097 .5549927 .09983317 .5709941 .1130015 .58199569 .1230011 .58799746 .14300029 .59932968 .16199748 .6049957 .17999268 .6049957H.33799745C.35666404 .6049957 .37599693 .59932968 .3959961 .58799746 .40533448 .58266708 .41799928 .5718333 .43399049 .5554962 .44999186 .5391693 .46132914 .52633669 .46800233 .5169983 .47800193 .5023295 .4830017 .48466493 .4830017 .46400453M.40100099 .13600159V.46200563C.40100099 .46533204 .4003347 .46832786 .39900209 .47099305 .39367167 .48033143 .38500468 .49066673 .3730011 .5019989 .36099754 .5133311 .35132853 .5209961 .34399415 .5249939 .34132896 .5263265 .33833314 .5269928 .3350067 .5269928H.18499756C.18166097 .5269928 .17866008 .5263265 .17599488 .5249939 .16666667 .5203349 .15466817 .51067098 .13999939 .4960022 .12533061 .4813334 .117996219 .47000123 .117996219 .46200563V.13600159C.117996219 .12933858 .12549336 .118504848 .14048767 .103500369 .15549214 .08849589 .16732788 .07899475 .17599488 .07499695 .17866008 .073664348 .18166097 .07299805 .18499756 .07299805H.3350067C.33833314 .07299805 .34132896 .073664348 .34399415 .07499695 .35333253 .07966614 .36516825 .08899943 .37950135 .102996829 .39383445 .116994228 .40100099 .1279958 .40100099 .13600159Z"/>
+        </defs>
+        <g fill="currentColor">
+          <use href="#lf" transform="matrix(96,0,0,-96,2.0000,78.8000)"/>
+          <use href="#lu" transform="matrix(96,0,0,-96,48.9440,78.8000)"/>
+          <use href="#ln" transform="matrix(96,0,0,-96,102.1280,78.8000)"/>
+          <use href="#lc" transform="matrix(96,0,0,-96,156.9440,78.8000)"/>
+          <use href="#lt" transform="matrix(96,0,0,-96,208.8800,78.8000)"/>
+          <use href="#li" transform="matrix(96,0,0,-96,257.2640,78.8000)"/>
+          <use href="#lo" transform="matrix(96,0,0,-96,278.6720,78.8000)"/>
+          <use href="#ln" transform="matrix(96,0,0,-96,334.2560,78.8000)"/>
+        </g>
+      </svg>
+    </a>
+  </div>
 </header>
 
-<section class="hero is-ink">
-  <div class="wrap hero-grid">
-    <div>
-      <p class="eyebrow">Brand strategy — independent practice</p>
-      <h1>
-        <span class="line"><span>ƒ(Brand, World)</span></span>
-        <span class="line"><span>≈ <em>Growth.</em></span></span>
-      </h1>
-      <!-- DRAFT — FOR JOHN'S REVIEW: co-term headline treatment (option A), not finalized -->
-      <p class="hero-sub">
-        Two variables, not one. Brand is what we can discipline; the audience is what
-        decides if it lands. <svg class="fn-logo" viewBox="0 0 391.07 100" role="img" aria-label="Function"><use href="#logo-function"></use></svg> is the rigor applied to both — built on growth
-        work for Church &amp; Dwight, Anthem, Nespresso, and American Express.
-      </p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Start a conversation →</a>
-        <a href="#approach" class="link-quiet">See the approach</a>
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner wrap" id="heroInner">
+      <div class="hero-bg" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="assets/img/hero-lobster-820.avif 820w, assets/img/hero-lobster-1240.avif 1240w, assets/img/hero-lobster-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" srcset="assets/img/hero-lobster-820.webp 820w, assets/img/hero-lobster-1240.webp 1240w, assets/img/hero-lobster-1920.webp 1920w" sizes="100vw">
+          <img src="assets/img/hero-lobster.jpg" alt="" decoding="async">
+        </picture>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Coming soon</p>
+        <h1>We're working out what kind of animal we are.</h1>
+        <p class="lede muted">Function is being built. Thank you for visiting.</p>
       </div>
     </div>
+    <div class="scrolltip"><span class="bar"></span> Scroll</div>
+  </section>
 
-    <div class="plot-wrap">
-      <p class="plot-caption">ƒ(x) — <b>brand equity</b> over time</p>
-      <svg id="heroPlot" viewBox="0 0 480 340" width="100%" role="img"
-           aria-label="A red trend line fitted through a scattered field of data points, crossing a blue baseline once">
-        <line class="tick" x1="40" y1="40" x2="40" y2="280"></line>
-        <line class="tick" x1="40" y1="280" x2="440" y2="280"></line>
-        <g class="axislabel">
-          <text x="20" y="45">y</text>
-          <text x="430" y="300">x</text>
-        </g>
-        <!-- faint reference grid -->
-        <g class="gridline">
-          <line x1="40" y1="220" x2="440" y2="220"></line>
-          <line x1="40" y1="100" x2="440" y2="100"></line>
-          <line x1="140" y1="40" x2="140" y2="280"></line>
-          <line x1="240" y1="40" x2="240" y2="280"></line>
-          <line x1="340" y1="40" x2="340" y2="280"></line>
-        </g>
-        <!-- the one full-strength blue element: a structural baseline the fitted line crosses once -->
-        <line class="baseline" x1="40" y1="170" x2="440" y2="170"></line>
-
-        <!-- scattered field: the market/audience the model doesn't fully control -->
-        <g>
-          <circle class="scatter" cx="70" cy="265" r="3"></circle>
-          <circle class="scatter" cx="95" cy="250" r="3"></circle>
-          <circle class="scatter" cx="112" cy="258" r="3"></circle>
-          <circle class="scatter" cx="140" cy="232" r="3"></circle>
-          <circle class="scatter" cx="160" cy="243" r="3"></circle>
-          <circle class="scatter" cx="185" cy="210" r="3"></circle>
-          <circle class="scatter" cx="207" cy="222" r="3"></circle>
-          <circle class="scatter" cx="232" cy="190" r="3"></circle>
-          <circle class="scatter" cx="252" cy="199" r="3"></circle>
-          <circle class="scatter far" cx="296" cy="155" r="3"></circle>
-          <circle class="scatter far" cx="312" cy="169" r="3"></circle>
-          <circle class="scatter far" cx="332" cy="130" r="3"></circle>
-          <circle class="scatter far" cx="352" cy="143" r="3"></circle>
-          <circle class="scatter far" cx="372" cy="106" r="3"></circle>
-          <circle class="scatter far" cx="392" cy="119" r="3"></circle>
-          <circle class="scatter far" cx="408" cy="96" r="3"></circle>
-        </g>
-
-        <!-- the fitted line: method applied to the scatter, not a promise through every point -->
-        <path class="fit" d="M60,268 C140,252 160,225 200,200 C230,180 250,172 275,170 C310,148 340,120 370,100 C390,88 400,82 410,78"></path>
-
-        <!-- the one sanctioned red/blue meeting point: where the fit crosses the baseline -->
-        <circle class="node-ring" cx="275" cy="170" r="6"></circle>
-        <circle class="node-fill" cx="275" cy="170" r="3"></circle>
-      </svg>
-    </div>
-  </div>
-</section>
-
-<section class="statement graph-bg">
-  <div class="wrap">
-    <p class="eyebrow" data-reveal>The premise</p>
-    <!-- DRAFT — FOR JOHN'S REVIEW -->
-    <blockquote data-reveal>
-      A brand becomes what people decide it means — that part was never in our hands.
-      What <b><svg class="fn-logo" viewBox="0 0 391.07 100" role="img" aria-label="Function"><use href="#logo-function"></use></svg></b> brings is the discipline: purpose, rigor, and a reason for
-      every choice, applied whether or not the outcome can be guaranteed.
-    </blockquote>
-
-    <div class="stat-strip">
-      <div class="stat" data-reveal>
-        <div class="num">2x<sup>+</sup></div>
-        <div class="label">Sales growth across a 12-brand portfolio at Razorfish</div>
+  <section data-reveal>
+    <div class="wrap">
+      <p class="eyebrow">A parable, for now</p>
+      <div class="parable-intro">
+        <p>Archilochus put it in twelve words, twenty-six centuries ago: "the fox knows many
+          things, but the hedgehog knows one big thing." When it comes to brand, are you a
+          hedgehog, or a fox?</p>
       </div>
-      <div class="stat" data-reveal>
-        <div class="num">769k</div>
-        <div class="label">Customers acquired for Anthem, three months ahead of a 600k goal</div>
+
+      <div class="plates">
+        <figure class="plate-fig">
+          <div class="plate-mount">
+            <picture>
+              <source type="image/avif" srcset="assets/img/plate-hedgehog-820.avif 820w, assets/img/plate-hedgehog-1240.avif 1240w" sizes="(min-width:760px) 50vw, 92vw">
+              <source type="image/webp" srcset="assets/img/plate-hedgehog-820.webp 820w, assets/img/plate-hedgehog-1240.webp 1240w" sizes="(min-width:760px) 50vw, 92vw">
+              <img src="assets/img/plate-hedgehog.jpg" width="1240" height="617" loading="lazy" decoding="async"
+                   alt="A mock nineteenth-century natural history plate: a European hedgehog in undergrowth, wireless earbuds lodged among its spines, with seven small diagrams of brand evolution printed beneath.">
+            </picture>
+            <span class="hair" aria-hidden="true"></span>
+          </div>
+          <figcaption class="platecap">
+            <span class="fig">Plate I — Hedgehog</span>
+            <p class="cap">One big idea, carried everywhere, collecting whatever it brushes past.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="plate-fig">
+          <div class="plate-mount">
+            <picture>
+              <source type="image/avif" srcset="assets/img/plate-fox-820.avif 820w, assets/img/plate-fox-1240.avif 1240w" sizes="(min-width:760px) 50vw, 92vw">
+              <source type="image/webp" srcset="assets/img/plate-fox-820.webp 820w, assets/img/plate-fox-1240.webp 1240w" sizes="(min-width:760px) 50vw, 92vw">
+              <img src="assets/img/plate-fox.jpg" width="1240" height="617" loading="lazy" decoding="async"
+                   alt="A mock nineteenth-century natural history plate: a red fox on a mossy bank strewn with discarded smartphones, with five small brand-architecture pyramids printed beneath.">
+            </picture>
+            <span class="hair" aria-hidden="true"></span>
+          </div>
+          <figcaption class="platecap">
+            <span class="fig">Plate II — Fox</span>
+            <p class="cap">Many small things, held loosely, none of them load-bearing on their own.</p>
+          </figcaption>
+        </figure>
       </div>
-      <div class="stat" data-reveal>
-        <div class="num">25<sup>%</sup></div>
-        <div class="label">Marketing productivity improvement across $5B+ in spend, AB-InBev</div>
+
+      <div class="foodband">
+        <p class="eyebrow">Food for thought</p>
+        <div class="thoughts">
+          <figure class="thought">
+            <q>Wovon man nicht sprechen kann, darüber muss man schweigen.</q>
+            <span class="gloss">Whereof one cannot speak, thereof one must be silent.</span>
+            <span class="src">Wittgenstein · Tractatus Logico-Philosophicus, 7</span>
+          </figure>
+          <figure class="thought">
+            <q>The wealth required by nature is limited and is easy to procure; but the wealth
+              required by vain ideals extends to infinity.</q>
+            <span class="src">Epicurus · Principal Doctrines</span>
+          </figure>
+          <figure class="thought">
+            <q>If you want to know what God thinks of money, just look at the people he gave it to.</q>
+            <span class="src">Dorothy Parker</span>
+          </figure>
+        </div>
       </div>
     </div>
-    <!-- OPEN ITEM: content.md drafts this first stat as "$1B+ sales growth," but the
-         resume states "2x+" with no dollar figure. Using the resume's verified figure
-         here; swap back to a dollar amount if you can confirm it elsewhere. -->
-  </div>
-</section>
+  </section>
 
-<section class="approach" id="approach">
-  <div class="wrap">
-    <!-- DRAFT — FOR JOHN'S REVIEW: content.md flags this framing as a strawman, not decided -->
-    <div class="approach-head" data-reveal>
-      <h2>Five disciplines. One point of contact.</h2>
-      <p>No account team, no hand-offs — the same person who sets the strategy stays on it through execution.</p>
-    </div>
+</main>
 
-    <div class="discipline" data-reveal>
-      <div class="idx">ƒ(01)</div>
-      <h3>Brand Strategy &amp; Positioning</h3>
-      <p>Defining what a brand stands for, and proving it belongs there.</p>
-    </div>
-    <div class="discipline" data-reveal>
-      <div class="idx">ƒ(02)</div>
-      <h3>Portfolio &amp; Brand Systems</h3>
-      <p>Coherent brand expression across a portfolio, not just a single campaign.</p>
-    </div>
-    <div class="discipline" data-reveal>
-      <div class="idx">ƒ(03)</div>
-      <h3>Go-to-Market Strategy</h3>
-      <p>Turning a launch into a repeatable growth engine.</p>
-    </div>
-    <div class="discipline" data-reveal>
-      <div class="idx">ƒ(04)</div>
-      <h3>Marketing Effectiveness</h3>
-      <p>Redesigning how marketing gets made, so it moves faster and costs less.</p>
-    </div>
-    <div class="discipline" data-reveal>
-      <div class="idx">ƒ(05)</div>
-      <h3>Creative Strategy</h3>
-      <p>Briefs and platforms that give creative teams something worth building on.</p>
-    </div>
+<footer>
+  <div class="wrap footrow">
+    <span class="wordmark" style="font-size:15px;font-weight:700;font-family:var(--font-display)">Function</span>
+    <a href="mailto:john.winterkorn@thisisfunction.io">john.winterkorn@thisisfunction.io</a>
+    <span>&copy; 2026 Function.</span>
   </div>
-</section>
-
-<section class="proof-section" id="work">
-  <div class="wrap">
-    <p class="eyebrow" data-reveal>Selected work</p>
-    <div class="logo-grid" data-reveal>
-      <div class="logo-slot">Church &amp; Dwight</div>
-      <div class="logo-slot">Anthem</div>
-      <div class="logo-slot">Nespresso</div>
-      <div class="logo-slot">AB-InBev</div>
-      <div class="logo-slot">Mastercard</div>
-      <div class="logo-slot">Unilever</div>
-      <div class="logo-slot">USPS</div>
-      <div class="logo-slot">MetLife</div>
-      <!-- PERMISSION PENDING before these ship: American Express, UNICEF, Ford.
-           GE status pending clarification (2021–2024 corporate split). Omitted here
-           until cleared, per content.md's own notes. -->
-    </div>
-    <p class="proof-ambient" data-reveal>
-      857MM earned impressions on a single campaign launch, Nespresso. 2014 Cannes Lions
-      shortlist for American Express Serve, an industry-first partnership with League of
-      Legends.
-    </p>
-  </div>
-</section>
-
-<section class="philosophy is-ink" id="philosophy">
-  <svg class="philo-plot" viewBox="0 0 1100 220" aria-hidden="true">
-    <path class="drawn" d="M0,190 C150,190 200,140 280,140 C360,140 380,90 480,90 C580,90 600,150 700,150"></path>
-    <path class="drift" d="M700,150 C800,150 820,60 920,60 C1000,60 1030,100 1100,80"></path>
-  </svg>
-  <div class="wrap">
-    <p class="eyebrow" data-reveal>Philosophy</p>
-    <!-- DRAFT — FOR JOHN'S REVIEW -->
-    <blockquote data-reveal>
-      A brand's meaning is never fully in your control. <b><svg class="fn-logo" viewBox="0 0 391.07 100" role="img" aria-label="Function"><use href="#logo-function"></use></svg></b> is the
-      discipline you bring anyway.
-    </blockquote>
-    <p class="philo-body" data-reveal>
-      Most strategy work happens inside agencies built to scale — more people, more
-      layers, more distance between the thinking and the client. <svg class="fn-logo" viewBox="0 0 391.07 100" role="img" aria-label="Function"><use href="#logo-function"></use></svg> is built the
-      opposite way: one strategist, direct access, and the discipline that comes from
-      running a portfolio spanning a dozen categories.
-    </p>
-    <cite data-reveal>— John Winterkorn, Founder</cite>
-    <a href="philosophy.html" class="philo-link link-quiet" data-reveal>Read the full philosophy →</a>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <div class="wrap">
-    <div class="contact-inner" data-reveal>
-      <h2>Let's define <em>the function.</em></h2>
-      <div class="contact-right">
-        <a href="mailto:john.winterkorn@thisisfunction.io" class="email">john.winterkorn@thisisfunction.io</a>
-        <!-- DRAFT — FOR JOHN'S REVIEW: no availability line exists in content.md yet -->
-        <span class="avail">Currently taking on a limited number of new engagements.</span>
-      </div>
-    </div>
-    <footer>
-      <span>© 2026 <svg class="fn-logo" viewBox="0 0 391.07 100" role="img" aria-label="Function"><use href="#logo-function"></use></svg> — ƒ(x)</span>
-      <div class="foot-links">
-        <a href="#approach">Approach</a>
-        <a href="#work">Work</a>
-        <a href="philosophy.html">Philosophy</a>
-      </div>
-    </footer>
-  </div>
-</section>
+</footer>
 
 <script>
-  // mobile nav toggle
-  const navToggle = document.getElementById('navToggle');
-  const navLinks = document.getElementById('navLinks');
-  navToggle.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open);
-  });
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', false);
-  }));
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // scroll reveal
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('is-visible');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.15 });
-  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+  var heroInner = document.getElementById('heroInner');
+  var hero = document.querySelector('.hero');
+  if (heroInner && hero && !reduce) {
+    var ticking = false;
+    function updateHero(){
+      var rect = hero.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = Math.min(Math.max(-rect.top / vh, 0), 1);
+      heroInner.style.opacity = String(1 - progress);
+      heroInner.style.transform = 'translateY(' + (progress * -24) + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking) { requestAnimationFrame(updateHero); ticking = true; }
+    }, { passive: true });
+    updateHero();
+  }
+
+  if ('IntersectionObserver' in window) {
+    var els = document.querySelectorAll('[data-reveal]');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('is-in'); });
+  }
+})();
 </script>
 
 </body>
