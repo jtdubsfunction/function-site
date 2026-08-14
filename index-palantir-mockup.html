@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Function — Brand Strategy (Palantir-direction mockup)</title>
+<meta name="description" content="Function is a brand strategy consultancy.">
+
+<!-- Real, self-hosted type — same files/paths as the Pass 2 index.html.
+     This file is meant to sit in the function site/ folder alongside the
+     existing assets/ directory so these relative paths resolve. -->
+<link rel="preload" href="assets/fonts/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/BlenderPro-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="tokens.css">
+
+<style>
+/* ===========================================================
+   Palantir-direction mockup. Consumes tokens.css + fonts.css
+   exactly like the real index.html — no fallback palette or
+   font stack duplicated here, no third-party font/script
+   requests. --font-display / --font-body come from fonts.css;
+   --surface/--text/--accent/etc. come from tokens.css.
+   =========================================================== */
+:root{
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font-body);
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+
+/* type */
+h1,h2,h3{font-family:var(--font-display);font-weight:700;letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.02}
+h2{font-size:clamp(26px,3.6vw,40px);line-height:1.06}
+h3{font-size:15px;letter-spacing:.02em;font-weight:600}
+p{margin:0 0 14px;max-width:58ch}
+.eyebrow{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-accent);margin:0 0 16px}
+.muted{color:var(--text-muted)}
+.emph-quiet{color:var(--text-muted);font-weight:700}
+
+/* section rhythm — .is-ink / .is-deep and their token flips are inherited
+   entirely from tokens.css; nothing overridden locally. */
+section{padding:96px 0}
+
+/* nav */
+header{position:sticky;top:0;z-index:20;background:var(--surface);
+  border-bottom:1px solid var(--rule)}
+.navrow{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;max-width:1120px;margin:0 auto}
+.wordmark{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em;text-decoration:none}
+nav ul{display:flex;gap:32px;list-style:none;margin:0;padding:0}
+nav a{text-decoration:none;font-size:14px;color:var(--text-muted);transition:color .2s ease}
+nav a:hover{color:var(--text)}
+.navlinks{display:flex;align-items:center;gap:32px}
+
+/* buttons — plain rectangles, high contrast, no radius, no gradient */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;
+  font-size:14px;letter-spacing:.01em;padding:14px 22px;text-decoration:none;border:1px solid transparent;
+  transition:background .2s ease, color .2s ease, border-color .2s ease}
+.btn-solid{background:var(--text);color:var(--surface)}
+.btn-solid:hover{background:var(--accent-press,var(--accent))}
+.btn-outline{border-color:var(--rule);color:var(--text)}
+.btn-outline:hover{border-color:var(--text)}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+
+/* hero — sticky content fades as the page scrolls past it, no illustration */
+.hero{height:150vh;position:relative}
+.hero-inner{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;
+  will-change:opacity, transform}
+.hero h1{max-width:16ch}
+.hero .lede{font-size:19px;max-width:52ch;margin-top:22px}
+.scrolltip{position:absolute;bottom:40px;left:28px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-muted);display:flex;align-items:center;gap:8px}
+.scrolltip .bar{width:1px;height:28px;background:var(--rule-strong);animation:tip 1.8s ease-in-out infinite}
+@keyframes tip{0%,100%{transform:scaleY(1);opacity:.4}50%{transform:scaleY(.4);opacity:1}}
+
+/* logo wall */
+.logos{display:flex;flex-wrap:wrap;gap:48px;align-items:center;margin-top:36px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:.01em;color:var(--text-muted)}
+
+/* stat band — plain numerals, no axis/grid chrome */
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:44px;margin-top:44px}
+.stat{font-family:var(--font-display);font-weight:700;font-size:clamp(40px,6vw,60px);line-height:1;
+  letter-spacing:-.02em;color:var(--accent-on-dark)}
+.statlbl{font-size:14px;color:var(--text-muted);margin-top:10px;max-width:26ch}
+.statnote{margin-top:48px;font-size:13px;color:var(--text-muted);border-top:1px solid var(--rule);padding-top:20px}
+
+/* approach — placeholder pillars */
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--rule);
+  border:1px solid var(--rule);margin-top:40px}
+.pillar{background:var(--surface);padding:32px 28px}
+.pillar h3{margin-bottom:12px}
+.placeholder-tag{display:inline-block;font-family:var(--font-display);font-size:10px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--text-accent);border:1px dashed var(--rule);padding:4px 8px;margin-bottom:18px}
+
+/* about teaser */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+@media (max-width:760px){.about-grid{grid-template-columns:1fr}}
+
+/* reveal-on-scroll */
+[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease), transform .6s var(--ease)}
+[data-reveal].is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none}
+  .hero-inner{opacity:1 !important;transform:none !important}
+  .scrolltip .bar{animation:none}
+}
+
+footer{border-top:1px solid var(--rule);padding:48px 0;font-size:13px;color:var(--text-muted)}
+.footrow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px}
+footer nav ul{gap:24px}
+footer a{text-decoration:none;color:var(--text-muted);transition:color .2s ease}
+footer a:hover{color:var(--text)}
+
+@media (max-width:640px){
+  section{padding:64px 0}
+  .navlinks nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navrow">
+    <a class="wordmark" href="#top">Function</a>
+    <div class="navlinks">
+      <nav><ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#about">About</a></li>
+      </ul></nav>
+      <a class="btn btn-solid" href="#contact">Start a project</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner wrap" id="heroInner">
+      <p class="eyebrow">Brand strategy consultancy</p>
+      <h1>Brand strategy for companies that already know <span class="emph-quiet">what they're building.</span></h1>
+      <p class="lede muted">Function works with teams who don't need convincing that brand matters —
+        they need the strategy sharpened, the story made sharp enough to survive contact with a market.</p>
+      <div class="btn-row">
+        <a class="btn btn-solid" href="#contact">Start a project</a>
+        <a class="btn btn-outline" href="#work">See the work</a>
+      </div>
+    </div>
+    <div class="scrolltip"><span class="bar"></span> Scroll</div>
+  </section>
+
+  <section id="work" data-reveal>
+    <div class="wrap">
+      <p class="eyebrow">Trusted by</p>
+      <div class="logos">
+        <span class="logo">Mastercard</span>
+        <span class="logo">Unilever</span>
+        <span class="logo">USPS</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="is-ink" data-reveal>
+    <div class="wrap">
+      <p class="eyebrow">Results</p>
+      <h2>Work that moved the numbers that mattered.</h2>
+      <div class="grid3">
+        <div>
+          <div class="stat">$1B+</div>
+          <div class="statlbl">Sales growth across a 12-brand portfolio — Church &amp; Dwight</div>
+        </div>
+        <div>
+          <div class="stat">769k</div>
+          <div class="statlbl">Customers acquired against a 600k goal — Anthem</div>
+        </div>
+        <div>
+          <div class="stat">857MM</div>
+          <div class="statlbl">Earned impressions on a single launch — Nespresso</div>
+        </div>
+      </div>
+      <p class="statnote">2014 Cannes Lions Shortlist — American Express Serve</p>
+    </div>
+  </section>
+
+  <section id="approach" data-reveal>
+    <div class="wrap">
+      <p class="eyebrow">Approach</p>
+      <h2>How we work</h2>
+      <div class="pillars">
+        <div class="pillar">
+          <span class="placeholder-tag">Placeholder</span>
+          <h3>Pillar one</h3>
+          <p class="muted">Services/approach framing is still open — function-next-steps.md, item 5.
+            Replace this and the two pillars beside it once that's decided.</p>
+        </div>
+        <div class="pillar">
+          <span class="placeholder-tag">Placeholder</span>
+          <h3>Pillar two</h3>
+          <p class="muted">Same here — structural placeholder so the section's weight and rhythm are
+            visible before the real copy lands.</p>
+        </div>
+        <div class="pillar">
+          <span class="placeholder-tag">Placeholder</span>
+          <h3>Pillar three</h3>
+          <p class="muted">Three pillars is a guess at shape, not a commitment to the number —
+            easy to collapse to two or expand to four.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" data-reveal>
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2>Bio — pending review</h2>
+      </div>
+      <div>
+        <span class="placeholder-tag">Placeholder</span>
+        <p class="muted">Bio tone and confidentiality review isn't finished — function-next-steps.md,
+          item 4. This block holds the space and column width the real bio will occupy; swap in
+          the finished copy once both lengths (hero-length and full About-page-length) are settled.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="is-deep" data-reveal>
+    <div class="wrap">
+      <p class="eyebrow">Get in touch</p>
+      <h2>Let's talk about what you're building.</h2>
+      <div class="btn-row">
+        <a class="btn btn-solid" href="mailto:hello@thisisfunction.io">hello@thisisfunction.io</a>
+      </div>
+      <p class="muted" style="margin-top:18px;font-size:13px">Contact address is a placeholder —
+        confirm the real inbox before this ships.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footrow">
+    <span class="wordmark" style="font-size:15px">Function</span>
+    <nav><ul style="display:flex;list-style:none;padding:0;margin:0">
+      <li><a href="#work">Work</a></li>
+      <li style="margin-left:24px"><a href="#approach">Approach</a></li>
+      <li style="margin-left:24px"><a href="#about">About</a></li>
+      <li style="margin-left:24px"><a href="#contact">Contact</a></li>
+    </ul></nav>
+    <span>&copy; 2026 Function. Mockup — not final copy.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Sticky hero: fade + slight rise as it scrolls out, cheap rAF-throttled listener, no deps.
+  var heroInner = document.getElementById('heroInner');
+  var hero = document.querySelector('.hero');
+  if (heroInner && hero && !reduce) {
+    var ticking = false;
+    function updateHero(){
+      var rect = hero.getBoundingClientRect();
+      var vh = window.innerHeight;
+      // progress: 0 at top of hero, 1 once scrolled a full viewport into the hero
+      var progress = Math.min(Math.max(-rect.top / vh, 0), 1);
+      heroInner.style.opacity = String(1 - progress);
+      heroInner.style.transform = 'translateY(' + (progress * -24) + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking) { requestAnimationFrame(updateHero); ticking = true; }
+    }, { passive: true });
+    updateHero();
+  }
+
+  // Fade-up reveals, IntersectionObserver, no deps.
+  if ('IntersectionObserver' in window) {
+    var els = document.querySelectorAll('[data-reveal]');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('is-in'); });
+  }
+})();
+</script>
+
+</body>
+</html>

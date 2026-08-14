@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Function — Color System</title>
+<link rel="stylesheet" href="assets/css/tokens.css">
+<style>
+/* ---- fallback tokens so this sheet renders standalone ---- */
+:root{
+--red-50:#FAEFEC;--red-100:#F2D4CD;--red-200:#E3A99C;--red-300:#DC7F6D;--red-400:#D8604C;
+--red-500:#D04838;--red-600:#B23A2C;--red-700:#8B2D22;--red-800:#5A1D16;--red-900:#2C0E0A;
+--blue-50:#EDF1F8;--blue-100:#D2DFEF;--blue-200:#A5C0DF;--blue-300:#78A0CF;--blue-400:#5484C3;
+--blue-500:#3868B0;--blue-600:#2D5490;--blue-700:#22406F;--blue-800:#172B4A;--blue-900:#0C1626;
+--n-0:#FFFFFF;--n-50:#F0F2F2;--n-100:#E0E5E5;--n-200:#CCD2D2;--n-300:#AAB1B1;--n-400:#767C7C;
+--n-500:#4E5457;--n-600:#2E3238;--n-700:#1E2228;--n-800:#14161C;--n-900:#0A0B0E;
+--surface:var(--n-50);--text:var(--n-800);--text-muted:var(--n-400);--accent:var(--red-500);
+--rule:var(--n-200);--coord:var(--blue-600);--focus:var(--red-500);
+
+--display:"Blender Pro","Space Grotesk",-apple-system,"Segoe UI",sans-serif;
+--body:"Circular Std",Inter,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--n-50);color:var(--n-800);font-family:var(--body);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+section{padding:72px 0;border-top:1px solid var(--rule)}
+section:first-of-type{border-top:0}
+
+.eyebrow{font-family:var(--display);font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  font-size:11px;color:var(--accent);margin:0 0 20px}
+.coord{font-family:var(--display);font-size:11px;letter-spacing:.1em;color:var(--coord);
+  font-weight:500;display:block;margin-bottom:8px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(38px,7vw,68px);line-height:.98;
+  letter-spacing:-.02em;margin:0 0 20px}
+h2{font-family:var(--display);font-weight:700;font-size:clamp(24px,3.4vw,34px);line-height:1.05;
+  letter-spacing:-.015em;margin:0 0 12px}
+h3{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.14em;
+  text-transform:uppercase;margin:40px 0 14px;color:var(--text-muted)}
+p{max-width:62ch;margin:0 0 14px}
+.lede{font-size:19px;line-height:1.5;max-width:60ch}
+.muted{color:var(--text-muted)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em}
+
+/* hero: two curves that meet exactly once */
+.hero{padding:80px 0 56px}
+.plot{width:100%;height:auto;display:block;margin:36px 0 0;overflow:visible}
+.plot .grid{stroke:rgba(56,104,176,.16);stroke-width:1}
+.plot .axis{stroke:var(--n-300);stroke-width:1}
+.plot .curve{fill:none;stroke-width:2.5;stroke-linecap:round}
+.plot .lbl{font-family:var(--display);font-size:11px;letter-spacing:.1em;font-weight:600}
+
+/* anchors */
+.anchors{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2px;
+  background:var(--rule);border:1px solid var(--rule)}
+.anchor{background:var(--n-50);padding:0}
+.anchor .chip{height:120px}
+.anchor .meta{padding:14px 16px 18px}
+.anchor .name{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.01em}
+.anchor .hex{font-family:var(--display);font-size:12px;letter-spacing:.08em;color:var(--text-muted);
+  margin-top:3px}
+.anchor .src{font-size:12px;color:var(--text-muted);margin-top:8px;line-height:1.35}
+
+/* ramps */
+.ramp{margin:0 0 28px}
+.ramp-head{display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:1px solid var(--rule);padding-bottom:8px;margin-bottom:10px}
+.ramp-name{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.02em}
+.ramp-note{font-size:12px;color:var(--text-muted)}
+.stops{display:grid;grid-template-columns:repeat(10,1fr);gap:2px}
+.stop{position:relative}
+.stop i{display:block;height:64px}
+.stop b{display:block;font-family:var(--display);font-size:10px;font-weight:600;
+  letter-spacing:.06em;margin-top:6px;color:var(--text-muted)}
+.stop s{display:block;font-family:var(--display);font-size:9px;letter-spacing:.02em;
+  text-decoration:none;color:var(--n-300)}
+.stop.anchorstop i{outline:2px solid var(--n-800);outline-offset:2px}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+th{font-family:var(--display);font-weight:600;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;text-align:left;color:var(--text-muted);
+  padding:0 12px 8px 0;border-bottom:1px solid var(--rule)}
+td{padding:11px 12px 11px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+td.tok{font-family:var(--display);font-size:13px;letter-spacing:.02em;white-space:nowrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;
+  vertical-align:-1px;border:1px solid rgba(0,0,0,.12)}
+.ratio{font-family:var(--display);font-weight:600;letter-spacing:.02em;white-space:nowrap}
+.pass{color:#3F6B4A}.warn{color:var(--red-600)}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* rules list */
+ol.rules{counter-reset:r;list-style:none;padding:0;margin:0}
+ol.rules li{counter-increment:r;position:relative;padding:0 0 22px 44px;max-width:64ch}
+ol.rules li::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;top:2px;
+  font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;color:var(--accent)}
+ol.rules strong{font-family:var(--display);font-weight:700;letter-spacing:.01em}
+
+/* inverted demo bands */
+.band{padding:64px 0}
+.band.ink{background:var(--n-800);color:var(--n-100)}
+.band.deep{background:var(--blue-900);color:var(--n-100)}
+.band .eyebrow{color:var(--red-300)}
+.band .coord{color:var(--blue-300)}
+.band .muted{color:#8E9698}
+.band h2{color:var(--n-100)}
+.stat{font-family:var(--display);font-weight:700;font-size:clamp(40px,6vw,64px);
+  line-height:1;letter-spacing:-.02em;color:var(--red-400)}
+.statlbl{font-size:13px;color:#8E9698;margin-top:8px;max-width:26ch}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:40px;margin-top:36px}
+
+footer{padding:40px 0 64px;font-size:13px;color:var(--text-muted)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+@media (max-width:640px){
+  .stops{grid-template-columns:repeat(5,1fr)}
+  section{padding:52px 0}
+}
+@media (prefers-reduced-motion:no-preference){
+  .curve{stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 1.6s ease-out forwards}
+  .curve.b{animation-delay:.25s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <section class="hero">
+    <span class="coord">01 — COLOR</span>
+    <p class="eyebrow">Brand guidelines / revision</p>
+    <h1>Two inks,<br>one meeting point.</h1>
+    <p class="lede muted">The palette is sampled from a single reference image: two saturated blots
+    on a cool paper ground, touching at exactly one place. That structure is the system — red carries
+    the argument, blue carries the structure, and they are allowed to meet once.</p>
+
+    <svg class="plot" viewBox="0 0 900 260" role="img" aria-label="A red curve and a blue curve converging at a single point">
+      <g class="grid">
+        <line x1="0" y1="52" x2="900" y2="52"/><line x1="0" y1="104" x2="900" y2="104"/>
+        <line x1="0" y1="156" x2="900" y2="156"/><line x1="0" y1="208" x2="900" y2="208"/>
+      </g>
+      <line class="axis" x1="0" y1="240" x2="900" y2="240"/>
+      <path class="curve a" stroke="#D04838" d="M20,222 C220,214 340,196 470,130"/>
+      <path class="curve b" stroke="#3868B0" d="M20,52 C230,60 350,84 470,130"/>
+      <path class="curve" stroke="#D04838" d="M470,130 C600,60 720,36 878,26"/>
+      <circle cx="470" cy="130" r="5" fill="#14161C"/>
+      <text class="lbl" x="885" y="22" text-anchor="end" fill="#B23A2C">SIGNAL</text>
+      <text class="lbl" x="24" y="44" fill="#2D5490">STRUCTURE</text>
+    </svg>
+  </section>
+
+  <section>
+    <span class="coord">01.1</span>
+    <h2>Sampled anchors</h2>
+    <p class="muted">Every value below is a pixel measurement from the reference image, not an
+    interpretation of it. The ramps are built outward from these four.</p>
+
+    <div class="anchors" style="margin-top:28px">
+      <div class="anchor">
+        <div class="chip" style="background:#D04838"></div>
+        <div class="meta">
+          <div class="name">Signal Red</div><div class="hex">#D04838</div>
+          <div class="src">Red blot, upper-right field. Most frequent value in the sample region.</div>
+        </div>
+      </div>
+      <div class="anchor">
+        <div class="chip" style="background:#3868B0"></div>
+        <div class="meta">
+          <div class="name">Ink Blue</div><div class="hex">#3868B0</div>
+          <div class="src">Blue blot, left field. Most frequent value across two sample regions.</div>
+        </div>
+      </div>
+      <div class="anchor">
+        <div class="chip" style="background:#E0E5E5"></div>
+        <div class="meta">
+          <div class="name">Paper</div><div class="hex">#E0E5E5</div>
+          <div class="src">Paper ground behind the figures. Cool, slightly green-gray.</div>
+        </div>
+      </div>
+      <div class="anchor">
+        <div class="chip" style="background:#14161C"></div>
+        <div class="meta">
+          <div class="name">Ink</div><div class="hex">#14161C</div>
+          <div class="src">Deepest shadow, lower-right. Blue-black, never pure #000.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="coord">01.2</span>
+    <h2>Ramps</h2>
+    <p class="muted">Ten stops each. Outlined stops are the sampled anchors.</p>
+
+    <div class="ramp" style="margin-top:30px">
+      <div class="ramp-head"><span class="ramp-name">Signal Red</span>
+        <span class="ramp-note">Accent. Replaces the previous signal orange.</span></div>
+      <div class="stops">
+        <div class="stop"><i style="background:#FAEFEC"></i><b>50</b><s>FAEFEC</s></div>
+        <div class="stop"><i style="background:#F2D4CD"></i><b>100</b><s>F2D4CD</s></div>
+        <div class="stop"><i style="background:#E3A99C"></i><b>200</b><s>E3A99C</s></div>
+        <div class="stop"><i style="background:#DC7F6D"></i><b>300</b><s>DC7F6D</s></div>
+        <div class="stop"><i style="background:#D8604C"></i><b>400</b><s>D8604C</s></div>
+        <div class="stop anchorstop"><i style="background:#D04838"></i><b>500</b><s>D04838</s></div>
+        <div class="stop"><i style="background:#B23A2C"></i><b>600</b><s>B23A2C</s></div>
+        <div class="stop"><i style="background:#8B2D22"></i><b>700</b><s>8B2D22</s></div>
+        <div class="stop"><i style="background:#5A1D16"></i><b>800</b><s>5A1D16</s></div>
+        <div class="stop"><i style="background:#2C0E0A"></i><b>900</b><s>2C0E0A</s></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp-head"><span class="ramp-name">Ink Blue</span>
+        <span class="ramp-note">Structure, plot geometry, second dark ground.</span></div>
+      <div class="stops">
+        <div class="stop"><i style="background:#EDF1F8"></i><b>50</b><s>EDF1F8</s></div>
+        <div class="stop"><i style="background:#D2DFEF"></i><b>100</b><s>D2DFEF</s></div>
+        <div class="stop"><i style="background:#A5C0DF"></i><b>200</b><s>A5C0DF</s></div>
+        <div class="stop"><i style="background:#78A0CF"></i><b>300</b><s>78A0CF</s></div>
+        <div class="stop"><i style="background:#5484C3"></i><b>400</b><s>5484C3</s></div>
+        <div class="stop anchorstop"><i style="background:#3868B0"></i><b>500</b><s>3868B0</s></div>
+        <div class="stop"><i style="background:#2D5490"></i><b>600</b><s>2D5490</s></div>
+        <div class="stop"><i style="background:#22406F"></i><b>700</b><s>22406F</s></div>
+        <div class="stop"><i style="background:#172B4A"></i><b>800</b><s>172B4A</s></div>
+        <div class="stop"><i style="background:#0C1626"></i><b>900</b><s>0C1626</s></div>
+      </div>
+    </div>
+
+    <div class="ramp">
+      <div class="ramp-head"><span class="ramp-name">Neutral</span>
+        <span class="ramp-note">Cool gray pulled off the paper ground. No warm grays anywhere.</span></div>
+      <div class="stops">
+        <div class="stop"><i style="background:#F0F2F2"></i><b>50</b><s>F0F2F2</s></div>
+        <div class="stop anchorstop"><i style="background:#E0E5E5"></i><b>100</b><s>E0E5E5</s></div>
+        <div class="stop"><i style="background:#CCD2D2"></i><b>200</b><s>CCD2D2</s></div>
+        <div class="stop"><i style="background:#AAB1B1"></i><b>300</b><s>AAB1B1</s></div>
+        <div class="stop"><i style="background:#767C7C"></i><b>400</b><s>767C7C</s></div>
+        <div class="stop"><i style="background:#4E5457"></i><b>500</b><s>4E5457</s></div>
+        <div class="stop"><i style="background:#2E3238"></i><b>600</b><s>2E3238</s></div>
+        <div class="stop"><i style="background:#1E2228"></i><b>700</b><s>1E2228</s></div>
+        <div class="stop anchorstop"><i style="background:#14161C"></i><b>800</b><s>14161C</s></div>
+        <div class="stop"><i style="background:#0A0B0E"></i><b>900</b><s>0A0B0E</s></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <span class="coord">01.3</span>
+    <h2>Roles</h2>
+    <p class="muted">Components reference these tokens, never the ramps directly. Putting
+    <code>.is-ink</code> or <code>.is-deep</code> on a section flips all of them at once.</p>
+
+    <h3>On paper</h3>
+    <div class="scroll"><table>
+      <tr><th>Token</th><th>Value</th><th>Used for</th></tr>
+      <tr><td class="tok">--surface</td><td class="tok"><span class="dot" style="background:#F0F2F2"></span>n-50</td><td>Page ground</td></tr>
+      <tr><td class="tok">--surface-raised</td><td class="tok"><span class="dot" style="background:#E0E5E5"></span>n-100</td><td>Logo wall, pull-quote panels, form fields</td></tr>
+      <tr><td class="tok">--text</td><td class="tok"><span class="dot" style="background:#14161C"></span>n-800</td><td>Headlines and body</td></tr>
+      <tr><td class="tok">--text-muted</td><td class="tok"><span class="dot" style="background:#767C7C"></span>n-400</td><td>Captions, meta, nav labels — 16px and above</td></tr>
+      <tr><td class="tok">--text-accent</td><td class="tok"><span class="dot" style="background:#B23A2C"></span>red-600</td><td>Accent text at body size</td></tr>
+      <tr><td class="tok">--accent</td><td class="tok"><span class="dot" style="background:#D04838"></span>red-500</td><td>Kickers, stat figures, buttons, link underlines</td></tr>
+      <tr><td class="tok">--coord</td><td class="tok"><span class="dot" style="background:#2D5490"></span>blue-600</td><td>Coordinate-style section numbers</td></tr>
+      <tr><td class="tok">--rule</td><td class="tok"><span class="dot" style="background:#CCD2D2"></span>n-200</td><td>Hairlines and dividers</td></tr>
+      <tr><td class="tok">--grid</td><td class="tok"><span class="dot" style="background:#DBE2EF"></span>blue-500 @ 14%</td><td>Graph grid behind sections</td></tr>
+    </table></div>
+
+    <h3>On ink and deep blue</h3>
+    <div class="scroll"><table>
+      <tr><th>Token</th><th>Value</th><th>Used for</th></tr>
+      <tr><td class="tok">--surface-ink</td><td class="tok"><span class="dot" style="background:#14161C"></span>n-800</td><td>Primary dark band</td></tr>
+      <tr><td class="tok">--surface-deep</td><td class="tok"><span class="dot" style="background:#0C1626"></span>blue-900</td><td>Second dark band — identical weight, different hue</td></tr>
+      <tr><td class="tok">--text-inv</td><td class="tok"><span class="dot" style="background:#E0E5E5"></span>n-100</td><td>Headlines and body</td></tr>
+      <tr><td class="tok">--text-inv-muted</td><td class="tok"><span class="dot" style="background:#8E9698"></span>#8E9698</td><td>Captions and meta</td></tr>
+      <tr><td class="tok">--accent-on-dark</td><td class="tok"><span class="dot" style="background:#D8604C"></span>red-400</td><td>Stat figures, kickers, buttons</td></tr>
+      <tr><td class="tok">--plot-secondary-dark</td><td class="tok"><span class="dot" style="background:#78A0CF"></span>blue-300</td><td>Second plotted curve, coordinate numbers</td></tr>
+      <tr><td class="tok">--focus-inv</td><td class="tok"><span class="dot" style="background:#5484C3"></span>blue-400</td><td>Keyboard focus ring on dark</td></tr>
+    </table></div>
+  </section>
+
+</div>
+
+<div class="band ink">
+  <div class="wrap">
+    <span class="coord">01.4</span>
+    <p class="eyebrow">Inverted band — ink</p>
+    <h2>The accent has to survive the flip.</h2>
+    <p class="muted" style="max-width:56ch">Red 500 is too heavy against ink, so dark sections
+    step up to red 400 for interface elements and red 300 for accent text. The blue does the
+    opposite — it lightens to 300 so the plotted line stays legible.</p>
+    <div class="grid3">
+      <div><div class="stat">$1B+</div><div class="statlbl">Portfolio sales growth across 12 brands</div></div>
+      <div><div class="stat">769k</div><div class="statlbl">Customers acquired, three months ahead of goal</div></div>
+      <div><div class="stat">857MM</div><div class="statlbl">Earned impressions on a single launch</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="band deep">
+  <div class="wrap">
+    <span class="coord">01.5</span>
+    <p class="eyebrow">Inverted band — deep blue</p>
+    <h2>Same weight. Different air.</h2>
+    <p class="muted" style="max-width:56ch">Deep blue and ink sit at effectively the same
+    luminance, so alternating between them changes the temperature of a section without changing
+    its contrast. Use ink for work and proof; use deep blue for philosophy and contact.</p>
+  </div>
+</div>
+
+<div class="wrap">
+  <section style="border-top:0">
+    <span class="coord">01.6</span>
+    <h2>Rules of use</h2>
+    <ol class="rules" style="margin-top:26px">
+      <li><strong>Red and blue meet once per page.</strong> On the reference image the two blots
+      touch at a single bleed. Full-strength red and full-strength blue may sit adjacent in exactly
+      one place per page — normally the hero plot. Everywhere else, one of them is reduced to a
+      grid, a hairline, or a coordinate label.</li>
+      <li><strong>Red argues. Blue structures.</strong> Red marks the claim: the outcome, the
+      figure, the call to action. Blue marks the frame: axes, numbering, grid, dark ground. If an
+      element is neither a claim nor a frame, it stays neutral.</li>
+      <li><strong>Never distinguish data by red versus blue alone.</strong> The two anchors are
+      1.24:1 against each other and read as one value in grayscale. Plotted curves must also differ
+      in weight, dash pattern, or direct label.</li>
+      <li><strong>No warm grays, no pure black, no pure white on ground.</strong> All neutrals carry
+      the paper's cool cast. White is reserved for text sitting on the accent.</li>
+      <li><strong>The accent stays scarce.</strong> Same discipline as the type system: red appears
+      at most twice per viewport. Frequency is what makes it read as signal rather than decoration.</li>
+      <li><strong>Punctuation takes the color of the type before it.</strong> A trailing mark —
+      period, comma, closing parenthesis, colon — belongs to the word or phrase it closes, not to
+      the paragraph's default color. If a red clause ends in a period, the period is red too.
+      Splitting the color at a tag boundary (<code>&lt;em&gt;Growth&lt;/em&gt;.</code> instead of
+      <code>&lt;em&gt;Growth.&lt;/em&gt;</code>) reads as a rendering bug, not a choice — keep
+      closing punctuation inside the colored span.</li>
+    </ol>
+  </section>
+
+  <section>
+    <span class="coord">01.7</span>
+    <h2>Contrast</h2>
+    <p class="muted">Computed WCAG 2.1 ratios for every pairing the system actually ships.</p>
+    <div class="scroll"><table style="margin-top:18px">
+      <tr><th>Pairing</th><th>Ratio</th><th>Status</th></tr>
+      <tr><td>Ink #14161C on Paper #F0F2F2</td><td class="ratio">16.1</td><td class="pass">AAA</td></tr>
+      <tr><td>Neutral 400 on Paper</td><td class="ratio">3.8</td><td class="warn">Large text / 16px+ only</td></tr>
+      <tr><td>Red 600 on Paper</td><td class="ratio">5.3</td><td class="pass">AA</td></tr>
+      <tr><td>Red 700 on Paper</td><td class="ratio">7.5</td><td class="pass">AAA</td></tr>
+      <tr><td>Red 500 on Paper</td><td class="ratio">4.0</td><td class="warn">Large text and graphics only</td></tr>
+      <tr><td>Blue 500 on Paper</td><td class="ratio">5.0</td><td class="pass">AA</td></tr>
+      <tr><td>Blue 600 on Paper</td><td class="ratio">6.8</td><td class="pass">AA</td></tr>
+      <tr><td>White on Red 500</td><td class="ratio">4.5</td><td class="pass">AA</td></tr>
+      <tr><td>White on Red 600</td><td class="ratio">5.9</td><td class="pass">AA</td></tr>
+      <tr><td>Neutral 100 on Ink</td><td class="ratio">14.2</td><td class="pass">AAA</td></tr>
+      <tr><td>#8E9698 on Ink</td><td class="ratio">6.0</td><td class="pass">AA</td></tr>
+      <tr><td>Red 400 on Ink</td><td class="ratio">4.9</td><td class="pass">AA</td></tr>
+      <tr><td>Red 300 on Ink</td><td class="ratio">6.3</td><td class="pass">AA</td></tr>
+      <tr><td>Blue 300 on Ink</td><td class="ratio">6.6</td><td class="pass">AA</td></tr>
+      <tr><td>Blue 400 on Ink (focus ring)</td><td class="ratio">4.7</td><td class="pass">AA</td></tr>
+      <tr><td>Neutral 100 on Deep Blue</td><td class="ratio">14.3</td><td class="pass">AAA</td></tr>
+      <tr><td>Red 300 on Deep Blue</td><td class="ratio">6.3</td><td class="pass">AA</td></tr>
+      <tr><td>Red 500 vs Blue 500</td><td class="ratio">1.2</td><td class="warn">Never rely on hue alone</td></tr>
+    </table></div>
+  </section>
+
+  <footer>Function — color system, revision 02. Anchors sampled from the supplied reference image.</footer>
+</div>
+
+</body>
+</html>

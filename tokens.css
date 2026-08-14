@@ -1,0 +1,156 @@
+/* ===========================================================
+   FUNCTION — COLOR TOKENS
+   Palette derived from pixel-sampled values in the reference
+   image (Dirty Projectors, "Bitte Orca" cover).
+
+   Anchors sampled directly from the artwork:
+     Signal Red   #D04838   red blot, upper-right field
+     Ink Blue     #3868B0   blue blot, left field
+     Paper        #E0E5E5   paper ground, upper-center
+     Ink          #14161C   deepest shadow, lower-right
+
+   Drop in at /assets/css/tokens.css, load before all other
+   stylesheets except fonts.css.
+   =========================================================== */
+
+:root {
+  /* ---- SIGNAL RED — the accent. Replaces signal orange. ---- */
+  --red-50:  #FAEFEC;
+  --red-100: #F2D4CD;
+  --red-200: #E3A99C;
+  --red-300: #DC7F6D;
+  --red-400: #D8604C;
+  --red-500: #D04838;  /* sampled anchor */
+  --red-600: #B23A2C;
+  --red-700: #8B2D22;
+  --red-800: #5A1D16;
+  --red-900: #2C0E0A;
+
+  /* ---- INK BLUE — structure, plot geometry, second ground ---- */
+  --blue-50:  #EDF1F8;
+  --blue-100: #D2DFEF;
+  --blue-200: #A5C0DF;
+  --blue-300: #78A0CF;
+  --blue-400: #5484C3;
+  --blue-500: #3868B0;  /* sampled anchor */
+  --blue-600: #2D5490;
+  --blue-700: #22406F;
+  --blue-800: #172B4A;
+  --blue-900: #0C1626;
+
+  /* ---- NEUTRALS — cool-gray, pulled off the paper ground ---- */
+  --n-0:   #FFFFFF;
+  --n-50:  #F0F2F2;  /* page ground */
+  --n-100: #E0E5E5;  /* sampled anchor — raised/recessed panels */
+  --n-200: #CCD2D2;  /* hairline on light */
+  --n-300: #AAB1B1;
+  --n-400: #767C7C;  /* meta text on light */
+  --n-500: #4E5457;
+  --n-600: #2E3238;  /* hairline on dark */
+  --n-700: #1E2228;
+  --n-800: #14161C;  /* sampled anchor — ink ground */
+  --n-900: #0A0B0E;
+
+  /* =========================================================
+     SEMANTIC TOKENS — use these in components, not the ramps
+     ========================================================= */
+
+  /* Surfaces — the site alternates light / ink / deep-blue */
+  --surface:        var(--n-50);
+  --surface-raised: var(--n-100);
+  --surface-ink:    var(--n-800);
+  --surface-deep:   var(--blue-900);  /* same value weight as ink, hue only */
+
+  /* Text on light */
+  --text:        var(--n-800);   /* 16.1:1 */
+  --text-muted:  var(--n-400);   /* 3.8:1 — meta, captions, 16px+ only */
+  --text-accent: var(--red-600); /* 5.3:1 — accent text at body size */
+
+  /* Text on ink / deep */
+  --text-inv:       var(--n-100);   /* 14.2:1 */
+  --text-inv-muted: #8E9698;        /* 6.0:1 */
+  --text-inv-accent: var(--red-300);/* 6.3:1 */
+
+  /* Accent — buttons, links, kickers, stat figures */
+  --accent:          var(--red-500);
+  --accent-hover:    var(--red-600);
+  --accent-press:    var(--red-700);
+  --accent-on-dark:  var(--red-400);
+  --accent-wash:     var(--red-50);
+  --on-accent:       var(--n-0);   /* 4.5:1 on red-500; 5.9:1 on red-600 */
+
+  /* Rules & dividers */
+  --rule:        var(--n-200);
+  --rule-strong: var(--n-300);
+  --rule-inv:    var(--n-600);
+
+  /* Graph motif — the plotted-curve system */
+  --plot-primary:   var(--red-500);   /* the function itself */
+  --plot-secondary: var(--blue-500);  /* the comparison / baseline */
+  --plot-primary-dark:   var(--red-400);
+  --plot-secondary-dark: var(--blue-300);
+  --axis:      var(--n-300);
+  --axis-inv:  var(--n-600);
+  --grid:      rgba(56, 104, 176, 0.14);   /* blue-500 @ 14% */
+  --grid-inv:  rgba(120, 160, 207, 0.16);  /* blue-300 @ 16% */
+
+  /* Coordinate-style section numbers */
+  --coord:     var(--blue-600);
+  --coord-inv: var(--blue-300);
+
+  /* Interaction */
+  --focus:     var(--red-500);
+  --focus-inv: var(--blue-400);
+
+  /* Form states (contact section) */
+  --error:        var(--red-700);
+  --error-inv:    var(--red-300);
+  --success:      #3F6B4A;
+  --success-inv:  #7FA98A;
+}
+
+/* Section-level inversion. Put .is-ink or .is-deep on a <section>
+   and every semantic token below flips — no per-element overrides. */
+.is-ink,
+.is-deep {
+  --surface:        var(--n-800);
+  --surface-raised: var(--n-700);
+  --text:           var(--n-100);
+  --text-muted:     var(--text-inv-muted);
+  --text-accent:    var(--red-300);
+  --accent:         var(--red-400);
+  --accent-hover:   var(--red-300);
+  --rule:           var(--n-600);
+  --rule-strong:    var(--n-500);
+  --plot-primary:   var(--red-400);
+  --plot-secondary: var(--blue-300);
+  --axis:           var(--n-600);
+  --grid:           var(--grid-inv);
+  --coord:          var(--blue-300);
+  --focus:          var(--blue-400);
+  --error:          var(--red-300);
+  --success:        var(--success-inv);
+
+  background: var(--surface);
+  color: var(--text);
+}
+
+.is-deep {
+  --surface:        var(--blue-900);
+  --surface-raised: var(--blue-800);
+  --rule:           var(--blue-800);
+}
+
+/* Quality floor */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --text-muted:   var(--n-500);
+    --text-accent:  var(--red-700);
+    --rule:         var(--n-300);
+  }
+}

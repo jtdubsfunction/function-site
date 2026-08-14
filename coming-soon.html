@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Function — Coming Soon</title>
+<meta name="description" content="Function is becoming something new. More soon.">
+
+<!-- Real, self-hosted type — same files/paths as index.html and the
+     Palantir-direction mockup this page is built from. -->
+<link rel="preload" href="assets/fonts/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/BlenderPro-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="tokens.css">
+
+<style>
+/* ===========================================================
+   Coming-soon teaser. Same foundation as index-palantir-mockup.html
+   (tokens.css + fonts.css only, semantic tokens throughout) — trimmed
+   to hero + one motif, nothing that promises a page that isn't built
+   yet. Fox/hedgehog plates and alt text carried over verbatim from
+   philosophy.html so this page previews the real one rather than
+   inventing a separate visual language.
+   =========================================================== */
+:root{ --ease:cubic-bezier(.2,.7,.3,1); }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font-body);
+  font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+
+h1,h2{font-family:var(--font-display);font-weight:700;letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(36px,6vw,64px);line-height:1.04}
+h2{font-size:clamp(22px,3vw,30px);line-height:1.1}
+p{margin:0 0 14px;max-width:58ch}
+.eyebrow{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-accent);margin:0 0 16px}
+.muted{color:var(--n-500)}
+
+section{padding:96px 0}
+
+header{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--rule)}
+.navrow{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;max-width:1120px;margin:0 auto}
+.wordmark{font-family:var(--font-display);font-weight:700;font-size:19px;letter-spacing:-.01em;text-decoration:none}
+.brandmark{display:inline-flex;align-items:center;color:var(--text)}
+.brandmark svg{height:20px;width:auto;display:block}
+
+/* hero — sticky content fades as the page scrolls past it */
+.hero{height:130vh;position:relative}
+.hero-inner{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;
+  will-change:opacity, transform}
+.hero-bg{position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;z-index:0;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-bg::after{content:"";position:absolute;inset:0;background:var(--surface);opacity:.88}
+.hero-copy{position:relative;z-index:1}
+.hero h1{max-width:17ch}
+.hero .lede{font-size:19px;max-width:50ch;margin-top:22px}
+.scrolltip{position:absolute;bottom:40px;left:28px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--n-500);display:flex;align-items:center;gap:8px}
+.scrolltip .bar{width:1px;height:28px;background:var(--rule-strong);animation:tip 1.8s ease-in-out infinite}
+@keyframes tip{0%,100%{transform:scaleY(1);opacity:.4}50%{transform:scaleY(.4);opacity:1}}
+@media (prefers-reduced-motion:reduce){ .scrolltip .bar{animation:none} }
+
+/* parable intro */
+.parable-intro p{font-size:17px}
+
+/* plates — side by side on desktop, two full stacked bands on mobile */
+.plates{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin-top:56px}
+@media (max-width:760px){
+  .plates{grid-template-columns:1fr;gap:0}
+  .plate-fig{padding:56px 0}
+  .plate-fig + .plate-fig{border-top:1px solid var(--rule)}
+}
+.plate-fig{margin:0}
+.plate-mount{position:relative;background:var(--surface-raised);padding:clamp(10px,1.4vw,16px)}
+.plate-mount img{width:100%;height:auto}
+.plate-mount .hair{position:absolute;inset:clamp(10px,1.4vw,16px);border:1px solid var(--rule-strong);
+  pointer-events:none}
+.platecap{display:flex;flex-wrap:wrap;gap:5px 16px;align-items:baseline;margin-top:16px}
+.platecap .fig{font-family:var(--font-display);font-weight:700;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--text-accent)}
+.platecap .cap{font-size:14px;line-height:1.45;color:var(--n-500);max-width:38ch;margin:0}
+
+.foodband{margin-top:56px;padding-top:24px;border-top:1px solid var(--rule)}
+.thoughts{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:24px}
+@media (max-width:760px){ .thoughts{grid-template-columns:1fr;gap:32px} }
+.thought{margin:0}
+.thought q{quotes:none;display:block;font-family:var(--font-display);font-weight:500;
+  font-size:15px;line-height:1.42;margin:0 0 8px}
+.thought .gloss{display:block;font-size:13px;font-style:italic;color:var(--n-500);margin:0 0 8px}
+.thought .src{display:block;font-family:var(--font-display);font-weight:700;font-size:11px;
+  letter-spacing:.04em;color:var(--n-500)}
+
+/* reveal-on-scroll */
+[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease), transform .6s var(--ease)}
+[data-reveal].is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  [data-reveal]{opacity:1;transform:none;transition:none}
+  .hero-inner{opacity:1 !important;transform:none !important}
+}
+
+footer{border-top:1px solid var(--rule);padding:40px 0;font-size:13px;color:var(--n-500)}
+.footrow{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:12px}
+footer a{color:var(--n-500);text-decoration:none;border-bottom:1px solid var(--rule-strong);transition:color .2s ease, border-color .2s ease}
+footer a:hover{color:var(--text);border-color:var(--text)}
+
+@media (max-width:640px){ section{padding:64px 0} }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navrow">
+    <a class="brandmark" href="#top" aria-label="Function">
+      <svg viewBox="0 0 391.07 100.00" role="img" aria-hidden="true">
+        <defs>
+          <path id="lf" d="M.40800477 .5220032H.1230011V.33900453H.39300538V.2610016H.1230011V0H.041000368V.6000061H.40800477V.5220032Z"/>
+          <path id="lu" d="M.45799256 .13400269C.45799256 .1126709 .45332847 .095336917 .44400025 .08200073 .43799845 .07266235 .42699687 .06016032 .41099549 .04449463 .3949941 .02882894 .38199363 .0179952 .37199403 .011993408 .35199485 .0006612142 .33299766-.005004883 .31500245-.005004883H.18099976C.16233318-.005004883 .14300029 .0006612142 .1230011 .011993408 .1130015 .0179952 .100001018 .02882894 .083999637 .04449463 .06799825 .06016032 .056996664 .07266235 .050994874 .08200073 .04099528 .09666952 .035995485 .1140035 .035995485 .13400269V.6000061H.117996219V.13600159C.117996219 .12933858 .12582906 .118504848 .14149475 .103500369 .15716045 .08849589 .16932678 .07899475 .17799378 .07499695 .18066915 .073664348 .18333943 .07299805 .18600464 .07299805H.30999757C.31333415 .07299805 .31633506 .073664348 .31900025 .07499695 .32766725 .07899475 .3393351 .08849589 .3540039 .103500369 .3686727 .118504848 .37600709 .12933858 .37600709 .13600159V.6000061H.45799256V.13400269Z"/>
+          <path id="ln" d="M.46899415 0H.37399293L.12199402 .45799256V0H.041000368V.6000061H.13800049L.3880005 .13699341V.6000061H.46899415V0Z"/>
+          <path id="lc" d="M.46299745 .12800598C.45433045 .106664028 .44499717 .08933004 .43499757 .07600403 .3916626 .021998087 .35066224-.005004883 .31199647-.005004883H.17999268C.1613261-.005004883 .14199321 .0006612142 .12199402 .011993408 .11199442 .0179952 .098993938 .02882894 .08299255 .04449463 .06700134 .06016032 .05600484 .07266235 .05000305 .08200073 .04000346 .09666952 .035003663 .11433411 .035003663 .1349945V.46499635C.035003663 .4849955 .04000346 .5023295 .05000305 .5169983 .056666059 .52633669 .06799825 .5391693 .083999637 .5554962 .100001018 .5718333 .11266581 .58266708 .12199402 .58799746 .14199321 .59932968 .16099549 .6049957 .17900086 .6049957H.31199647C.35332743 .6049957 .3943278 .57799789 .43499757 .5240021 .44233195 .5153351 .45166526 .4983368 .46299745 .4730072L.3829956 .44999696C.3723348 .47999574 .3503367 .5053304 .31700135 .526001 .31433616 .5266622 .31167094 .5269928 .30900575 .5269928H.18400574C.18066915 .5269928 .17766826 .5263265 .17500305 .5249939 .16766866 .5209961 .15816753 .5133311 .14649964 .5019989 .13483174 .49066673 .1259969 .48033143 .11999512 .47099305 .118662517 .46899925 .117996219 .46466575 .117996219 .45799256V.13600159C.117996219 .1279958 .12516277 .116994228 .13949585 .102996829 .15382894 .08899943 .16566468 .07966614 .17500305 .07499695 .17766826 .073664348 .18066915 .07299805 .18400574 .07299805H.30900575C.31300355 .07299805 .31633506 .073664348 .31900025 .07499695 .33100382 .08167013 .343338 .09200541 .3560028 .10600281 .3686676 .120000209 .3776652 .1343333 .3829956 .14900208L.46299745 .12800598Z"/>
+          <path id="lt" d="M.43200685 .5220032H.2610016V0H.17900086V.5220032H.0079956059V.6000061H.43200685V.5220032Z"/>
+          <path id="li" d="M.12199402 0H.039993287V.6000061H.12199402V0Z"/>
+          <path id="lo" d="M.4830017 .1349945C.4830017 .11433411 .47800193 .09666952 .46800233 .08200073 .46200053 .07266235 .45099894 .06016032 .43499757 .04449463 .41899619 .02882894 .4059957 .0179952 .3959961 .011993408 .37599693 .0006612142 .35666404-.005004883 .33799745-.005004883H.17999268C.16199748-.005004883 .14300029 .0006612142 .1230011 .011993408 .1130015 .0179952 .09983317 .02882894 .083496097 .04449463 .06716919 .06016032 .05600484 .07266235 .05000305 .08200073 .040664674 .095336917 .035995485 .1130015 .035995485 .1349945V.46400453C.035995485 .48599754 .040664674 .5036621 .05000305 .5169983 .05600484 .52633669 .06716919 .53900149 .083496097 .5549927 .09983317 .5709941 .1130015 .58199569 .1230011 .58799746 .14300029 .59932968 .16199748 .6049957 .17999268 .6049957H.33799745C.35666404 .6049957 .37599693 .59932968 .3959961 .58799746 .40533448 .58266708 .41799928 .5718333 .43399049 .5554962 .44999186 .5391693 .46132914 .52633669 .46800233 .5169983 .47800193 .5023295 .4830017 .48466493 .4830017 .46400453M.40100099 .13600159V.46200563C.40100099 .46533204 .4003347 .46832786 .39900209 .47099305 .39367167 .48033143 .38500468 .49066673 .3730011 .5019989 .36099754 .5133311 .35132853 .5209961 .34399415 .5249939 .34132896 .5263265 .33833314 .5269928 .3350067 .5269928H.18499756C.18166097 .5269928 .17866008 .5263265 .17599488 .5249939 .16666667 .5203349 .15466817 .51067098 .13999939 .4960022 .12533061 .4813334 .117996219 .47000123 .117996219 .46200563V.13600159C.117996219 .12933858 .12549336 .118504848 .14048767 .103500369 .15549214 .08849589 .16732788 .07899475 .17599488 .07499695 .17866008 .073664348 .18166097 .07299805 .18499756 .07299805H.3350067C.33833314 .07299805 .34132896 .073664348 .34399415 .07499695 .35333253 .07966614 .36516825 .08899943 .37950135 .102996829 .39383445 .116994228 .40100099 .1279958 .40100099 .13600159Z"/>
+        </defs>
+        <g fill="currentColor">
+          <use href="#lf" transform="matrix(96,0,0,-96,2.0000,78.8000)"/>
+          <use href="#lu" transform="matrix(96,0,0,-96,48.9440,78.8000)"/>
+          <use href="#ln" transform="matrix(96,0,0,-96,102.1280,78.8000)"/>
+          <use href="#lc" transform="matrix(96,0,0,-96,156.9440,78.8000)"/>
+          <use href="#lt" transform="matrix(96,0,0,-96,208.8800,78.8000)"/>
+          <use href="#li" transform="matrix(96,0,0,-96,257.2640,78.8000)"/>
+          <use href="#lo" transform="matrix(96,0,0,-96,278.6720,78.8000)"/>
+          <use href="#ln" transform="matrix(96,0,0,-96,334.2560,78.8000)"/>
+        </g>
+      </svg>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="hero-inner wrap" id="heroInner">
+      <div class="hero-bg" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset="assets/img/hero-lobster-820.avif 820w, assets/img/hero-lobster-1240.avif 1240w, assets/img/hero-lobster-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" srcset="assets/img/hero-lobster-820.webp 820w, assets/img/hero-lobster-1240.webp 1240w, assets/img/hero-lobster-1920.webp 1920w" sizes="100vw">
+          <img src="assets/img/hero-lobster.jpg" alt="" decoding="async">
+        </picture>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">Coming soon</p>
+        <h1>We're working out what kind of animal we are.</h1>
+        <p class="lede muted">Function is being built. Thank you for visiting.</p>
+      </div>
+    </div>
+    <div class="scrolltip"><span class="bar"></span> Scroll</div>
+  </section>
+
+  <section data-reveal>
+    <div class="wrap">
+      <p class="eyebrow">A parable, for now</p>
+      <div class="parable-intro">
+        <p>Archilochus put it in twelve words, twenty-six centuries ago: the fox knows many
+          things, but the hedgehog knows one big thing. When it comes to brand, are you a
+          hedgehog, or a fox?</p>
+      </div>
+
+      <div class="plates">
+        <figure class="plate-fig">
+          <div class="plate-mount">
+            <picture>
+              <source type="image/avif" srcset="assets/img/plate-hedgehog-820.avif 820w, assets/img/plate-hedgehog-1240.avif 1240w" sizes="(min-width:760px) 50vw, 92vw">
+              <source type="image/webp" srcset="assets/img/plate-hedgehog-820.webp 820w, assets/img/plate-hedgehog-1240.webp 1240w" sizes="(min-width:760px) 50vw, 92vw">
+              <img src="assets/img/plate-hedgehog.jpg" width="1240" height="617" loading="lazy" decoding="async"
+                   alt="A mock nineteenth-century natural history plate: a European hedgehog in undergrowth, wireless earbuds lodged among its spines, with seven small diagrams of brand evolution printed beneath.">
+            </picture>
+            <span class="hair" aria-hidden="true"></span>
+          </div>
+          <figcaption class="platecap">
+            <span class="fig">Plate I — Hedgehog</span>
+            <p class="cap">One big idea, carried everywhere, collecting whatever it brushes past.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="plate-fig">
+          <div class="plate-mount">
+            <picture>
+              <source type="image/avif" srcset="assets/img/plate-fox-820.avif 820w, assets/img/plate-fox-1240.avif 1240w" sizes="(min-width:760px) 50vw, 92vw">
+              <source type="image/webp" srcset="assets/img/plate-fox-820.webp 820w, assets/img/plate-fox-1240.webp 1240w" sizes="(min-width:760px) 50vw, 92vw">
+              <img src="assets/img/plate-fox.jpg" width="1240" height="617" loading="lazy" decoding="async"
+                   alt="A mock nineteenth-century natural history plate: a red fox on a mossy bank strewn with discarded smartphones, with five small brand-architecture pyramids printed beneath.">
+            </picture>
+            <span class="hair" aria-hidden="true"></span>
+          </div>
+          <figcaption class="platecap">
+            <span class="fig">Plate II — Fox</span>
+            <p class="cap">Many small things, held loosely, none of them load-bearing on their own.</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="foodband">
+        <p class="eyebrow">Food for thought</p>
+        <div class="thoughts">
+          <figure class="thought">
+            <q>Wovon man nicht sprechen kann, darüber muss man schweigen.</q>
+            <span class="gloss">Whereof one cannot speak, thereof one must be silent.</span>
+            <span class="src">Wittgenstein · Tractatus Logico-Philosophicus, 7</span>
+          </figure>
+          <figure class="thought">
+            <q>The wealth required by nature is limited and is easy to procure; but the wealth
+              required by vain ideals extends to infinity.</q>
+            <span class="src">Epicurus · Principal Doctrines</span>
+          </figure>
+          <figure class="thought">
+            <q>If you want to know what God thinks of money, just look at the people he gave it to.</q>
+            <span class="src">Dorothy Parker</span>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap footrow">
+    <span class="wordmark" style="font-size:15px;font-weight:700;font-family:var(--font-display)">Function</span>
+    <a href="mailto:john.winterkorn@thisisfunction.io">john.winterkorn@thisisfunction.io</a>
+    <span>&copy; 2026 Function.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var heroInner = document.getElementById('heroInner');
+  var hero = document.querySelector('.hero');
+  if (heroInner && hero && !reduce) {
+    var ticking = false;
+    function updateHero(){
+      var rect = hero.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var progress = Math.min(Math.max(-rect.top / vh, 0), 1);
+      heroInner.style.opacity = String(1 - progress);
+      heroInner.style.transform = 'translateY(' + (progress * -24) + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if (!ticking) { requestAnimationFrame(updateHero); ticking = true; }
+    }, { passive: true });
+    updateHero();
+  }
+
+  if ('IntersectionObserver' in window) {
+    var els = document.querySelectorAll('[data-reveal]');
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    els.forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-reveal]').forEach(function(el){ el.classList.add('is-in'); });
+  }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+/* ============================================
+   Function — Font Face Declarations
+   Two families, mapped to numeric weights so you
+   can just write font-weight: 400 / 500 / 700 etc.
+
+   Roles:
+   - Blender Pro  → headlines, display type, big impact moments
+   - Circular Std → body copy, UI, longer-form reading
+   ============================================ */
+
+/* --- Circular Std (body / UI) --- */
+
+@font-face {
+  font-family: "Circular Std";
+  src: url("../fonts/CircularStd-Book.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circular Std";
+  src: url("../fonts/CircularStd-BookItalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circular Std";
+  src: url("../fonts/CircularStd-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circular Std";
+  src: url("../fonts/CircularStd-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circular Std";
+  src: url("../fonts/CircularStd-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circular Std";
+  src: url("../fonts/CircularStd-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circular Std";
+  src: url("../fonts/CircularStd-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Circular Std";
+  src: url("../fonts/CircularStd-BlackItalic.woff2") format("woff2");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --- Blender Pro (headlines / display) --- */
+
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-ThinItalic.woff2") format("woff2");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-Book.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-BookItalic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Blender Pro";
+  src: url("../fonts/BlenderPro-Heavy.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- Usage --- */
+:root {
+  --font-display: "Blender Pro", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Circular Std", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Sensible defaults so headings pick up Blender Pro automatically —
+   override per-element if a specific heading needs a different weight. */
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+h1, h2, h3, h4,
+.display, .headline {
+  font-family: var(--font-display);
+  font-weight: 700; /* swap to 800 (Heavy) for hero-level moments */
+  letter-spacing: -0.01em; /* Blender Pro reads tighter at large sizes */
+}
+
+/* Small but high-impact elements — stat callouts, pull quotes, nav labels,
+   eyebrows/kickers, buttons. Sits alongside body copy but should punch
+   above its weight. */
+.stat,
+.pull-quote,
+.nav-label,
+.eyebrow,
+.kicker,
+.btn,
+.button {
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+/* Eyebrows/kickers: full Blender punch — these are rare, meant to grab attention. */
+.eyebrow,
+.kicker {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* Nav labels: same family for voice consistency, but lighter weight + tighter
+   tracking than eyebrows — nav is high-frequency, so it should stay quiet and
+   comfortable rather than shouting on every page. */
+.nav-label {
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* Stats want to feel oversized and confident even at moderate point sizes. */
+.stat {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Pull quotes: medium weight, a touch of negative tracking, italic
+   available via BlenderPro-MediumItalic if you want a softer feel. */
+.pull-quote {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
