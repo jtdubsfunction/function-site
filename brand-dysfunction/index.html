@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>What is brand dysfunction? · Function</title>
+<meta name="description" content="What brand dysfunction is, why it happens, and how to recognise where your brand sits.">
+<link rel="preload" href="../assets/fonts/BlenderPro-Bold.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/fonts.css">
+<style>
+:root{
+  --paper:#F0F2F2; --raised:#E0E5E5; --ink:#14161C; --muted:#4E5457; --rule:#CCD2D2; --rule-strong:#9CA3A6;
+  --accent:#B23A2C; --accent-fill:#D04838; --on-accent:#FFFFFF; --structure:#2D5490; --wash:#FAEFEC;
+  --band:#14161C; --band-deep:#0C1626; --on-band:#E0E5E5; --on-band-muted:#8E9698; --band-rule:#2E3238; --band-raised:#1E2228;
+  --font-display:"Blender Pro","Space Grotesk",-apple-system,"Segoe UI",sans-serif;
+  --font-body:"Circular Std","Inter",-apple-system,"Segoe UI",sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#14161C; --raised:#1E2228; --ink:#E0E5E5; --muted:#8E9698; --rule:#2E3238; --rule-strong:#5A6166;
+    --accent:#DC7F6D; --accent-fill:#D8604C; --structure:#78A0CF; --wash:#2C0E0A;
+    --band:#0A0B0E; --band-raised:#1E2228;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#14161C; --raised:#1E2228; --ink:#E0E5E5; --muted:#8E9698; --rule:#2E3238; --rule-strong:#5A6166;
+  --accent:#DC7F6D; --accent-fill:#D8604C; --structure:#78A0CF; --wash:#2C0E0A;
+  --band:#0A0B0E; --band-raised:#1E2228;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);
+  font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent-fill);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+/* header */
+.masthead .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:22px;padding-bottom:22px}
+.wordmark{font:700 17px/1 var(--font-display);letter-spacing:.14em;text-decoration:none}
+.masthead nav a{font:500 15px/1 var(--font-display);color:var(--muted);text-decoration:none}
+.masthead nav a:hover{color:var(--ink)}
+.masthead nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px 28px}
+.masthead nav a{display:inline-block;padding:8px 0}
+@media (max-width:640px){.masthead .wrap{flex-wrap:wrap;gap:10px 20px}.masthead nav{justify-content:flex-start;gap:0 20px}}
+
+section{padding:88px 0}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;margin:0}
+h1{font-size:clamp(40px,11vw,120px);line-height:.92;letter-spacing:-.03em;max-width:none}
+.h1-line{display:block}
+h2{font-size:clamp(30px,4.2vw,46px);line-height:1.02;letter-spacing:-.02em;max-width:18ch;margin-bottom:28px}
+p{margin:0 0 18px}
+.measure{max-width:64ch}
+.lede{font-size:clamp(19px,2.1vw,22px);line-height:1.5;margin-top:40px}
+.lead-in{font-weight:500}
+.aside{color:var(--muted)}
+
+/* ---------- recognition panel ---------- */
+.s-intro{padding:64px 0 24px}
+.recog{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:56px;margin-top:48px;align-items:start}
+.says{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.says li{border-bottom:1px solid var(--rule)}
+.say{display:flex;gap:18px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;
+  padding:20px 4px;cursor:pointer;color:var(--ink);font:400 clamp(18px,1.9vw,21px)/1.4 var(--font-body)}
+.say .mark{flex:0 0 22px;height:22px;margin-top:3px;border:1.5px solid var(--muted);border-radius:50%;
+  display:grid;place-items:center;transition:background .18s ease,border-color .18s ease}
+.say .mark svg{width:12px;height:12px;opacity:0;transition:opacity .15s ease}
+.say .q::before{content:"\201C"}.say .q::after{content:"\201D"}
+.say:hover .q{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.say[aria-pressed="true"] .mark{background:var(--ink);border-color:var(--ink)}
+.say[aria-pressed="true"] .mark svg{opacity:1}
+.note{margin:0 0 22px 40px;padding-left:18px;border-left:2px solid var(--structure);color:var(--muted);font-size:16px;line-height:1.55;max-width:56ch}
+.js .note{display:none}
+.js .says li.is-on .note{display:block;animation:open .25s ease-out}
+@keyframes open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+.summary{position:sticky;top:24px;padding:24px;background:var(--raised);border:1px solid var(--rule)}
+.no-js .summary{display:none}
+.summary h3{font-size:15px;font-weight:500;color:var(--muted);letter-spacing:.01em;margin-bottom:18px}
+.scale{position:relative;height:74px;margin:6px 6px 8px}
+.scale .track{position:absolute;left:0;right:0;top:30px;height:2px;background:var(--rule)}
+.scale .range{position:absolute;top:28px;height:6px;background:var(--ink);border-radius:3px;
+  transition:left .3s ease,width .3s ease,opacity .3s ease;opacity:0}
+.scale .stop{position:absolute;top:24px;width:14px;height:14px;margin-left:-7px;border-radius:50%;
+  background:var(--paper);border:2px solid var(--muted)}
+.scale .stop.s0{left:0}.scale .stop.s1{left:50%}.scale .stop.s2{left:100%}
+.scale .stop.is-hit{background:var(--ink);border-color:var(--ink)}
+.scale .count{position:absolute;top:0;font:500 13px/1 var(--font-display);color:var(--muted);transform:translateX(-50%)}
+.scale .count.c0{left:0;transform:none}.scale .count.c1{left:50%}.scale .count.c2{left:100%;transform:translateX(-100%)}
+.scale .lbl{position:absolute;top:48px;font:500 14px/1.2 var(--font-display)}
+.scale .lbl.l0{left:0}.scale .lbl.l1{left:50%;transform:translateX(-50%)}.scale .lbl.l2{right:0}
+.verdict{font-family:var(--font-display);font-weight:700;font-size:22px;line-height:1.2;margin:18px 0 8px}
+.verdict .st{color:var(--accent)}
+.summary p.small{font-size:15px;color:var(--muted);margin:0 0 14px}
+.summary a.readon{font:500 15px/1.3 var(--font-display);color:var(--ink)}
+
+/* ---------- plates ---------- */
+.plates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:56px}
+@media (max-width:860px){.plates{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;overflow-x:auto;
+  scroll-snap-type:x mandatory;padding:18px 2px 12px;-webkit-overflow-scrolling:touch}.plates figure{scroll-snap-align:start}}
+figure{margin:0;position:relative}
+.plate-img{aspect-ratio:2/1;font-size:13px;width:100%;background:var(--raised);border:1px solid var(--rule);
+  display:grid;place-items:center;text-align:center;padding:24px;color:var(--muted);font-size:14px;
+  transition:outline-color .3s ease;outline:3px solid transparent;outline-offset:6px}
+figure.is-match .plate-img{outline-color:var(--ink)}
+picture.plate-img{display:block;padding:0;background:var(--raised)}
+picture.plate-img img{display:block;width:100%;height:100%;object-fit:cover}
+.match-flag{display:none;position:absolute;top:-14px;left:16px;background:var(--ink);color:var(--paper);
+  font:500 13px/1 var(--font-display);padding:8px 10px;letter-spacing:.01em}
+figure.is-match .match-flag{display:block}
+figcaption{margin-top:18px}
+.plate-name{font-family:var(--font-display);font-weight:700;font-size:19px;line-height:1.2;margin:0 0 10px}
+.plate-name i{font-family:var(--font-body);font-weight:400}
+.plate-num{display:block;font:500 14px/1.4 var(--font-display);color:var(--structure);margin-bottom:4px}
+.plate-caption{font-style:italic;margin:0 0 10px;font-size:16px;line-height:1.5}
+.plate-gloss{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
+
+/* ---------- essay with marginalia ---------- */
+.row{display:grid;grid-template-columns:minmax(0,64ch) 250px;column-gap:56px;align-items:start}
+.row > p,.row > h2{grid-column:1}
+.row > .margin{grid-column:2;display:flex;flex-direction:column;gap:10px;padding-top:4px}
+.tag{position:relative;background:var(--raised);border:1px solid var(--rule);padding:12px 14px 12px 30px;
+  font-size:14px;line-height:1.45;animation:open .3s ease-out}
+.tag::before{content:"";position:absolute;left:11px;top:16px;width:8px;height:8px;border-radius:50%;
+  border:1.5px solid var(--muted);background:var(--paper)}
+.tag b{display:block;font:500 12px/1.2 var(--font-display);color:var(--structure);letter-spacing:.02em;margin-bottom:4px}
+.tag i{font-style:italic}
+.band .tag{background:var(--band-raised);border-color:var(--band-rule);color:var(--on-band)}
+.band .tag::before{background:var(--band);border-color:var(--on-band-muted)}
+.band .tag b{color:#78A0CF}
+
+/* bands */
+.band{background:var(--band);color:var(--on-band)}
+.band .aside{color:var(--on-band-muted)}
+.band-deep{background:var(--band-deep);color:var(--on-band)}
+.contact{margin-top:56px;padding-top:40px;border-top:1px solid var(--band-rule);max-width:64ch}
+.contact h3{font-size:clamp(26px,3.4vw,36px);line-height:1.1;margin:0 0 12px}
+.contact-line{color:var(--on-band);margin:0 0 26px;max-width:52ch}
+.btn{display:inline-block;font:500 16px/1 var(--font-display);text-decoration:none;padding:16px 22px;
+  background:#D04838;color:var(--on-accent);transition:background .2s ease}
+.btn:hover{background:#B23A2C}
+.draft-note{margin-top:22px;font-size:14px;color:var(--on-band-muted)}
+footer{padding:40px 0;font-size:14px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media (max-width:960px){
+  .recog{grid-template-columns:1fr;gap:40px}
+  .summary{position:static}
+  .row{grid-template-columns:minmax(0,1fr)}
+  .row > .margin{grid-column:1;grid-row:1;max-width:420px}
+  .row > .margin:not(:empty){margin-bottom:14px}
+}
+@media (max-width:640px){section{padding:64px 0}body{font-size:17px}.note{margin-left:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* review bar */
+.review{background:var(--raised);border-bottom:1px solid var(--rule);font-size:14px;color:var(--muted)}
+.review .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;padding-top:12px;padding-bottom:12px}
+.switch{display:inline-flex;flex-wrap:wrap;border:1px solid var(--rule)}
+.switch button{font:500 14px/1 var(--font-display);background:transparent;color:var(--ink);border:0;padding:10px 14px;cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+
+.s-intro .recog{margin-top:56px}
+.diag :where(button){font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer}
+@keyframes draw{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+
+/* ---- 1. field notebook ---- */
+.nb{background:var(--raised);border:1px solid var(--rule);padding:28px 32px 20px 0;position:relative}
+.nb::before{content:"";position:absolute;top:0;bottom:0;left:72px;border-left:1px solid var(--muted);opacity:.35}
+.nb-row{border-bottom:1px solid rgba(56,104,176,.28)}
+.nb-row:first-child{border-top:1px solid rgba(56,104,176,.28)}
+.nb-entry{display:grid;grid-template-columns:72px minmax(0,1fr);align-items:start;width:100%;padding:16px 0}
+.nb-box{justify-self:center;position:relative;width:22px;height:22px;margin-top:4px;border:1.5px solid var(--muted)}
+.nb-box svg{position:absolute;left:-4px;top:-10px;width:34px;height:34px;overflow:visible}
+.nb-box .tick{fill:none;stroke:var(--ink);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40}
+.nb-entry.is-on .tick{stroke-dashoffset:0}
+.nb-entry:not(.is-on) .tick{visibility:hidden}
+.nb-entry.just .tick{animation:draw .42s ease-out both}
+.nb-text{font-size:clamp(18px,1.9vw,21px);line-height:1.4;padding-left:18px}
+.nb-entry:hover .nb-text{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.nb-note{margin:-6px 0 18px 90px;font-style:italic;font-size:16px;line-height:1.55;color:var(--muted);max-width:52ch}
+.nb-note.just{animation:rise .3s ease-out}
+
+/* ---- 2. specimen tags ---- */
+
+/* ---- 3. the line ---- */
+.ln-track{position:relative;height:30px;margin:0 0 8px}
+.ln-track .base{position:absolute;left:0;right:0;top:14px;height:2px;background:var(--rule)}
+.ln-seg{position:absolute;top:12px;height:6px;background:var(--ink);transition:opacity .25s ease;opacity:0}
+.ln-seg.g0{left:0;width:33.33%}.ln-seg.g1{left:33.33%;width:33.34%}.ln-seg.g2{left:66.67%;width:33.33%}
+.ln-seg.on{opacity:1}
+.ln-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px}
+.ln-head{font:700 20px/1.2 var(--font-display);margin:0 0 6px}
+.ln-sub{font-size:14px;color:var(--muted);margin:0 0 14px}
+.ln-chip{display:flex;gap:12px;width:100%;padding:12px 0;border-top:1px solid var(--rule);font-size:17px;line-height:1.4}
+.ln-chip .m{flex:0 0 16px;height:16px;margin-top:4px;border-radius:50%;border:1.5px solid var(--muted)}
+.ln-chip.is-on .m{background:var(--ink);border-color:var(--ink)}
+.ln-chip:hover .t{text-decoration:underline;text-underline-offset:4px}
+.ln-note{font-size:15px;color:var(--muted);font-style:italic;margin:0 0 12px 28px}
+.ln-note.just{animation:rise .3s ease-out}
+.page-line .recog{grid-template-columns:1fr}
+.page-line .summary{position:static;background:none;border:0;padding:0}
+.page-line .summary h3,.page-line .summary .scale{display:none}
+
+@media (max-width:960px){
+  .ln-cols{grid-template-columns:1fr;gap:28px}
+  .ln-track{display:none}
+}
+@media (max-width:640px){
+  .nb{padding-right:16px}.nb::before{left:52px}.nb-entry{grid-template-columns:52px minmax(0,1fr)}.nb-note{margin-left:66px}
+}
+
+/* ===== specimen field + case ===== */
+.field{position:relative;min-height:300px;margin:56px 0 24px}
+.stag{position:absolute;left:var(--x);top:var(--t);width:var(--w);background:var(--raised);border:1px solid var(--rule);
+  padding:28px 14px 14px 36px;font:400 15.5px/1.42 var(--font-body);color:var(--ink);text-align:left;cursor:pointer;
+  transform:rotate(var(--r));box-shadow:2px 2px 0 var(--rule);transition:transform .2s ease,box-shadow .2s ease;z-index:var(--z)}
+.stag:hover,.stag:focus-visible{transform:rotate(0deg) translateY(-4px);box-shadow:4px 5px 0 var(--rule);z-index:20}
+.stag .hole{position:absolute;left:14px;top:17px;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--muted);background:var(--paper)}
+.stag .hole::after{content:"";position:absolute;right:8px;top:3px;width:30px;height:1px;background:var(--muted);transform:rotate(-28deg);transform-origin:right}
+.catno{position:absolute;top:10px;right:14px;font:500 11.5px/1 var(--font-display);color:var(--muted);letter-spacing:.04em}
+.case{border:1px solid var(--rule);background:var(--raised);padding:18px 20px 22px}
+.case-label{font:500 13px/1.2 var(--font-display);color:var(--muted);letter-spacing:.04em;margin:0 0 14px}
+.bays{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.bay{border:1px dashed var(--rule-strong);background:var(--paper);min-height:150px;padding:12px 12px 16px;transition:border-color .25s ease}
+.bay.has{border-style:solid;border-color:var(--ink)}
+.bay-name{font:700 16px/1.2 var(--font-display);margin:0 0 12px;color:var(--muted)}
+.bay.has .bay-name{color:var(--ink);animation:rise .3s ease-out}
+.bay:not(.has) .bay-name{color:var(--muted);font-weight:500}
+@keyframes rise{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.bay-items{display:flex;flex-direction:column;gap:22px;padding-top:6px}
+.ptag{position:relative;display:block;width:100%;background:var(--raised);border:1px solid var(--ink);padding:20px 14px 12px;
+  font:400 15.5px/1.42 var(--font-body);color:var(--ink);text-align:left;cursor:default}
+.ptag.just{animation:pinIn .38s ease-out}
+.ptag .pin{position:absolute;top:-7px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--ink)}
+.ptag .pin::after{content:"";position:absolute;left:5px;top:10px;width:2px;height:9px;background:var(--ink);opacity:.5}
+.ptag .catno{top:8px;right:10px}
+.ptag .back{display:block;margin-top:12px;padding-top:10px;border-top:1px dashed var(--rule);font-size:14px;line-height:1.5;color:var(--ink);opacity:.86}
+.case .verdict{font:700 20px/1.25 var(--font-display);margin:0 0 18px}
+.case .verdict .st{color:var(--accent)}
+.case .verdict small{display:block;font:400 14px/1.5 var(--font-body);color:var(--muted);margin-top:4px}
+@keyframes pinIn{0%{opacity:0;transform:translateY(-16px) rotate(-4deg)}100%{opacity:1;transform:none}}
+.fallback{list-style:none;padding:0;margin:40px 0 0}
+.fallback li{padding:16px 0;border-bottom:1px solid var(--rule)}
+.fallback .fq{font-size:20px;margin:0 0 6px}.fallback .fn{font-size:16px;color:var(--muted);margin:0}
+.js .fallback{display:none}.no-js .field,.no-js .case{display:none}
+
+@media (max-width:760px){
+  .field{height:auto;display:flex;flex-direction:column;margin:40px 0 28px}
+  .stag{position:relative;left:auto;top:auto;width:auto;margin:3px 6px 0;transform:rotate(calc(var(--rm)*.5))}
+  .stag:hover{transform:rotate(0)}
+  .bays{grid-template-columns:1fr}
+  .bay{min-height:0}
+}
+.wrap.measure{max-width:1120px}
+.wrap.measure > *{max-width:64ch}
+.wrap.measure > h2{max-width:18ch}
+
+/* ===== review fixes ===== */
+.definition{font:700 clamp(22px,2.6vw,28px)/1.3 var(--font-display);letter-spacing:-.01em;padding-left:20px;border-left:3px solid var(--accent-fill);margin:0 0 28px}
+.tally{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;
+  display:inline-flex;align-items:center;gap:10px;padding:12px 18px;background:var(--ink);color:var(--paper);
+  font:500 15px/1 var(--font-display);text-decoration:none;border:1px solid var(--on-band-muted);box-shadow:3px 3px 0 var(--rule-strong);transition:opacity .2s ease,transform .2s ease}
+.tally[hidden]{display:none}
+.tally-arrow{font-family:var(--font-body)} /* Blender Pro has no arrow glyphs */
+.tally:hover{transform:translateX(-50%) translateY(-2px)}
+.tally-pin{width:9px;height:9px;border-radius:50%;background:var(--accent-fill)}
+.tally.bump{animation:bump .35s ease-out}
+@keyframes bump{0%{transform:translateX(-50%) scale(1)}40%{transform:translateX(-50%) scale(1.08)}100%{transform:translateX(-50%) scale(1)}}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.case-label:focus{outline:none}
+.case-label:focus-visible{outline:2px solid var(--accent-fill);outline-offset:3px}
+
+/* ===== specimen engravings on collected tags ===== */
+.ptag-q{display:block;width:100%;background:none;border:0;padding:0;margin:0;text-align:left;cursor:pointer;color:inherit;font:inherit}
+.ptag-q:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+.pile-hint{margin:36px 0 0;max-width:52ch;font-size:17px;line-height:1.5;color:var(--muted)}
+.pile-empty{margin:0;padding:28px 0;font-style:italic;color:var(--muted)}
+.field.is-empty{min-height:0}
+@media (max-width:760px){.field{padding-bottom:72px}}
+.ptag .spec{display:block;margin:12px 0 0}
+.ptag .spec-img{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#ECE3CF;border:1px solid var(--rule-strong)}
+.ptag .spec-name{display:block;margin-top:9px;font:700 14px/1.35 var(--font-display);color:var(--ink)}
+.ptag .spec-name i{font:italic 400 14px/1.35 var(--font-body)}
+.ptag .spec-cap{display:block;margin-top:3px;font-style:italic;font-size:13.5px;line-height:1.45;color:var(--muted)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ptag .spec-img{filter:brightness(.8) sepia(.12)}}
+:root[data-theme="dark"] .ptag .spec-img{filter:brightness(.8) sepia(.12)}
+</style>
+</head>
+<body class="no-js">
+
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="wordmark" href="../index.html">FUNCTION</a>
+    <nav aria-label="Main"><a href="../index.html#work">What we work on</a><a href="../about.html">About</a><a href="../diagnostic.html">Start with a diagnostic</a></nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="s-intro">
+    <div class="wrap">
+      <h1><span class="h1-line">What is brand</span> <span class="h1-line">dysfunction?</span></h1>
+      <p class="pile-hint" id="pileHint">Pick up any of these you’ve heard said about your own brand, and we’ll sort them below, from healthy to dysfunctional.</p>
+      <div id="field" class="field" role="group" aria-labelledby="pileHint"></div>
+      <ul class="fallback" id="fallback"></ul>
+      <div class="case" id="case">
+        <p class="case-label" id="caseLabel" tabindex="-1">Collected specimens</p>
+        <p class="verdict" id="verdict" hidden></p>
+        <div class="bays">
+          <div class="bay" data-bay="0"><p class="bay-name">Healthy</p><div class="bay-items" id="bay0"></div></div>
+          <div class="bay" data-bay="1"><p class="bay-name">Settled</p><div class="bay-items" id="bay1"></div></div>
+          <div class="bay" data-bay="2"><p class="bay-name">Dysfunctional</p><div class="bay-items" id="bay2"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="line">
+    <div class="wrap">
+      <div class="measure">
+        <h2>Most brands sit somewhere on a line.</h2>
+        <p class="definition">Here's how we see it. Brand dysfunction is the gap between what a brand is supposed to do for the business and what it actually does. It opens slowly, through drift, and it usually goes unnoticed until something outside the company – a new competitor, a change in how people shop, a retailer handing your shelf space to its own label – shows how wide it has become.</p>
+        <p>The people are usually not the problem. Most brand teams are smart and hardworking, and the tools they use work. But brand work has to pass through the rest of the organization before it changes anything, and that's where it tends to get stuck.</p>
+        <p>So it helps to think of brand health as a position on a line. It runs from healthy, through settled, to dysfunctional, and brands drift along it without anyone deciding to move. The same brand can be healthy in one market and settled in another, which is part of why the drift is so hard to spot.</p>
+      </div>
+      <div class="plates">
+        <figure id="plate-0">
+          <span class="match-flag">Closest to what you said</span>
+          <picture class="plate-img">
+            <source type="image/avif" srcset="../assets/img/plate-hermit-healthy-820.avif 820w, ../assets/img/plate-hermit-healthy-1240.avif 1240w" sizes="(min-width:1120px) 355px, (min-width:861px) 30vw, 82vw">
+            <source type="image/webp" srcset="../assets/img/plate-hermit-healthy-820.webp 820w, ../assets/img/plate-hermit-healthy-1240.webp 1240w" sizes="(min-width:1120px) 355px, (min-width:861px) 30vw, 82vw">
+            <img src="../assets/img/plate-hermit-healthy.jpg" width="1240" height="620" loading="lazy" decoding="async"
+                 alt="A mock nineteenth-century natural history plate: a hermit crab in a well-fitting shell on a beach, holding up a brass measuring tape beside a larger empty whelk shell, with a band of shell diagrams beneath titled Comparative Conchology and Crab Sizing.">
+          </picture>
+          <figcaption>
+            <p class="plate-name"><span class="plate-num">Plate III · Healthy</span><i>Pagurus aptus</i>, the Well-Housed Hermit</p>
+            <div><p class="plate-caption">Moves house when it must, and measures the next shell before it needs one.</p>
+            <p class="plate-gloss">The brand fits the business, the strategy shapes real decisions, and the team is already looking at what comes next.</p></div>
+          </figcaption>
+        </figure>
+        <figure id="plate-1">
+          <span class="match-flag">Closest to what you said</span>
+          <picture class="plate-img">
+            <source type="image/avif" srcset="../assets/img/plate-hermit-settled-820.avif 820w, ../assets/img/plate-hermit-settled-1240.avif 1240w" sizes="(min-width:1120px) 355px, (min-width:861px) 30vw, 82vw">
+            <source type="image/webp" srcset="../assets/img/plate-hermit-settled-820.webp 820w, ../assets/img/plate-hermit-settled-1240.webp 1240w" sizes="(min-width:1120px) 355px, (min-width:861px) 30vw, 82vw">
+            <img src="../assets/img/plate-hermit-settled.jpg" width="1240" height="620" loading="lazy" decoding="async"
+                 alt="A mock nineteenth-century natural history plate: a hermit crab dozing in a tarnished silver trophy cup engraved Category Leader, its legs spilling over the rim, while a larger empty shell lies ignored nearby. Diagrams beneath show the cup is too small for the crab.">
+          </picture>
+          <figcaption>
+            <p class="plate-name"><span class="plate-num">Plate IV · Settled</span><i>Pagurus mediocris</i>, the Settled Hermit</p>
+            <div><p class="plate-caption">Has not moved house in some years and sees no particular reason to. Legs increasingly external.</p>
+            <p class="plate-gloss">The brand works well enough to defend but not well enough to be proud of. Past success has become a shell too small to grow in.</p></div>
+          </figcaption>
+        </figure>
+        <figure id="plate-2">
+          <span class="match-flag">Closest to what you said</span>
+          <picture class="plate-img">
+            <source type="image/avif" srcset="../assets/img/plate-hermit-dysfunctional-820.avif 820w, ../assets/img/plate-hermit-dysfunctional-1240.avif 1240w" sizes="(min-width:1120px) 355px, (min-width:861px) 30vw, 82vw">
+            <source type="image/webp" srcset="../assets/img/plate-hermit-dysfunctional-820.webp 820w, ../assets/img/plate-hermit-dysfunctional-1240.webp 1240w" sizes="(min-width:1120px) 355px, (min-width:861px) 30vw, 82vw">
+            <img src="../assets/img/plate-hermit-dysfunctional.jpg" width="1240" height="620" loading="lazy" decoding="async"
+                 alt="A mock nineteenth-century natural history plate: three hermit crabs roped to one large shell, each hauling in a different direction, one clutching cards marked Option A, B and C. A diagram beneath shows the forces cancelling out to nil.">
+          </picture>
+          <figcaption>
+            <p class="plate-name"><span class="plate-num">Plate V · Dysfunctional</span><i>Pagurus concors</i>, the Committee Hermit</p>
+            <div><p class="plate-caption">Several occupants, one shell, no agreed direction. Remarkably stable. Goes nowhere.</p>
+            <p class="plate-gloss">Everyone is pulling hard, in good faith, in different directions, and the net result is zero.</p></div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="row"><h2>Work goes where the structure sends it.</h2></div>
+      <div class="row"><p id="p-system">Every organization has a structure that decides how work moves: planning cycles, agency rosters, approval chains, quarterly targets. Capable people follow those paths, and the paths produce the outcome. If the structure pushes every brief toward consensus and every launch toward the safe option, that's what the brand will get, no matter who's in the room.</p><div class="margin" data-for="p-system"></div></div>
+      <div class="row"><p id="p-inherited"><span class="lead-in">Most of the limits were never decided.</span> They were inherited: the category's conventions, the channel mix, the way launches have always been done. Over time they stop looking like choices and start looking like physics. Some are real, but a surprising number are habits nobody has questioned <span class="aside">(usually because questioning them wasn't anyone's job)</span>.</p><div class="margin" data-for="p-inherited"></div></div>
+      <div class="row"><p id="p-inside"><span class="lead-in">It's also hard to see from inside.</span> A company that mostly talks to itself describes itself in its own language and tests ideas against its own assumptions, so every round of internal refinement feels like progress while moving the thinking further from how the market sees the business. Kodak is the famous case. One of its own engineers built the first digital camera in 1975, and the company kept betting on film until it filed for bankruptcy in 2012. An outside view helps for a simple reason: it doesn't share the assumptions, so it can see which ones are doing the damage.</p><div class="margin" data-for="p-inside"></div></div>
+      <div class="row"><p id="p-bounce"><span class="lead-in">So small fixes bounce off.</span> Brand work done inside the same structure gets absorbed by it. It's negotiated down to something nobody objects to, which also means nobody is passionate about it, and a year later the business is behaving exactly as it did before.</p><div class="margin" data-for="p-bounce"></div></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="row"><h2>Settling is the easy option.</h2></div>
+      <div class="row"><p id="p-easy">When a brand is working, the status quo is exactly what it should protect, and we'll say so. But the status quo is also the easy option. Nobody has to argue for it or gets blamed for it, and staying put feels safe even when it quietly costs more than moving would <span class="aside">(Kahneman and Tversky called this loss aversion: a loss weighs more than a gain of the same size, and the gains from moving are the ones nobody can see yet)</span>.</p><div class="margin" data-for="p-easy"></div></div>
+      <div class="row"><p id="p-know">But most teams know when they're settling. Ask a marketing leader whether they're happy with their brand, and the length of the pause tells you most of what you need to know.</p><div class="margin" data-for="p-know"></div></div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="row"><h2>How a brand gets functional again.</h2></div>
+      <div class="row"><p id="p-rules"><span class="lead-in">Take the rules apart.</span> We break the category's conventions into their pieces and test which ones hold. Then we rebuild what survives into a position only this business could occupy, one that makes complete sense to your team and is hard to copy for a competitor still following the old rules.</p><div class="margin" data-for="p-rules"></div></div>
+      <div class="row"><p id="p-theory"><span class="lead-in">Commit to a theory.</span> We say plainly what's happening, why, and what would have to change for a different outcome, including what we don't know and what would prove us wrong. A menu of options leaves the client holding the risk. A theory takes a position and shows its work, so you can argue with it.</p><div class="margin" data-for="p-theory"></div></div>
+      <div class="row"><p id="p-act"><span class="lead-in">Act to learn.</span> You can't collect every answer before you move, and waiting for certainty is just a more respectable way of settling. So we pick a few first moves small enough to try soon and clear enough to read, and let the market show how it really responds. Each result sharpens the theory.</p><div class="margin" data-for="p-act"></div></div>
+    </div>
+  </section>
+
+  <section class="band-deep" id="contact">
+    <div class="wrap measure">
+      <h2>Brands rarely fail all at once.</h2>
+      <p>They drift, one reasonable decision at a time, and drift can be corrected. Nobody controls a brand outright, since its meaning gets made together with the people who buy it. But most of the limits a team works inside were chosen at some point, and what was chosen once can be chosen again, on purpose this time.</p>
+      <div class="contact">
+        <h3>Partner with us.</h3>
+        <p class="contact-line">Tell us what you collected. We'll start with <a href="../diagnostic.html">an honest read on where your brand sits</a>, and take it from there together.</p>
+        <a class="btn" href="mailto:hello@thisisfunction.io">hello@thisisfunction.io</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<a class="tally" id="tally" href="#case" hidden><span class="tally-pin" aria-hidden="true"></span><span id="tallyText"></span><span class="tally-arrow" aria-hidden="true">&darr;</span></a>
+<p class="sr-only" id="announce" aria-live="polite"></p>
+<footer><div class="wrap"><span>&copy; 2026 Function</span></div></footer>
+
+<script>
+(function(){
+  var S = [
+    {id:'a1', st:1, no:'0417', refs:'p-easy p-know', q:"It works. I'm just not sure it's working as hard as it could.", n:"That's what settling sounds like from inside. Nothing is broken, so nothing gets fixed, and the cost stays invisible."},
+    {id:'a2', st:2, no:'1102', refs:'p-theory', q:"Our agencies came back with a menu of options and no real point of view.", n:"A menu hands the risk straight back to you. What you needed was a position someone would defend."},
+    {id:'a3', st:0, no:'0063', refs:'p-easy', q:"Our brand strategy actually comes up when hard decisions get made.", n:"That's the clearest sign a strategy is alive. Plenty get approved; far fewer get used."},
+    {id:'a4', st:1, no:'0588', refs:'p-bounce p-theory', q:"We did the positioning work, and now it sits in a deck nobody opens.", n:"The work usually wasn't wrong. It was negotiated down to something nobody objected to, so nobody cared enough to use it."},
+    {id:'a5', st:2, no:'1377', refs:'p-act p-rules', q:"We know most launches miss, but our batting average feels well below normal.", n:"When launches keep missing, the product is rarely the whole story. Each one tends to be briefed from scratch, sold in on a different promise, and judged before the market has had time to answer."},
+    {id:'a6', st:0, no:'0148', refs:'p-easy', q:"Customers describe us the way we'd describe ourselves.", n:"The promise and the experience line up. The thing to watch for is drift, which rarely announces itself."},
+    {id:'a7', st:1, no:'0663', refs:'p-bounce p-rules', q:"Nobody loves our packaging, but every redesign ends up only slightly better.", n:"Packaging work tends to converge on safe. Each round fixes what people objected to, which is a different job from making something people want to pick up."},
+    {id:'a8', st:2, no:'1215', refs:'p-system p-theory', q:"Ask our leadership what the brand stands for and you'll get five different answers.", n:"Nobody is wrong, exactly. Each answer reflects what that part of the business needs, and without a shared theory they pull apart."},
+    {id:'a9', st:0, no:'0231', refs:'p-theory', q:"Our agency brought us one clear recommendation, and we backed it.", n:"A recommendation someone will argue for is worth more than any number of options. It means someone did the hard thinking."},
+    {id:'a10', st:1, no:'0721', refs:'p-inherited p-rules', q:"We're still coasting on what made us successful years ago.", n:"Past success makes a comfortable shell, shaped for a market that has since moved on."},
+    {id:'a11', st:2, no:'1340', refs:'p-inside p-act', q:"What we promise and what customers actually get have drifted badly apart.", n:"Drift starts when strategy stops being checked against the real experience. The fix is rarely a better promise."},
+    {id:'a12', st:0, no:'0310', refs:'p-system', q:"Our leadership tells the same story about the brand, without a script.", n:"Shared understanding like that is rare, and it's what lets a brand make decisions quickly."},
+    {id:'a13', st:1, no:'0852', refs:'p-system p-theory', q:"Every campaign starts from scratch, so we keep relitigating the basics.", n:"Without a shared theory of the brand, every brief reopens the same questions."},
+    {id:'a14', st:2, no:'0996', refs:'p-inside p-inherited', q:"We're so close to it that we can't see what's wrong anymore.", n:"That's how organizations work. Everyone inside shares the same assumptions, which is why an outside view helps."},
+    {id:'a15', st:0, no:'0402', refs:'p-act', q:"When the market told us something, we changed course, and it worked.", n:"That's acting in order to learn. Most teams wait for a certainty that never arrives."},
+    {id:'a16', st:1, no:'0779', refs:'p-easy p-know', q:"Nobody complains about the brand, and nobody gets excited about it either.", n:"Indifference is the quietest form of settling, and the easiest one to live with."},
+    {id:'a17', st:2, no:'1488', refs:'p-bounce p-system', q:"We've rebranded twice in five years, and nothing really changed.", n:"Change attempted inside a structure that absorbs it. The new look changes; the deep patterns don't."},
+    {id:'a18', st:0, no:'0095', refs:'p-rules', q:"Our packaging does real work on shelf, and we can tell you why.", n:"Knowing why it works is the important part. It means the next change will be a decision rather than a guess."}
+  ];
+  var SPEC_BASE="../assets/img/specimens/";
+  var SP={"0063": ["Sphinx consultata", "the Consulted Sphinx", "Consulted at every crossroads. The volume beneath her paw is visibly well-thumbed.", "A winged sphinx resting at a fork in a path, one paw on a well-worn book."], "0148": ["Melusina congruens", "the Congruent Mermaid", "Her reflection has been checked and found in agreement.", "A mermaid on a rock holding up a hand mirror, her reflection matching in the pool below, a brass spirit level beside her."], "0231": ["Gryphus decisivus", "the Decisive Griffin", "Carries one card only, and has been observed to defend it.", "A griffin on a rock ledge holding up a single card that reads This One."], "0310": ["Hydra unisona", "the Harmonious Hydra", "Five heads, one account of events. The prompt cards lie untouched.", "A five-headed hydra with every head facing the same way, singing, beside an unused stack of cue cards."], "0402": ["Hippogryphus agilis", "the Agile Hippogriff", "Adjusts its heading when new information arrives, without apparent embarrassment.", "A hippogriff banking into a turn above the shoreline, a small striped windsock streaming from one wingtip."], "0095": ["Phoenix explicata", "the Explicable Phoenix", "Plumage of proven effect. The bird can account for every feather.", "A phoenix in full tail display, with a tiny barcode hidden among the plumes."], "0417": ["Pegasus modicus", "the Modest Pegasus", "Fully capable of flight. Has not been asked.", "A winged horse pulling a wooden plough, its wings neatly folded."], "0588": ["Draco custodiens", "the Custodial Dragon", "Guards it faithfully. Has never looked inside.", "A dragon curled over a dusty office binder with a cobweb on its spine."], "0663": ["Chimaera convergens", "the Convergent Chimera", "Each revision answered the objections. The animal now offends no one.", "An all-beige chimera, lion, goat and serpent, with a strip of five near-identical beige paint swatches at its feet."], "0721": ["Aspidochelone memorata", "the Remembering Island-Turtle", "Still arranged for swimming. The sea withdrew some years ago.", "A giant sea turtle with a small tree on its shell, flippers spread for swimming on dry sand, a rusted anchor beside it."], "0852": ["Minotaurus iterans", "the Returning Minotaur", "Walks the same corridors with each new brief. The thread lies nearby, still wound.", "A minotaur at a fork in a stone labyrinth, an untouched ball of red thread in the corner."], "0779": ["Monoceros tepidus", "the Tepid Unicorn", "Seldom sighted, chiefly because no one looks.", "A pale unicorn grazing in a misty meadow, an unclaimed blue rosette in the grass."], "1102": ["Cerberus trifarius", "the Threefold Cerberus", "Three heads, three proposals, no preference expressed.", "A three-headed hound holding cards marked Option A, Option B and Option C."], "1377": ["Wyverna inconstans", "the Inconstant Wyvern", "Each wing was commissioned separately. Flight trials concluded after four seconds.", "A wyvern taking off with one bat wing, one feathered wing and a fish tail, a stopwatch around its neck."], "1215": ["Hydra discors", "the Discordant Hydra", "Each head is correct about its own direction.", "A five-headed hydra with each head straining a different way, beside a signpost with five blank arms."], "1340": ["Leviathan promissus", "the Promised Leviathan", "As depicted, and as collected.", "A magnificent sea serpent drawn in a map cartouche, beside the real specimen: a modest eel laid next to a small brass rule."], "0996": ["Ouroboros myops", "the Short-Sighted Ouroboros", "Has studied itself closely for many years. Reports nothing unusual.", "A serpent coiled into a ring, peering closely at its own tail through tiny spectacles."], "1488": ["Amphisbaena renovata", "the Renovated Amphisbaena", "Moults on schedule. Emerges, each time, as itself.", "A two-headed serpent beside two shed skins in teal and coral, with a decorator’s paintbrush."]};
+  var specSrc=function(no){return SPEC_BASE+no+".jpg";};
+  var byId={}; S.forEach(function(x){byId[x.id]=x;});
+  var on=[], just=null, rowH={}, lastW=0;
+  var $=function(id){return document.getElementById(id);};
+  var esc=function(t){var d=document.createElement('div');d.textContent=t;return d.innerHTML.replace(/"/g,'&quot;');};
+  var quoted=function(t){return '\u201C'+esc(t)+'\u201D';};
+  var bayOf=function(x){return x.st;};
+
+  $('fallback').innerHTML=S.map(function(x){return '<li><p class="fq">'+quoted(x.q)+'</p><p class="fn">'+esc(x.n)+'</p></li>';}).join('');
+  document.body.classList.remove('no-js'); document.documentElement.classList.add('js');
+
+  function specHTML(no){var p=SP[no]; if(!p) return '';
+    return '<span class="spec"><img class="spec-img" src="'+specSrc(no)+'" alt="'+esc(p[3])+'" width="640" height="480" decoding="async">'+
+      '<span class="spec-name"><i>'+esc(p[0])+'</i>, '+esc(p[1])+'</span><span class="spec-cap">'+esc(p[2])+'</span></span>';}
+  function render(){
+    var field=$('field'), fw=field.clientWidth, narrow=window.innerWidth<=760;
+    var cols=Math.max(2,Math.floor(fw/220)), colW=fw/cols, tw=Math.min(236,Math.floor(colW-24)), slack=colW-tw;
+    var rnd=function(i,k){var x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x);};
+    field.innerHTML=S.map(function(x,i){
+      if(on.indexOf(x.id)>-1) return '';
+      var c=i%cols, left=c*colW+slack/2+(rnd(i,1)-.5)*Math.max(0,slack-10);
+      var rot=((rnd(i,3)-.5)*6).toFixed(1), rm=((i%2?1:-1)*(0.5+rnd(i,4))).toFixed(1);
+      return '<button type="button" class="stag" data-sid="'+x.id+'" data-i="'+i+'" aria-pressed="false" style="--x:'+left.toFixed(1)+'px;--t:0px;--w:'+tw+'px;--r:'+rot+'deg;--rm:'+rm+'deg;--z:'+(1+Math.floor(rnd(i,5)*9))+'">'+
+        '<span class="hole" aria-hidden="true"></span><span class="catno" aria-hidden="true">No. '+x.no+'</span>'+quoted(x.q)+'</button>';
+    }).join('');
+    field.classList.toggle('is-empty',on.length===S.length);
+    if(on.length===S.length){ field.innerHTML='<p class="pile-empty">The pile is empty. Every specimen is in the case below.</p>'; field.style.height=''; }
+    else if(narrow){ field.style.height=''; }
+    else{
+      // measure each row so tags sit below the tallest tag above them: edges may touch, text is never covered
+      var tags=[].slice.call(field.querySelectorAll('.stag')), rows={}, y=10, gap=20, rowsN=Math.ceil(S.length/cols);
+      tags.forEach(function(t){var r=Math.floor(t.dataset.i/cols);(rows[r]=rows[r]||[]).push(t);});
+      for(var r=0;r<rowsN;r++){
+        var hMax=0;
+        (rows[r]||[]).forEach(function(t){ var j=rnd(+t.dataset.i,2)*10; t.style.setProperty('--t',(y+j).toFixed(1)+'px'); hMax=Math.max(hMax,t.offsetHeight+j); });
+        if(!rows[r]){ rowH[r]=0; continue; } // a fully emptied row closes up; partly emptied rows keep their height so the pile doesn't jump
+        rowH[r]=Math.max(rowH[r]||0,hMax);
+        y+=rowH[r]+gap;
+      }
+      field.style.height=(y+10)+'px';
+    }
+    [0,1,2].forEach(function(b){
+      var items=on.filter(function(id){return bayOf(byId[id])===b;});
+      // reuse collected tags already in the bay so their engravings don't reload on every click
+      var box=$('bay'+b), keep={};
+      [].forEach.call(box.children,function(el){keep[el.getAttribute('data-sid')]=el;});
+      items.forEach(function(id){var x=byId[id], el=keep[id];
+        if(el){ el.classList.remove('just'); delete keep[id]; }
+        else{ var t=document.createElement('div');
+          t.innerHTML='<div class="ptag'+(just===id?' just':'')+'" data-sid="'+id+'"><span class="pin" aria-hidden="true"></span><span class="catno" aria-hidden="true">No. '+x.no+'</span><button type="button" class="ptag-q" aria-label="'+esc('Return to the pile: \u201C'+x.q+'\u201D')+'">'+quoted(x.q)+'</button>'+specHTML(x.no)+'<span class="back">'+esc(x.n)+'</span></div>';
+          el=t.firstChild; }
+        box.appendChild(el);
+      });
+      Object.keys(keep).forEach(function(k){box.removeChild(keep[k]);});
+      document.querySelector('.bay[data-bay="'+b+'"]').classList.toggle('has',items.length>0);
+    });
+    just=null; update();
+  }
+
+  function update(){
+    var counts=[0,0,0];
+    on.forEach(function(id){counts[byId[id].st]++;});
+    var v=$('verdict'), h=counts[0], st=counts[1], d=counts[2], probs=st+d;
+    var words=['','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve'];
+    var areas=function(n){return (words[n]||n)+' area'+(n>1?'s':'')+' worth a closer look';};
+    var note='<small>A position on a line, not a diagnosis. Brands drift along it, and most show a bit of everything.</small>';
+    var html='';
+    if(!on.length){ v.hidden=true; }
+    else if(!probs){ html='A clean bill of health.<small>Protect whatever made it this way, and keep an eye out for drift.</small>'; }
+    else if(h>probs){ html='Mostly healthy, with '+areas(probs)+'.'+note; }
+    else if(st>h && st>d){ html='Mostly <span class="st">settled</span>'+(d?', with signs of dysfunction':(h?', with some healthy habits intact':''))+'.'+note; }
+    else if(d>h && d>st){ html='Mostly <span class="st">dysfunctional</span>'+(st?', with some signs of settling':(h?', with some healthy habits intact':''))+'.'+note; }
+    else{
+      var present=[h&&'healthy',st&&'settled',d&&'dysfunctional'].filter(Boolean);
+      var mix=present.length===3?'all three':present.join(' and ');
+      html='A mix of '+mix+', with '+areas(probs)+'.'+note;
+    }
+    if(on.length){ v.innerHTML=html; v.hidden=false; }
+    var dom = !on.length ? -1 : (probs ? (d>=st?2:1) : 0);
+
+    // sticky tally
+    var tally=$('tally');
+    $('tallyText').textContent=on.length+' collected';
+    tallyWanted=on.length>0; syncTally();
+    [0,1,2].forEach(function(i){$('plate-'+i).classList.toggle('is-match',on.length>0&&i===dom);});
+    document.querySelectorAll('.margin').forEach(function(m){m.innerHTML='';});
+    on.forEach(function(id){var x=byId[id];
+      x.refs.split(' ').some(function(ref){var m=document.querySelector('.margin[data-for="'+ref+'"]');
+        if(!m||m.children.length>=3)return false; var t=document.createElement('div'); t.className='tag'; t.innerHTML='<b>You said</b><i>'+quoted(x.q)+'</i>'; m.appendChild(t); return true;});
+    });
+  }
+
+  var tallyWanted=false, caseVisible=false;
+  function syncTally(){ $('tally').hidden=!(tallyWanted && !caseVisible); }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){ caseVisible=es[0].isIntersecting; syncTally(); },{threshold:0.25}).observe($('case'));
+  }
+  var bayNames=['Healthy','Settled','Dysfunctional'];
+  function toggle(e){
+    var b=e.target.closest('[data-sid]'); if(!b)return;
+    var id=b.getAttribute('data-sid'), i=on.indexOf(id), fromPile=!!b.closest('#field'), idx=S.indexOf(byId[id]);
+    var bayList=on.filter(function(o){return byId[o].st===byId[id].st;}), bayPos=bayList.indexOf(id);
+    if(i>-1){ on.splice(i,1); } else { on.push(id); just=id; }
+    render();
+    $('announce').textContent = i>-1 ? 'Returned to the pile. '+on.length+' collected.'
+      : 'Added to '+bayNames[byId[id].st]+'. '+on.length+' collected.';
+    if(i<0){ var t=$('tally'); t.classList.remove('bump'); void t.offsetWidth; t.classList.add('bump'); }
+    // keep keyboard focus where the reader is instead of jumping off-screen
+    var next=null;
+    if(fromPile){
+      for(var k=idx+1;k<S.length && !next;k++) next=document.querySelector('#field [data-sid="'+S[k].id+'"]');
+      for(var k2=idx-1;k2>=0 && !next;k2--) next=document.querySelector('#field [data-sid="'+S[k2].id+'"]');
+      if(!next) next=$('caseLabel');
+    } else {
+      var left=bayList.filter(function(o){return o!==id;}), nid=left[Math.min(bayPos,left.length-1)];
+      next=(nid && document.querySelector('#case [data-sid="'+nid+'"] .ptag-q')) || document.querySelector('#field [data-sid="'+id+'"]') || $('caseLabel');
+    }
+    if(e.detail===0 && next) next.focus({preventScroll:false});
+  }
+  var rt; window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){rowH={};render();},150);});
+  $('field').addEventListener('click',toggle);
+  $('case').addEventListener('click',function(e){ if(e.target.closest('.ptag-q')) toggle(e); });
+  render();
+  var pre=function(){Object.keys(SP).forEach(function(no){var im=new Image(); im.src=specSrc(no); if(im.decode) im.decode().catch(function(){});});};
+  if('requestIdleCallback' in window) requestIdleCallback(pre,{timeout:3000}); else setTimeout(pre,1500);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+/* ===========================================================
+   FUNCTION — shared site styles
+   Load order on every page: assets/css/fonts.css → tokens.css → this file.
+   Components use the semantic tokens from tokens.css. Three site-level
+   tokens are defined below from the tokens.css ramps, so .is-ink /
+   .is-deep flips keep working.
+     --text-soft   small meta text (n-500; tokens' --text-muted is 16px+ only)
+     --structure   Ink Blue for structural marks: current-page states,
+                   figure numbers, list counters. Red stays for argument.
+     --paper-*     the always-white readout "document"
+   =========================================================== */
+:root{
+  --text-soft:var(--n-500);
+  --structure:var(--blue-600);
+  --paper:var(--n-0);--paper-text:var(--n-800);--paper-soft:var(--n-500);--paper-rule:var(--n-200);
+}
+.is-ink,.is-deep{--text-soft:var(--text-inv-muted);--structure:var(--blue-300)}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:96px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--surface);color:var(--text);font-family:var(--font-body);
+  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img,svg{max-width:100%;display:block}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.2em}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+.is-ink :focus-visible,.is-deep :focus-visible{outline-color:var(--focus-inv)}
+
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+@media (max-width:640px){.wrap{padding:0 20px}}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;z-index:50;background:var(--text);color:var(--surface);
+  padding:10px 14px;font-family:var(--font-display);font-weight:500;text-decoration:none}
+.skip:focus{top:12px}
+
+/* ---------- type ---------- */
+h1,h2,h3,h4{font-family:var(--font-display);margin:0;color:var(--text);text-wrap:balance}
+h1{font-weight:700;font-size:clamp(40px,6.4vw,76px);line-height:1;letter-spacing:-.02em;max-width:17ch}
+h2{font-weight:700;font-size:clamp(28px,3.6vw,42px);line-height:1.05;letter-spacing:-.015em;max-width:22ch}
+h3{font-weight:700;font-size:21px;line-height:1.2;letter-spacing:-.005em}
+p{margin:0 0 1em;max-width:62ch}
+p:last-child{margin-bottom:0}
+.lede{font-size:clamp(19px,1.7vw,22px);line-height:1.5;max-width:52ch;text-wrap:pretty}
+.soft{color:var(--text-soft)}
+.eyebrow{font-family:var(--font-display);font-weight:700;font-size:12.5px;line-height:1.4;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--text-accent);margin:0 0 18px;max-width:none}
+.mt-md{margin-top:24px}
+.mt-lg{margin-top:32px}
+
+/* ---------- buttons & links ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;font-family:var(--font-display);font-weight:500;
+  font-size:15px;letter-spacing:.03em;text-transform:uppercase;padding:13px 22px;text-decoration:none;
+  border:1px solid transparent;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
+.btn-solid{background:var(--text);color:var(--surface)}
+.btn-solid:hover{background:var(--accent-hover);color:var(--on-accent)}
+.btn .arr{transition:transform .2s ease}
+.btn:hover .arr{transform:translateX(3px)}
+.btn-row{display:flex;gap:16px 28px;flex-wrap:wrap;align-items:center;margin-top:36px}
+.textlink{font-family:var(--font-display);font-weight:500;font-size:15px;letter-spacing:.03em;text-transform:uppercase;
+  text-decoration:none;border-bottom:1px solid var(--rule-strong);padding:6px 0 3px;display:inline-flex;gap:8px;
+  transition:border-color .2s ease}
+.textlink:hover{border-color:var(--accent)}
+.textlink .arr,.go .arr{transition:transform .2s ease}
+.textlink:hover .arr{transform:translateX(3px)}
+@media (prefers-reduced-motion:reduce){.arr{transition:none!important;transform:none!important}}
+
+/* ---------- header ---------- */
+.site-header{position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--rule)}
+.navrow{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:76px}
+.brandmark{display:inline-flex;align-items:center;color:var(--text);padding:10px 0}
+.brandmark svg{height:24px;width:auto;aspect-ratio:391.07/100}
+.brandmark--sm svg{height:18px}
+.site-nav{display:flex;align-items:center;gap:32px}
+.site-nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.site-nav ul a{font-family:var(--font-display);font-weight:500;font-size:14.5px;letter-spacing:.05em;text-transform:uppercase;
+  text-decoration:none;color:var(--text-soft);padding:10px 0;border-bottom:2px solid transparent;transition:color .2s ease,border-color .2s ease}
+.site-nav ul a:hover{color:var(--text)}
+.site-nav ul a[aria-current="page"],.site-nav ul a.is-section{color:var(--text);border-bottom-color:var(--structure)}
+.site-nav .btn{min-height:44px;padding:10px 16px;font-size:14px}
+.site-nav .btn[aria-current="page"]{background:transparent;color:var(--text);border-color:var(--text)}
+.menu-toggle{display:none;font-family:var(--font-display);font-weight:500;font-size:14px;letter-spacing:.08em;
+  text-transform:uppercase;background:none;border:1px solid var(--rule-strong);color:var(--text);min-height:44px;padding:0 16px;cursor:pointer}
+
+@media (max-width:880px){
+  .brandmark svg{height:20px}
+  /* Without JS the nav wraps under the wordmark. With JS it collapses behind a toggle. */
+  .navrow{flex-wrap:wrap;padding-top:12px;padding-bottom:12px;min-height:64px}
+  .site-nav{width:100%;flex-wrap:wrap;gap:12px 20px}
+  .site-nav ul{flex-wrap:wrap;gap:4px 20px}
+  .js .navrow{flex-wrap:nowrap;padding-top:0;padding-bottom:0}
+  .js .menu-toggle{display:inline-flex;align-items:center}
+  .js .site-nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--surface);
+    border-bottom:1px solid var(--rule);padding:8px 20px 24px;flex-direction:column;align-items:stretch;gap:16px;
+    box-shadow:0 24px 32px -16px color-mix(in srgb,var(--n-800) 28%,transparent)}
+  .js .site-nav.is-open{display:flex}
+  .js .site-nav ul{flex-direction:column;gap:0}
+  .js .site-nav ul a{display:block;padding:14px 0;border-bottom:1px solid var(--rule);font-size:16px}
+  .js .site-nav ul a[aria-current="page"],.js .site-nav ul a.is-section{border-bottom-color:var(--rule);color:var(--text);
+    box-shadow:inset 3px 0 0 var(--structure);padding-left:14px}
+  .js .site-nav .btn{justify-content:center}
+}
+
+/* ---------- sections ---------- */
+.section{padding:112px 0}
+.section + .section:not(.is-ink):not(.is-deep){border-top:1px solid var(--rule)}
+.section--flush{padding-top:24px}
+.section.section--flush{border-top:0}
+@media (max-width:640px){.section{padding:72px 0}}
+
+/* main column + ambient proof column */
+.with-aside{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:88px;align-items:start}
+@media (max-width:960px){.with-aside{grid-template-columns:1fr;gap:56px}}
+
+.prose h2{margin-bottom:28px}
+.prose > p:not([class]){font-size:18px;text-wrap:pretty}
+
+/* proof — a stat with its source, sitting beside the argument */
+.proof{border-top:2px solid var(--text);padding-top:18px}
+.proof-tag{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-soft);margin:0 0 14px}
+.proof .fig{font-family:var(--font-display);font-weight:800;font-size:clamp(52px,5.6vw,68px);line-height:.95;letter-spacing:-.03em;color:var(--text)}
+.proof .fig--accent{color:var(--text-accent)}
+.proof .lbl{font-size:15px;line-height:1.5;color:var(--text-soft);margin-top:14px;max-width:32ch}
+.proof .lbl strong{color:var(--text);font-weight:500}
+.proof--sm .fig{font-size:clamp(34px,3.4vw,40px);line-height:1.05}
+@media (min-width:961px){.proof--sticky{position:sticky;top:112px}}
+@media (max-width:960px){.proof{max-width:420px}}
+
+/* ---------- home: hero ---------- */
+.hero{padding:88px 0 112px}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:64px;align-items:center}
+.hero h1{font-size:clamp(44px,5.4vw,68px)}
+.hero .lede{margin-top:28px;color:var(--text-soft)}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr;gap:48px}.hero h1{font-size:clamp(40px,7.4vw,64px)}}
+@media (max-width:640px){
+  .hero{padding:28px 0 72px}
+  .hero-grid{gap:36px}
+  .hero-plate{order:-1}
+}
+
+/* natural-history plate — same mount as the coming-soon page */
+.plate{margin:0}
+.plate-mount{position:relative;background:var(--surface-raised);padding:clamp(8px,1.4vw,16px)}
+.plate-mount img{width:100%;height:auto}
+.plate-mount .hair{position:absolute;inset:clamp(8px,1.4vw,16px);border:1px solid var(--rule-strong);pointer-events:none}
+.platecap{display:flex;flex-wrap:wrap;gap:5px 14px;align-items:baseline;margin-top:14px}
+.platecap .fig{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--structure)}
+.platecap .cap{font-size:14.5px;color:var(--text-soft)}
+
+/* ---------- home: situations (each links to its specialty page) ---------- */
+.situations{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:48px}
+.situation{background:var(--surface);padding:30px 28px 28px;text-decoration:none;display:flex;flex-direction:column;gap:12px;
+  transition:background-color .2s ease}
+.situation:hover{background:var(--surface-raised)}
+.situation:focus-visible{outline-offset:-4px}
+.situation h3{font-size:22px}
+.situation p{color:var(--text-soft);font-size:16.5px}
+.situation .go{margin-top:auto;padding-top:6px;font-family:var(--font-display);font-weight:500;font-size:13.5px;letter-spacing:.05em;
+  text-transform:uppercase;color:var(--text);display:inline-flex;gap:8px}
+.situation .go .arr{color:var(--structure)}
+.situation:hover .go .arr{transform:translateX(3px)}
+@media (max-width:720px){.situations{grid-template-columns:1fr}.situation{padding:26px 22px}}
+
+/* ---------- engagement ladder (on ink) ---------- */
+.ladder{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:48px}
+.rung{background:var(--surface);padding:34px 30px 32px;display:flex;flex-direction:column;gap:12px}
+.rung .step{font-family:var(--font-display);font-weight:500;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--structure)}
+.rung h3{font-size:24px}
+.rung p{color:var(--text-soft);font-size:16.5px}
+.rung--lead{background:var(--surface-raised)}
+.rung--lead p{color:var(--text)}
+.rung .textlink{margin-top:auto;align-self:flex-start}
+@media (max-width:880px){.ladder{grid-template-columns:1fr}}
+
+/* ---------- contact (deep) ---------- */
+.contact h2{max-width:none}
+.contact .lede{margin-top:22px}
+.contact .mail{font-family:var(--font-display);font-weight:700;font-size:clamp(20px,4.6vw,34px);letter-spacing:-.01em;text-decoration:none;
+  border-bottom:2px solid var(--accent);padding-bottom:4px;display:inline-block;margin-top:34px}
+.contact .mail:hover{border-color:var(--text)}
+
+/* ---------- interior pages ---------- */
+.page-intro{padding:96px 0 104px}
+.page-intro--tight{padding-bottom:32px}
+.page-intro .lede{margin-top:32px}
+.page-intro .lede + .lede{margin-top:18px}
+.intro-grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:80px;align-items:center}
+@media (max-width:960px){.intro-grid{grid-template-columns:1fr;gap:48px}}
+@media (max-width:640px){.page-intro{padding:56px 0 64px}}
+
+.subnav{border-bottom:1px solid var(--rule);background:var(--surface-raised)}
+.subnav .wrap{display:flex;align-items:center;gap:8px 28px;flex-wrap:wrap;min-height:54px;padding-top:6px;padding-bottom:6px}
+.subnav .label{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft)}
+.subnav ul{display:flex;flex-wrap:wrap;gap:2px 24px;list-style:none;margin:0;padding:0}
+.subnav a{font-family:var(--font-display);font-weight:500;font-size:15px;letter-spacing:.02em;text-decoration:none;color:var(--text-soft);
+  padding:8px 0;border-bottom:2px solid transparent;display:inline-block}
+.subnav a:hover{color:var(--text)}
+.subnav a[aria-current="page"]{color:var(--text);border-bottom-color:var(--structure)}
+@media (max-width:640px){
+  .subnav .label{display:none}
+  .subnav .wrap{padding-right:0}
+  .subnav ul{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;white-space:nowrap;scroll-padding-inline:56px}
+  .subnav li:last-child{padding-right:20px}
+  /* fade whichever edge has more items beyond it (classes set by site.js) */
+  .subnav ul.more-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 48px),transparent)}
+  .subnav ul.more-l{-webkit-mask-image:linear-gradient(90deg,transparent,#000 48px);mask-image:linear-gradient(90deg,transparent,#000 48px)}
+  .subnav ul.more-l.more-r{-webkit-mask-image:linear-gradient(90deg,transparent,#000 48px,#000 calc(100% - 48px),transparent);mask-image:linear-gradient(90deg,transparent,#000 48px,#000 calc(100% - 48px),transparent)}
+  .subnav ul::-webkit-scrollbar{display:none}
+}
+
+/* field-notes tag — a specimen label for the problem each page describes */
+.fieldtag{position:relative;background:var(--surface-raised);border:1px solid var(--rule-strong);padding:30px 28px 26px 28px;
+  transform:rotate(-1.2deg);box-shadow:0 14px 30px -22px color-mix(in srgb,var(--n-800) 45%,transparent)}
+.fieldtag::before{content:"";position:absolute;right:22px;top:22px;width:14px;height:14px;border-radius:50%;
+  border:1px solid var(--rule-strong);background:var(--surface);box-shadow:inset 0 1px 2px color-mix(in srgb,var(--n-800) 14%,transparent)}
+.fieldtag-head{display:flex;gap:14px;font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--structure);margin:0 0 14px;padding-bottom:12px;border-bottom:1px dashed var(--rule-strong)}
+.fieldtag-name{font-family:var(--font-display);font-weight:700;font-size:23px;line-height:1.15;margin:0 0 16px}
+.fieldtag dl{margin:0;display:grid;gap:14px}
+.fieldtag dt{font-family:var(--font-display);font-weight:700;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft);margin-bottom:3px}
+.fieldtag dd{margin:0;font-size:16px;line-height:1.45}
+.fieldtag--terms{transform:none;box-shadow:none}
+.fieldtag--terms::before{display:none}
+@media (max-width:960px){.fieldtag{max-width:420px;transform:rotate(-.8deg)}.fieldtag--terms{transform:none}}
+
+/* approach rows: imperative heading + explanation */
+.rows{margin-top:44px;border-top:1px solid var(--rule)}
+.row{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:40px;padding:34px 0;border-bottom:1px solid var(--rule)}
+.row h3{font-size:26px;max-width:16ch}
+.row p{font-size:18px}
+.row--compact{padding:22px 0;grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
+.row--compact h3{font-size:21px}
+@media (max-width:760px){.row{grid-template-columns:1fr;gap:10px;padding:26px 0}}
+
+/* specimen tag — the proof vignette */
+.specimen{position:relative;background:var(--surface-raised);border:1px solid var(--rule-strong);
+  display:grid;grid-template-columns:minmax(0,1fr) 260px}
+.specimen::before{content:"";position:absolute;left:28px;top:46px;width:16px;height:16px;border-radius:50%;
+  border:1px solid var(--rule-strong);background:var(--surface);box-shadow:inset 0 1px 2px color-mix(in srgb,var(--n-800) 14%,transparent)}
+.specimen::after{content:"";position:absolute;left:35px;top:62px;bottom:40px;border-left:1px dashed var(--rule-strong)}
+.specimen-body{padding:44px 48px 40px 76px}
+.specimen .tagline{font-family:var(--font-display);font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-soft);margin:0 0 20px;display:flex;flex-wrap:wrap;gap:6px 16px;max-width:none}
+.specimen .tagline span + span::before{content:"/";margin-right:16px;color:var(--rule-strong)}
+.specimen h3{font-size:clamp(26px,3vw,34px);margin-bottom:20px}
+.specimen-body p{font-size:18px}
+.specimen .also{margin-top:28px;padding-top:22px;border-top:1px solid var(--rule);font-size:16px;color:var(--text-soft)}
+.specimen .also strong{color:var(--text);font-weight:500}
+.specimen-fig{border-left:1px dashed var(--rule-strong);padding:44px 32px 40px;display:flex;flex-direction:column;justify-content:flex-end}
+.specimen-fig .fig{font-family:var(--font-display);font-weight:800;font-size:clamp(44px,4.4vw,58px);line-height:.95;letter-spacing:-.03em}
+.specimen-fig .lbl{margin-top:12px;font-size:15px;color:var(--text-soft);max-width:22ch}
+@media (max-width:820px){
+  .specimen{grid-template-columns:1fr}
+  .specimen-fig{border-left:0;border-top:1px dashed var(--rule-strong);padding:24px 22px 28px 52px}
+}
+@media (max-width:640px){
+  .specimen-body{padding:36px 22px 28px 52px}
+  .specimen::before{left:16px;top:40px;width:14px;height:14px}
+  .specimen::after{left:22px;top:54px;bottom:28px}
+}
+
+/* closing principle */
+.principle-rule{width:56px;height:3px;background:var(--accent);margin:0 0 32px;border:0}
+.principle{font-family:var(--font-display);font-weight:700;font-size:clamp(30px,4.2vw,50px);line-height:1.08;letter-spacing:-.015em;
+  max-width:24ch;margin:0;text-wrap:balance}
+.close-note{font-size:19px;line-height:1.55;color:var(--text-soft);margin-top:24px;max-width:52ch}
+
+/* pager between specialty pages */
+.pager-band{border-top:1px solid var(--rule)}
+.pager{display:grid;grid-template-columns:1fr 1fr;margin-inline:-16px}
+.pager a{padding:30px 16px;text-decoration:none;display:flex;flex-direction:column;gap:8px;transition:color .2s ease}
+.pager a:last-child{text-align:right;align-items:flex-end;border-left:1px solid var(--rule);padding-left:32px}
+.pager a:first-child{padding-right:32px}
+.pager a:hover .ttl{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:.2em}
+.pager a:focus-visible{outline-offset:-4px}
+.pager .dir{font-family:var(--font-display);font-weight:500;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-soft)}
+.pager .ttl{font-family:var(--font-display);font-weight:700;font-size:22px;line-height:1.2}
+@media (max-width:640px){
+  .pager{grid-template-columns:1fr}
+  .pager a,.pager a:first-child,.pager a:last-child{padding:22px 16px}
+  .pager a:last-child{text-align:left;align-items:flex-start;border-left:0;border-top:1px solid var(--rule)}
+}
+
+/* diagnostic */
+.leave{margin-top:44px;display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule);grid-template-columns:repeat(3,minmax(0,1fr))}
+.leave > div{background:var(--surface);padding:32px 30px}
+.leave h3{margin-bottom:12px}
+.leave p{font-size:16.5px;color:var(--text-soft)}
+@media (max-width:880px){.leave{grid-template-columns:1fr}}
+
+.readout-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:72px;align-items:center}
+@media (max-width:960px){.readout-grid{grid-template-columns:1fr;gap:40px}}
+.readout{background:var(--paper);color:var(--paper-text);border:1px solid var(--rule-strong);padding:44px 48px 36px;
+  box-shadow:0 1px 0 var(--rule),0 18px 40px -24px color-mix(in srgb,var(--n-800) 35%,transparent)}
+.readout .doc-top{display:flex;justify-content:space-between;gap:16px;font-family:var(--font-display);font-weight:500;font-size:12.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--paper-soft);border-bottom:1px solid var(--paper-rule);padding-bottom:16px;margin-bottom:26px}
+.readout h3{color:var(--paper-text);font-size:26px;margin-bottom:18px}
+.readout ol{margin:0;padding:0;list-style:none;counter-reset:r}
+.readout li{text-wrap:balance;counter-increment:r;display:grid;grid-template-columns:40px 1fr;gap:8px;padding:14px 0;border-bottom:1px dashed var(--paper-rule);font-size:17px;color:var(--paper-text)}
+.readout li:last-child{border-bottom:0}
+.readout li::before{content:counter(r,decimal-leading-zero);font-family:var(--font-display);font-weight:700;color:var(--structure);font-size:15px;padding-top:2px}
+@media (max-width:640px){.readout{padding:30px 22px 22px}}
+
+/* about */
+.bio p{font-size:18.5px;max-width:60ch}
+.career{list-style:none;margin:0;padding:0;border-top:2px solid var(--text)}
+.career li{padding:16px 0;border-bottom:1px solid var(--rule)}
+.career .co{font-family:var(--font-display);font-weight:700;font-size:18px;display:block}
+.career .role{font-size:14.5px;color:var(--text-soft);display:block;margin-top:2px}
+.career-head{font-family:var(--font-display);font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft);margin:0 0 14px}
+
+/* ---------- footer ---------- */
+.site-footer{padding:72px 0 40px;font-size:15px}
+.footgrid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.25fr;gap:40px}
+.site-footer .blurb{margin-top:14px;color:var(--text-soft);max-width:30ch;font-size:15px}
+.site-footer h2{font-family:var(--font-display);font-weight:700;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-soft);margin:0 0 14px}
+.site-footer ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.site-footer li a{display:inline-block;padding:4px 0;text-decoration:none;color:var(--text);transition:color .2s ease}
+.site-footer li a:hover{color:var(--text-accent)}
+@media (min-width:521px){.site-footer a[href^="mailto"]{white-space:nowrap}}
+.legal{margin-top:56px;padding-top:22px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  font-size:13.5px;color:var(--text-soft)}
+@media (max-width:880px){.footgrid{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.footgrid{grid-template-columns:1fr}}
+
+/* ---------- print ---------- */
+@media print{.site-header,.subnav,.pager-band,.site-footer .footgrid{display:none}.section{padding:32px 0}.fieldtag{transform:none}}
+
+/* several specimens on one page; a lone last situation card spans the row */
+.specimen + .specimen{margin-top:32px}
+.situation:last-child:nth-child(odd){grid-column:1/-1}
+
+/* Blender Pro has no arrow glyphs (→ ← ↓), so arrows are set in Circular Std,
+   which does, instead of falling back to whatever system font the visitor has. */
+.arr{font-family:var(--font-body)}
+/* engagement ladder: billing line and what-you-get list */
+.ladder{grid-template-columns:repeat(3,1fr)}
+.rung .terms{font-family:var(--font-display);font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin-top:-4px}
+.gets{list-style:none;margin:6px 0 0;padding:16px 0 0;border-top:1px solid var(--rule);display:grid;gap:9px}
+.gets li{position:relative;padding-left:18px;font-size:15.5px;line-height:1.45;color:var(--text)}
+.gets li::before{content:"";position:absolute;left:0;top:.6em;width:6px;height:6px;background:var(--structure)}
+.rung .textlink{margin-top:auto;padding-top:14px}
+@media (max-width:880px){.ladder{grid-template-columns:1fr}}
+@media (min-width:881px){@supports (grid-template-rows:subgrid){
+  .ladder{grid-template-rows:repeat(6,auto)}
+  .rung{display:grid;grid-row:span 6;grid-template-rows:subgrid;align-content:start}
+  .rung .textlink{align-self:end;justify-self:start}
+}}
+.gets{align-content:start}
