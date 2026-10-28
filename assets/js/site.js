@@ -1,5 +1,6 @@
-/* Function — shared site script: the small-screen menu and the
-   scrollable specialty sub-nav. Without JS both still work. */
+/* Function — shared site script: the small-screen menu, the
+   scrollable specialty sub-nav, and analytics click events.
+   Without JS the menu and sub-nav still work. */
 (function () {
   // Small screens: the specialty sub-nav scrolls sideways. Keep the current
   // page in view (re-measured once web fonts load, since they change widths),
@@ -49,5 +50,22 @@
   nav.addEventListener('click', function (e) { if (e.target.closest('a')) setOpen(false); });
   document.addEventListener('click', function (e) {
     if (isOpen() && !nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
+  });
+})();
+
+// Analytics: GA4 doesn't count mailto: clicks on its own, so log them, and
+// LinkedIn clicks by profile. Does nothing if GA isn't on the page.
+(function () {
+  document.addEventListener('click', function (e) {
+    if (typeof gtag !== 'function') return;
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    if (a.protocol === 'mailto:') {
+      gtag('event', 'email_click', {
+        link_location: a.closest('header') ? 'header' : a.closest('footer') ? 'footer' : 'body'
+      });
+    } else if (/(^|\.)linkedin\.com$/.test(a.hostname)) {
+      gtag('event', 'linkedin_click', { profile: a.pathname.indexOf('/in/') === 0 ? 'john' : 'company' });
+    }
   });
 })();
