@@ -1,0 +1,109 @@
+/* Home page only: layout, the plate loupe, and the specimen tags.
+   Old Standard TT (SIL OFL 1.1, see ../fonts/OldStandardTT-OFL.txt) sets the plate's figure numeral and the tag printing. */
+@font-face{font-family:"Old Standard TT";src:url("../fonts/OldStandardTT-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Old Standard TT";src:url("../fonts/OldStandardTT-Italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Old Standard TT";src:url("../fonts/OldStandardTT-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+
+/* ---------- layout ---------- */
+.hero-lg{padding:72px 0 88px}
+.hero-lg-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:56px;align-items:center}
+.hero-lg h1{font-size:clamp(42px,5.6vw,84px);line-height:.94;letter-spacing:-.03em;max-width:none}
+.hero-lg h1 span{display:block;white-space:nowrap}
+.hero-lg h1 em{font-style:normal;color:var(--text-accent)}
+.hero-lg .lede{margin-top:30px;color:var(--text-soft);max-width:40ch}
+@media (max-width:960px){.hero-lg-grid{grid-template-columns:1fr;gap:40px}}
+@media (max-width:640px){.hero-lg{padding:28px 0 64px}.hero-lg .hero-plate{order:-1}}
+
+.statband{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--surface-raised)}
+.statband .wrap{display:grid;grid-template-columns:150px repeat(3,minmax(0,1fr));gap:0}
+.statband .tag{font-family:var(--font-display);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-soft);padding:36px 24px 36px 0;margin:0}
+.stat{padding:32px 32px 34px;border-left:1px solid var(--rule)}
+.stat .fig{font-family:var(--font-display);font-weight:800;font-size:clamp(44px,4.6vw,64px);line-height:.95;letter-spacing:-.03em}
+.stat .fig--accent{color:var(--text-accent)}
+.stat .fig--word{font-size:clamp(30px,3vw,40px);line-height:1.1;padding-top:10px}
+.stat .lbl{font-family:var(--font-body);font-weight:400;text-transform:none;letter-spacing:0;font-size:15px;line-height:1.5;color:var(--text-soft);margin-top:12px;max-width:30ch}
+.stat .lbl strong{color:var(--text);font-weight:500}
+@media (max-width:880px){.statband .wrap{grid-template-columns:1fr}.statband .tag{padding:28px 0 0}
+  .stat{border-left:0;border-top:1px solid var(--rule);padding:24px 0 26px}.statband .tag + .stat{border-top:0}}
+
+.why-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:88px;align-items:start}
+.why-grid .prose > p:not([class]){font-size:18px}
+.pull{font-family:var(--font-display);font-weight:700;font-size:clamp(26px,2.8vw,36px);line-height:1.15;letter-spacing:-.01em;
+  border-left:3px solid var(--accent);padding:4px 0 4px 28px;margin:0 0 40px;max-width:24ch}
+.drift{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.drift li{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.drift .n{font-family:var(--font-display);font-weight:500;font-size:13px;letter-spacing:.12em;color:var(--structure);padding-top:5px}
+.drift h3{font-size:20px;margin-bottom:4px}
+.drift p{font-size:16px;color:var(--text-soft);margin:0}
+.drift li:last-child h3{color:var(--text-accent)}
+@media (max-width:960px){.why-grid{grid-template-columns:1fr;gap:48px}}
+
+.work-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:88px;align-items:end}
+.work-head .lede{margin:0}
+@media (max-width:960px){.work-head{grid-template-columns:1fr;gap:24px}}
+.situations--tagged{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:56px}
+.situations--tagged .situation{grid-column:span 2}
+.situations--tagged .situation:nth-child(n+4){grid-column:span 3}
+.situations--tagged .num{font-family:var(--font-display);font-weight:500;font-size:13px;letter-spacing:.12em;color:var(--structure)}
+@media (max-width:960px){.situations--tagged{grid-template-columns:1fr 1fr}.situations--tagged .situation,.situations--tagged .situation:nth-child(n+4){grid-column:span 1}
+  .situations--tagged .situation:last-child{grid-column:1/-1}}
+@media (max-width:640px){.situations--tagged{grid-template-columns:1fr}}
+
+/* ---------- plate loupe ---------- */
+/* Plate loupe */
+.plate-mount{position:relative}
+.plate-ink{position:absolute;pointer-events:none;mix-blend-mode:multiply;opacity:.94}
+.loupe{position:absolute;left:0;top:0;width:196px;height:196px;pointer-events:none;opacity:0;z-index:5;will-change:transform,opacity;transform-origin:50% 50%}
+.loupe-glass{position:absolute;inset:0;width:100%;height:100%;border-radius:50%}
+/* Blender-rendered layers. The bezel and glint renders include 7px of margin around the 196px lens. */
+.loupe-bezel,.loupe-glint{position:absolute;left:-7px;top:-7px;width:210px;height:210px}
+.loupe-glint{opacity:.85}
+/* the shadow and gathered light, rendered with the lens 6.9cm above the page; 380px square, centred on the lens */
+.loupe-cast{position:absolute;left:-92px;top:-92px;width:380px;height:380px;transform-origin:50% 50%}
+.loupe-cast img{position:absolute;inset:0;width:100%;height:100%}
+.loupe-shadow{opacity:.55}
+.loupe-caustic{opacity:.42}
+@media (hover:hover) and (pointer:fine){.is-looking img{cursor:none}}
+[data-loupe]:focus{outline:none}
+[data-loupe]:focus-visible .plate-mount{outline:2px solid var(--focus);outline-offset:4px}
+
+/* the legend entry the plate gains once the figure is found */
+.platecap-fig{display:inline-flex;gap:5px 14px;align-items:baseline;opacity:0}
+/* space is reserved from the start, so the plate doesn't shift when the line appears */
+
+/* ---------- specimen tags ---------- */
+/* Specimen tags: a rag-card museum tag on a linen loop, pinned to each situation.
+   Layers are Blender renders under the same key light as the plate loupe.
+   Geometry (css px, tag box 100x180): pin/pivot at (50.2, 8.9); card spans x 10-90, y 26.7-172.7. */
+
+.situations--tagged .situation{position:relative}
+.sit-body{display:block}
+.sit-body .num{display:block;margin-bottom:12px}
+.sit-body h3{margin-bottom:12px}
+.sit-body .tag-room{float:right;width:84px;height:156px;margin:-6px -8px 6px 14px}
+
+.spec-tag{position:absolute;top:2px;right:12px;width:100px;height:180px;pointer-events:none;z-index:2}
+.spec-tag img{position:absolute;inset:0;width:100%;height:100%;display:block;user-select:none;-webkit-user-drag:none}
+.spec-tag .t-swing{position:absolute;inset:0;transform-origin:50.2px 8.9px;transform:rotate(var(--rest,0deg))}
+.spec-tag .t-shadow{opacity:.34;transform-origin:50px 100px}
+.spec-tag .t-twist{position:absolute;inset:0;transform-origin:50px 100px;transform-style:preserve-3d;perspective:700px}
+.spec-tag .t-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.spec-tag .t-back{transform:rotateY(180deg)}
+.spec-tag .t-string,.spec-tag .t-pin{pointer-events:none}
+.situation.tag-reading{cursor:none}
+
+/* printing: letterpress ink, multiplied into the card */
+.spec-tag .t-print{position:absolute;left:10px;top:26.7px;width:80px;height:146px;mix-blend-mode:multiply;color:#2b2620}
+.spec-tag .t-rule{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.spec-tag .t-rule path{fill:none;stroke:#2b2620;stroke-width:.5;opacity:.6}
+.spec-tag .t-text{position:absolute;left:7px;right:7px;top:33px;bottom:9px;display:flex;flex-direction:column;align-items:center;text-align:center;
+  font-family:"Old Standard TT",Georgia,serif;text-shadow:0 0 .35px rgba(43,38,32,.55)}
+.spec-tag .t-no{font-weight:700;font-size:15.5px;letter-spacing:.02em;line-height:1;margin-top:5px}
+.spec-tag .t-no small{font-weight:400;font-size:8.5px;letter-spacing:.06em;margin-right:3px;vertical-align:2px}
+.spec-tag .t-hair{width:26px;height:0;border-top:.6px solid currentColor;opacity:.65;margin:9px 0 8px}
+.spec-tag .t-name{font-style:italic;font-weight:400;font-size:12px;line-height:1.22}
+.spec-tag .t-note{font-style:italic;font-size:10.4px;line-height:1.32;margin-top:3px;hyphens:manual}
+
+
+@media (max-width:640px){.spec-tag{right:6px}.sit-body .tag-room{margin-right:-14px}}

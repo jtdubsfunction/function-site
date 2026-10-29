@@ -25,6 +25,9 @@
 <link rel="stylesheet" href="tokens.css">
 <link rel="stylesheet" href="assets/css/site.css">
 <script src="assets/js/site.js" defer></script>
+<link rel="stylesheet" href="assets/css/home.css">
+<script src="assets/js/plate-loupe.js" defer></script>
+<script src="assets/js/specimen-tags.js" defer></script>
 <script type="application/ld+json">
 {
  "@context": "https://schema.org",
@@ -114,17 +117,18 @@
 </header>
 <main id="main">
 
-<section class="hero" aria-labelledby="hero-h">
-  <div class="wrap hero-grid">
+<section class="hero-lg" aria-labelledby="hero-h">
+  <div class="wrap hero-lg-grid">
     <div class="hero-copy">
       <p class="eyebrow">An independent brand strategy practice</p>
-      <h1 id="hero-h">Helping brands grow.</h1>
+      <h1 id="hero-h"><span>Helping</span> <span>brands grow.</span></h1>
       <p class="lede">Function helps consumer brands outperform their peers by fixing or preventing the causes of brand dysfunction that are limiting their potential.</p>
       <div class="btn-row">
         <a class="btn btn-solid" href="diagnostic.html">Start with a diagnostic <span class="arr" aria-hidden="true">&rarr;</span></a>
+        <a class="textlink" href="brand-dysfunction/index.html">What is brand dysfunction? <span class="arr" aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
-    <figure class="plate hero-plate">
+    <figure class="plate hero-plate" data-loupe data-loupe-src="assets/img/hero-lobster-1920.webp" data-loupe-assets="assets/img/loupe/">
       <div class="plate-mount">
         <picture>
           <source type="image/avif" srcset="assets/img/hero-lobster-820.avif 820w, assets/img/hero-lobster-1240.avif 1240w, assets/img/hero-lobster-1920.avif 1920w" sizes="(min-width:960px) 600px, 92vw">
@@ -134,13 +138,22 @@
         </picture>
         <span class="hair" aria-hidden="true"></span>
       </div>
-      <figcaption class="platecap"><span class="fig">Plate LVIII</span><span class="cap">American lobster, with telephone.</span></figcaption>
+      <figcaption class="platecap"><span class="fig">Plate LVIII</span><span class="cap">American lobster, with telephone.</span><span class="platecap-fig" aria-hidden="true"><span class="fig">Fig. 4</span><span class="cap">Apparatus, purpose undetermined.</span></span></figcaption>
     </figure>
   </div>
 </section>
 
+<section class="statband" aria-label="Results from John's work before Function">
+  <div class="wrap">
+    <p class="tag">Before<br>Function</p>
+    <div class="stat"><div class="fig fig--accent"><span aria-hidden="true">$1B+</span><span class="visually-hidden">More than $1 billion</span></div><p class="lbl">Organic sales growth across <strong>Church &amp; Dwight's</strong> brand portfolio, while John led its brand strategy at Razorfish</p></div>
+    <div class="stat"><div class="fig">+7%</div><p class="lbl">Purchase intent across <strong>Nestl&eacute; Waters'</strong> $1.9 billion portfolio of six brands, where John led brand and creative strategy at 360i</p></div>
+    <div class="stat"><div class="fig fig--word">Cannes Lions</div><p class="lbl">2014 shortlist for John's work on <strong>American Express Serve</strong>, at Rokkan</p></div>
+  </div>
+</section>
+
 <section class="section" id="frame" aria-labelledby="frame-h">
-  <div class="wrap with-aside">
+  <div class="wrap why-grid">
     <div class="prose">
       <p class="eyebrow">How we see it</p>
       <h2 id="frame-h">Why good brands lose steam</h2>
@@ -150,52 +163,61 @@
       <p>Now the clock is ticking, fast. These individual problems all have point solutions, but they leave the root causes unaddressed – the drift in the brand and its strategy – and this underlying structural weakness can transform a powerhouse brand into a has-been.</p>
       <p class="mt-lg"><a class="textlink" href="brand-dysfunction/index.html">What is brand dysfunction? <span class="arr" aria-hidden="true">&rarr;</span></a></p>
     </div>
-    <div class="proof">
-      <p class="proof-tag">Before Function</p>
-      <div class="fig fig--accent"><span aria-hidden="true">$1B+</span><span class="visually-hidden">More than $1 billion</span></div>
-      <p class="lbl">Organic sales growth across <strong>Church &amp; Dwight's</strong> brand portfolio, while John led its brand strategy at Razorfish</p>
+    <div>
+      <p class="pull">From a story that drives growth to a set of slides.</p>
+      <ol class="drift">
+        <li><span class="n">01</span><div><h3>A clear story</h3><p>The brand knows what it stands for, and it shows up in the numbers.</p></div></li>
+        <li><span class="n">02</span><div><h3>Small choices pile up</h3><p>New teams, committee decisions, line extensions that each made sense.</p></div></li>
+        <li><span class="n">03</span><div><h3>The market moves</h3><p>Pricing, pack, portfolio and distribution all look wrong at once.</p></div></li>
+        <li><span class="n">04</span><div><h3>Muddy results</h3><p>The story now lives in a deck, and growth has stalled.</p></div></li>
+      </ol>
     </div>
   </div>
 </section>
 
 <section class="section" id="work" aria-labelledby="work-h">
-  <div class="wrap with-aside">
-    <div>
-      <p class="eyebrow">What we work on</p>
+  <div class="wrap">
+    <p class="eyebrow">What we work on</p>
+    <div class="work-head">
       <h2 id="work-h">Five common situations that hold multi-brand companies back</h2>
-      <p class="lede mt-md">Our engagements go beyond strategy that sits in slides – we see it through until a brand is truly functional again.</p>
-      <div class="situations">
+      <p class="lede">Our engagements go beyond strategy that sits in slides – we see it through until a brand is truly functional again.</p>
+    </div>
+    <div class="situations situations--tagged">
         <a class="situation" href="positioning.html" aria-labelledby="s-pos" aria-describedby="s-pos-d">
+          <span class="spec-tag" aria-hidden="true" style="--rest:-1.4deg"><span class="t-swing"><img class="t-shadow" src="assets/img/tags/tag-shadow.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-twist"><span class="t-face t-front"><img src="assets/img/tags/tag-front.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-no"><small>No.</small>0588</span><span class="t-hair"></span><span class="t-name">Draco custodiens</span></span></span></span><span class="t-face t-back"><img src="assets/img/tags/tag-back.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-note">Guards it faithfully. Has never looked inside.</span></span></span></span></span><img class="t-string" src="assets/img/tags/tag-string.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span><img class="t-pin" src="assets/img/tags/tag-pin.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span>
+          <div class="sit-body"><span class="tag-room" aria-hidden="true"></span><span class="num">01</span>
           <h3 id="s-pos">The re-positioning is done, and nothing has changed.</h3>
-          <p id="s-pos-d">The strategy work was signed off months ago and now lives in a deck. People agree with it, but it hasn't settled a single argument about what the brand should do next.</p>
+          <p id="s-pos-d">The strategy work was signed off months ago and now lives in a deck. People agree with it, but it hasn't settled a single argument about what the brand should do next.</p></div>
           <span class="go" aria-hidden="true">Positioning that gets used <span class="arr" aria-hidden="true">&rarr;</span></span>
         </a>
         <a class="situation" href="relevance.html" aria-labelledby="s-rel" aria-describedby="s-rel-d">
+          <span class="spec-tag" aria-hidden="true" style="--rest:0.9deg"><span class="t-swing"><img class="t-shadow" src="assets/img/tags/tag-shadow.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-twist"><span class="t-face t-front"><img src="assets/img/tags/tag-front.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-no"><small>No.</small>0779</span><span class="t-hair"></span><span class="t-name">Monoceros tepidus</span></span></span></span><span class="t-face t-back"><img src="assets/img/tags/tag-back.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-note">Seldom sighted, chiefly because no one looks.</span></span></span></span></span><img class="t-string" src="assets/img/tags/tag-string.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span><img class="t-pin" src="assets/img/tags/tag-pin.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span>
+          <div class="sit-body"><span class="tag-room" aria-hidden="true"></span><span class="num">02</span>
           <h3 id="s-rel">The brand is familiar, but fading.</h3>
-          <p id="s-rel-d">People still know the name, but they no longer care. Previously loyal buyers are suddenly open to something new. Each new campaign comes and goes without changing much – but changing it up feels too risky.</p>
+          <p id="s-rel-d">People still know the name, but they no longer care. Previously loyal buyers are suddenly open to something new. Each new campaign comes and goes without changing much – but changing it up feels too risky.</p></div>
           <span class="go" aria-hidden="true">Earning relevance <span class="arr" aria-hidden="true">&rarr;</span></span>
         </a>
         <a class="situation" href="portfolio.html" aria-labelledby="s-port" aria-describedby="s-port-d">
+          <span class="spec-tag" aria-hidden="true" style="--rest:-0.6deg"><span class="t-swing"><img class="t-shadow" src="assets/img/tags/tag-shadow.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-twist"><span class="t-face t-front"><img src="assets/img/tags/tag-front.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-no"><small>No.</small>1377</span><span class="t-hair"></span><span class="t-name">Wyverna inconstans</span></span></span></span><span class="t-face t-back"><img src="assets/img/tags/tag-back.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-note">Each wing was commissioned separately. Flight trials concluded after four seconds.</span></span></span></span></span><img class="t-string" src="assets/img/tags/tag-string.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span><img class="t-pin" src="assets/img/tags/tag-pin.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span>
+          <div class="sit-body"><span class="tag-room" aria-hidden="true"></span><span class="num">03</span>
           <h3 id="s-port">The portfolio has outgrown the architecture.</h3>
-          <p id="s-port-d">Propositions were added one at a time, each for a good reason. Taken together, it's no longer clear what the brand signifies or how it strengthens each product's chances in the market.</p>
+          <p id="s-port-d">Propositions were added one at a time, each for a good reason. Taken together, it's no longer clear what the brand signifies or how it strengthens each product's chances in the market.</p></div>
           <span class="go" aria-hidden="true">Portfolios and brand architecture <span class="arr" aria-hidden="true">&rarr;</span></span>
         </a>
         <a class="situation" href="launches.html" aria-labelledby="s-launch" aria-describedby="s-launch-d">
+          <span class="spec-tag" aria-hidden="true" style="--rest:1.3deg"><span class="t-swing"><img class="t-shadow" src="assets/img/tags/tag-shadow.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-twist"><span class="t-face t-front"><img src="assets/img/tags/tag-front.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-no"><small>No.</small>0663</span><span class="t-hair"></span><span class="t-name">Chimaera convergens</span></span></span></span><span class="t-face t-back"><img src="assets/img/tags/tag-back.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-note">Each revision answered the objections. The animal now offends no one.</span></span></span></span></span><img class="t-string" src="assets/img/tags/tag-string.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span><img class="t-pin" src="assets/img/tags/tag-pin.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span>
+          <div class="sit-body"><span class="tag-room" aria-hidden="true"></span><span class="num">04</span>
           <h3 id="s-launch">A launch or redesign underdelivered.</h3>
-          <p id="s-launch-d">The new product or pack scored well in research, but sales haven't followed. Instead of moving on, this is the time to dig in and understand the real problems.</p>
+          <p id="s-launch-d">The new product or pack scored well in research, but sales haven't followed. Instead of moving on, this is the time to dig in and understand the real problems.</p></div>
           <span class="go" aria-hidden="true">Launches and renovation <span class="arr" aria-hidden="true">&rarr;</span></span>
         </a>
         <a class="situation" href="marketing-operations.html" aria-labelledby="s-ops" aria-describedby="s-ops-d">
+          <span class="spec-tag" aria-hidden="true" style="--rest:-0.9deg"><span class="t-swing"><img class="t-shadow" src="assets/img/tags/tag-shadow.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-twist"><span class="t-face t-front"><img src="assets/img/tags/tag-front.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-no"><small>No.</small>0852</span><span class="t-hair"></span><span class="t-name">Minotaurus iterans</span></span></span></span><span class="t-face t-back"><img src="assets/img/tags/tag-back.webp" alt="" width="100" height="180" loading="lazy" decoding="async"><span class="t-print"><svg class="t-rule" viewBox="0 0 80 146" aria-hidden="true"><path d="M36.5 3.2H13.53L3.2 13.53V142.8H76.8V13.53L66.47 3.2H44"/></svg><span class="t-text"><span class="t-note">Walks the same corridors with each new brief. The thread lies nearby, still wound.</span></span></span></span></span><img class="t-string" src="assets/img/tags/tag-string.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span><img class="t-pin" src="assets/img/tags/tag-pin.webp" alt="" width="100" height="180" loading="lazy" decoding="async"></span>
+          <div class="sit-body"><span class="tag-room" aria-hidden="true"></span><span class="num">05</span>
           <h3 id="s-ops">The team is too stretched to step back.</h3>
-          <p id="s-ops-d">Marketing runs from one deadline to the next, and the opportunities everyone can see keep slipping down the list.</p>
+          <p id="s-ops-d">Marketing runs from one deadline to the next, and the opportunities everyone can see keep slipping down the list.</p></div>
           <span class="go" aria-hidden="true">How marketing gets made <span class="arr" aria-hidden="true">&rarr;</span></span>
         </a>
-      </div>
-    </div>
-    <div class="proof proof--sticky">
-      <p class="proof-tag">Before Function</p>
-      <div class="fig">+7%</div>
-      <p class="lbl">Purchase intent across <strong>Nestl&eacute; Waters'</strong> $1.9 billion portfolio of six brands, where John led brand and creative strategy at 360i</p>
     </div>
   </div>
 </section>
@@ -254,11 +276,6 @@
       <h2 id="about-h">John Winterkorn</h2>
       <p>Function is led by John Winterkorn. He has spent more than fifteen years in marketing, most of it in brand strategy at agencies including Razorfish, 360i, and McCann. He spent 2018 to 2026 at Razorfish, rising to Group Vice President.</p>
       <p class="mt-lg"><a class="textlink" href="about.html">More about John <span class="arr" aria-hidden="true">&rarr;</span></a></p>
-    </div>
-    <div class="proof proof--sm">
-      <p class="proof-tag">Before Function</p>
-      <div class="fig">Cannes Lions</div>
-      <p class="lbl">2014 shortlist for John's work on <strong>American Express Serve</strong>, at Rokkan</p>
     </div>
   </div>
 </section>
