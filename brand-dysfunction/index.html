@@ -20,8 +20,11 @@
 <script>(function(){var h=location.hostname;if(h!=='www.thisisfunction.io'&&h!=='thisisfunction.io')return;window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','G-NLZM8V9G5H',{allow_google_signals:false,allow_ad_personalization_signals:false});function l(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-NLZM8V9G5H';document.head.appendChild(s)}if(document.readyState==='complete')l();else window.addEventListener('load',l)})()</script>
 <link rel="preload" href="../assets/fonts/BlenderPro-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/CircularStd-Book.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/OldStandardTT-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/OldStandardTT-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/css/fonts.css">
 <script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/specimen-labels.js" defer></script>
 <style>
 :root{
   --paper:#F0F2F2; --raised:#E0E5E5; --ink:#14161C; --muted:#4E5457; --rule:#CCD2D2; --rule-strong:#9CA3A6;
@@ -171,13 +174,11 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
 /* ===== specimen field + case ===== */
 .field{position:relative;min-height:300px;margin:56px 0 24px}
-.stag{position:absolute;left:var(--x);top:var(--t);width:var(--w);background:var(--raised);border:1px solid var(--rule);
-  padding:28px 14px 14px 36px;font:400 15.5px/1.42 var(--font-body);color:var(--ink);text-align:left;cursor:pointer;
-  transform:rotate(var(--r));box-shadow:2px 2px 0 var(--rule);transition:transform .2s ease,box-shadow .2s ease;z-index:var(--z)}
-.stag:hover,.stag:focus-visible{transform:rotate(0deg) translateY(-4px);box-shadow:4px 5px 0 var(--rule);z-index:20}
-.stag .hole{position:absolute;left:14px;top:17px;width:10px;height:10px;border-radius:50%;border:1.5px solid var(--muted);background:var(--paper)}
-.stag .hole::after{content:"";position:absolute;right:8px;top:3px;width:30px;height:1px;background:var(--muted);transform:rotate(-28deg);transform-origin:right}
-.catno{position:absolute;top:10px;right:14px;font:500 11.5px/1 var(--font-display);color:var(--muted);letter-spacing:.04em}
+.stag{position:absolute;left:var(--x);top:var(--t);width:var(--w);aspect-ratio:236/150;padding:0;margin:0;border:0;background:none;
+  cursor:pointer;text-align:left;z-index:var(--z);transform:translate(var(--bx,0px),var(--by,0px)) rotate(calc(var(--r) + var(--br,0deg)))}
+.stag:hover,.stag:focus-visible{z-index:20}
+.stag:focus-visible{outline:none}
+.stag:focus-visible .lbl-print{outline:2px solid var(--accent-fill);outline-offset:4px}
 .case{border:1px solid var(--rule);background:var(--raised);padding:18px 20px 22px}
 .case-label{font:500 13px/1.2 var(--font-display);color:var(--muted);letter-spacing:.04em;margin:0 0 14px}
 .bays{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
@@ -188,17 +189,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .bay:not(.has) .bay-name{color:var(--muted);font-weight:500}
 @keyframes rise{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
 .bay-items{display:flex;flex-direction:column;gap:22px;padding-top:6px}
-.ptag{position:relative;display:block;width:100%;background:var(--raised);border:1px solid var(--ink);padding:20px 14px 12px;
-  font:400 15.5px/1.42 var(--font-body);color:var(--ink);text-align:left;cursor:default}
-.ptag.just{animation:pinIn .38s ease-out}
-.ptag .pin{position:absolute;top:-7px;left:50%;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:var(--ink)}
-.ptag .pin::after{content:"";position:absolute;left:5px;top:10px;width:2px;height:9px;background:var(--ink);opacity:.5}
-.ptag .catno{top:8px;right:10px}
-.ptag .back{display:block;margin-top:12px;padding-top:10px;border-top:1px dashed var(--rule);font-size:14px;line-height:1.5;color:var(--ink);opacity:.86}
 .case .verdict{font:700 20px/1.25 var(--font-display);margin:0 0 18px}
 .case .verdict .st{color:var(--accent)}
 .case .verdict small{display:block;font:400 14px/1.5 var(--font-body);color:var(--muted);margin-top:4px}
-@keyframes pinIn{0%{opacity:0;transform:translateY(-16px) rotate(-4deg)}100%{opacity:1;transform:none}}
 .fallback{list-style:none;padding:0;margin:40px 0 0}
 .fallback li{padding:16px 0;border-bottom:1px solid var(--rule)}
 .fallback .fq{font-size:20px;margin:0 0 6px}.fallback .fn{font-size:16px;color:var(--muted);margin:0}
@@ -206,8 +199,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 
 @media (max-width:760px){
   .field{height:auto;display:flex;flex-direction:column;margin:40px 0 28px}
-  .stag{position:relative;left:auto;top:auto;width:auto;margin:3px 6px 0;transform:rotate(calc(var(--rm)*.5))}
-  .stag:hover{transform:rotate(0)}
+  @media (min-width:561px){.field{flex-direction:row;flex-wrap:wrap;justify-content:center;column-gap:26px}.stag{width:min(280px,calc(50% - 40px))}}
+  .stag{position:relative;left:auto;top:auto;width:min(280px,calc(100% - 36px));margin:8px 0 0 calc(22px + var(--off,0px));transform:rotate(calc(var(--rm)*.6))}
   .bays{grid-template-columns:1fr}
   .bay{min-height:0}
 }
@@ -231,20 +224,73 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
 .case-label:focus-visible{outline:2px solid var(--accent-fill);outline-offset:3px}
 
 /* ===== specimen engravings on collected tags ===== */
-.ptag-q{display:block;width:100%;background:none;border:0;padding:0;margin:0;text-align:left;cursor:pointer;color:inherit;font:inherit}
-.ptag-q:hover{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
 .pile-hint{margin:36px 0 0;max-width:52ch;font-size:17px;line-height:1.5;color:var(--muted)}
 .pile-empty{margin:0;padding:28px 0;font-style:italic;color:var(--muted)}
 .field.is-empty{min-height:0}
 @media (max-width:760px){.field{padding-bottom:72px}}
-.ptag .spec{display:block;margin:12px 0 0}
+
+/* ===== specimen labels (Blender renders, scene "Label"/"Mount" in loupe.blend) =====
+   Pile label: rag-card shipping label 10.6 x 6.75 cm, same card, washer, linen and light as the homepage tags.
+   Every layer is a 320x191 frame (css at a 236 px card); the card sits at (42.2, 20.5) inside it,
+   so layers are placed in % of the card and scale with it. Printing is HTML, multiplied into the card. */
+@font-face{font-family:"Old Standard TT";src:url("../assets/fonts/OldStandardTT-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Old Standard TT";src:url("../assets/fonts/OldStandardTT-Italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:"Old Standard TT";src:url("../assets/fonts/OldStandardTT-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}
+.s-intro{overflow-x:clip}
+@media print{.s-intro{overflow-x:visible}.field{display:flex;flex-wrap:wrap;gap:14px 26px;height:auto!important}
+  .stag{position:relative;left:auto;top:auto;width:236px;margin-left:22px;transform:none;break-inside:avoid}.ptag{break-inside:avoid}.tally{display:none!important}}
+.lbl{position:absolute;inset:0;display:block;transition:transform .18s ease-out}
+.lbl img{position:absolute;left:-17.881%;top:-13.667%;width:135.593%;height:auto;max-width:none;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.lbl .l-rest{opacity:.9;transition:opacity .18s ease-out}
+.lbl .l-lift{opacity:0;transition:opacity .18s ease-out}
+/* fallback card surface: keeps the ink readable if the renders fail (they cover it exactly when they load) */
+.stag .lbl::before,.ptag-q .lbl::before{content:"";position:absolute;inset:1px;background:#ece6d6;clip-path:polygon(8% 0,100% 0,100% 100%,8% 100%,0 87.4%,0 12.6%)}
+.stag{-webkit-user-select:none;user-select:none}
+/* lift: hover only where hover is real, so a tap on a phone never leaves a card raised */
+:root{--lift:1.015}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--lift:1.03}}
+:root[data-theme="dark"]{--lift:1.03}
+.stag:focus-visible .lbl,.ptag-q:focus-visible .lbl{transform:scale(var(--lift))}
+.stag:focus-visible .l-rest,.ptag-q:focus-visible .l-rest{opacity:0}
+.stag:focus-visible .l-lift,.ptag-q:focus-visible .l-lift{opacity:.6}
+@media (hover:hover){
+  .stag:hover .lbl,.ptag-q:hover .lbl{transform:scale(var(--lift))}
+  .stag:hover .l-rest,.ptag-q:hover .l-rest{opacity:0}
+  .stag:hover .l-lift,.ptag-q:hover .l-lift{opacity:.6}
+}
+.lbl-print{position:absolute;inset:0;display:block;container-type:inline-size;mix-blend-mode:multiply;color:#2b2620;
+  font-family:"Old Standard TT",Georgia,serif;text-shadow:0 0 .35px rgba(43,38,32,.5)}
+.lbl-rule{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.lbl-rule path{fill:none;stroke:#2b2620;stroke-width:.5;opacity:.55}
+.lbl-text{position:absolute;inset:4.2cqw 6cqw 4cqw 15.3cqw;display:flex;flex-direction:column}
+.lbl-no{align-self:flex-end;font-weight:700;font-size:6.2cqw;line-height:1;letter-spacing:.02em}
+.lbl-no small{font-weight:400;font-size:3.6cqw;letter-spacing:.06em;margin-right:.8cqw;vertical-align:.5cqw}
+.lbl-q{display:block;margin-top:2.4cqw;font-size:7.2cqw;line-height:1.3;hyphens:manual}
+
+/* collected: the same label, pinned through its eyelet to a museum mount board that carries the engraving and note */
+.ptag{position:relative;display:block;width:100%;max-width:400px;padding:18px 22px 26px;border:0 solid transparent;background:#ece6d6;background-clip:padding-box;
+  border-image:url("../assets/img/labels/mount.webp") 60 fill / 30px / 13px stretch;
+  color:#2b2620;font-family:"Old Standard TT",Georgia,serif;text-align:left}
+.ptag-q{position:relative;display:block;width:min(236px,100%);aspect-ratio:236/150;padding:0;margin:0 0 0 2px;border:0;background:none;
+  cursor:pointer;transform:rotate(var(--mr,-1deg));font:inherit;color:inherit;text-align:left}
+.ptag-q:focus-visible{outline:none}
+.ptag-q:focus-visible .lbl-print{outline:2px solid var(--accent-fill);outline-offset:4px}
+.ptag .spec{display:block;margin:16px 0 0}
 .ptag .spec picture{display:block}
-.ptag .spec-img{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#ECE3CF;border:1px solid var(--rule-strong)}
-.ptag .spec-name{display:block;margin-top:9px;font:700 14px/1.35 var(--font-display);color:var(--ink)}
-.ptag .spec-name i{font:italic 400 14px/1.35 var(--font-body)}
-.ptag .spec-cap{display:block;margin-top:3px;font-style:italic;font-size:13.5px;line-height:1.45;color:var(--muted)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ptag .spec-img{filter:brightness(.8) sepia(.12)}}
-:root[data-theme="dark"] .ptag .spec-img{filter:brightness(.8) sepia(.12)}
+.ptag .spec-img{display:block;width:100%;height:auto;aspect-ratio:4/3;background:#ECE3CF;border:1px solid rgba(43,38,32,.4);mix-blend-mode:multiply}
+.ptag .spec-name{display:block;margin-top:10px;font-size:15px;line-height:1.35}
+.ptag .spec-name i{font-style:italic}
+.ptag .spec-cap{display:block;margin-top:3px;font-style:italic;font-size:14px;line-height:1.45;color:#5a5249}
+.ptag .back{display:block;margin-top:14px;padding-top:12px;border-top:.6px solid rgba(43,38,32,.45);font-size:15px;line-height:1.5}
+.ptag.just{animation:mountIn .3s ease-out}
+.ptag.just .ptag-q{animation:labelIn .38s ease-out}
+.ptag.just .l-pin{animation:pinIn .5s ease-out}
+@keyframes mountIn{from{opacity:0}to{opacity:1}}
+@keyframes labelIn{0%{opacity:0;transform:translateY(-14px) rotate(var(--mr,-1deg)) scale(1.04)}100%{opacity:1;transform:rotate(var(--mr,-1deg))}}
+@keyframes pinIn{0%,60%{opacity:0}100%{opacity:1}}
+@media (max-width:960px){.bays{grid-template-columns:1fr}.bay{min-height:0}}
+@media (forced-colors:active){.lbl img,.ptag{border-image:none}.ptag .spec-img{mix-blend-mode:normal}.lbl::before{display:none}.lbl img{display:none}.lbl-print{mix-blend-mode:normal;color:CanvasText;text-shadow:none}
+  .stag,.ptag-q{border:1px solid ButtonText}.ptag{border:1px solid CanvasText;color:CanvasText;background:Canvas}.lbl-rule{display:none}}
 </style>
 <script type="application/ld+json">
 {
@@ -498,6 +544,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   var SPEC_BASE="../assets/img/specimens/";
   var SP={"0063": ["Sphinx consulta", "the Consulted Sphinx", "Consulted at every crossroads. The volume beneath her paw is visibly well-thumbed.", "A winged sphinx resting at a fork in a path, one paw on a well-worn book."], "0148": ["Melusina congruens", "the Congruent Mermaid", "Her reflection has been checked and found in agreement.", "A mermaid on a rock holding up a hand mirror, her reflection matching in the pool below, a brass spirit level beside her."], "0231": ["Gryphus decisivus", "the Decisive Griffin", "Carries one card only, and has been observed to defend it.", "A griffin on a rock ledge holding up a single card that reads This One."], "0310": ["Hydra unisona", "the Harmonious Hydra", "Five heads, one account of events. The cue cards lie untouched.", "A five-headed hydra with every head facing the same way, singing, beside an unused stack of cue cards."], "0402": ["Hippogryphus agilis", "the Agile Hippogriff", "Adjusts its heading when new information arrives, without apparent embarrassment.", "A hippogriff banking into a turn above the shoreline, a small striped windsock streaming from one wingtip."], "0095": ["Phoenix explicabilis", "the Explicable Phoenix", "Plumage of proven effect. The bird can account for every feather.", "A phoenix in full tail display, with a tiny barcode hidden among the plumes."], "0417": ["Pegasus modicus", "the Modest Pegasus", "Fully capable of flight. Has not been asked.", "A winged horse pulling a wooden plough, its wings neatly folded."], "0588": ["Draco custodiens", "the Custodial Dragon", "Guards it faithfully. Has never looked inside.", "A dragon curled over a dusty office binder with a cobweb on its spine."], "0663": ["Chimaera convergens", "the Convergent Chimera", "Each revision answered the objections. The animal now offends no one.", "An all-beige chimera, lion, goat and serpent, with a strip of five near-identical beige paint swatches at its feet."], "0721": ["Aspidochelone memor", "the Remembering Island-Turtle", "Still arranged for swimming. The sea withdrew some years ago.", "A giant sea turtle with a small tree on its shell, flippers spread for swimming on dry sand, a rusted anchor beside it."], "0852": ["Minotaurus iterans", "the Returning Minotaur", "Walks the same corridors with each new brief. The thread lies nearby, still wound.", "A minotaur at a fork in a stone labyrinth, an untouched ball of red thread in the corner."], "0779": ["Monoceros tepidus", "the Tepid Unicorn", "Seldom sighted, chiefly because no one looks.", "A pale unicorn grazing in a misty meadow, an unclaimed blue rosette in the grass."], "1102": ["Cerberus trifarius", "the Threefold Cerberus", "Three heads, three proposals, no preference expressed.", "A three-headed hound holding cards marked Option A, Option B and Option C."], "1377": ["Wyverna inconstans", "the Inconstant Wyvern", "Each wing was commissioned separately. Flight trials concluded after four seconds.", "A wyvern taking off with one bat wing, one feathered wing and a fish tail, a stopwatch around its neck."], "1215": ["Hydra discors", "the Discordant Hydra", "Each head is correct about its own direction.", "A five-headed hydra with each head straining a different way, beside a signpost with four blank arms."], "1340": ["Leviathan promissus", "the Promised Leviathan", "As depicted, and as collected.", "A magnificent sea serpent drawn in a map cartouche, beside the real specimen: a modest eel laid next to a small brass rule."], "0996": ["Ouroboros myops", "the Short-Sighted Ouroboros", "Has studied itself closely for many years. Reports nothing unusual.", "A serpent coiled into a ring, peering closely at its own tail through tiny spectacles."], "1488": ["Amphisbaena renovata", "the Renovated Amphisbaena", "Moults on schedule. Emerges, each time, as itself.", "A two-headed serpent beside two shed skins in teal and coral, with a decorator’s paintbrush."]};
   var specSrc=function(no){return SPEC_BASE+no+".webp";};
+  var LB="../assets/img/labels/";
+  // a rendered label: shadows, card (one of three wear variants), printed rule + number + quote; pinned in the case
+  function labelHTML(x,i,pinned){var v='abc'.charAt(i%3), im=function(c,f,lazy){return '<img class="'+c+'" src="'+LB+f+'.webp" alt="" width="320" height="191" decoding="async" onerror="this.style.visibility=\'hidden\'"'+(lazy?' loading="lazy"':'')+'>';};
+    return '<span class="lbl">'+im('l-rest','label-'+v+'-shadow')+im('l-lift','label-lift-shadow',1)+im('l-card','label-'+v)+
+      '<span class="lbl-print"><svg class="lbl-rule" viewBox="0 0 236 150" aria-hidden="true"><path d="M20.2 3.2H232.8V146.8H20.2L3.2 129.8V20.2Z"/></svg>'+
+      '<span class="lbl-text"><span class="lbl-no" aria-hidden="true"><small>No.</small>'+x.no+'</span><span class="lbl-q">'+quoted(x.q)+'</span></span></span>'+
+      (pinned?im('l-pin','label-pin'):'')+'</span>';}
   var byId={}; S.forEach(function(x){byId[x.id]=x;});
   var on=[], just=null, rowH={}, lastW=0;
   var $=function(id){return document.getElementById(id);};
@@ -512,14 +565,14 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       '<span class="spec-name"><i>'+esc(p[0])+'</i>, '+esc(p[1])+'</span><span class="spec-cap">'+esc(p[2])+'</span></span>';}
   function render(){
     var field=$('field'), fw=field.clientWidth, narrow=window.innerWidth<=760;
-    var cols=Math.max(2,Math.floor(fw/220)), colW=fw/cols, tw=Math.min(236,Math.floor(colW-24)), slack=colW-tw;
+    var cols=Math.max(2,Math.floor(fw/245)), colW=fw/cols, tw=Math.min(236,Math.floor(colW-24)), slack=colW-tw;
     var rnd=function(i,k){var x=Math.sin(i*12.9898+k*78.233)*43758.5453;return x-Math.floor(x);};
     field.innerHTML=S.map(function(x,i){
       if(on.indexOf(x.id)>-1) return '';
       var c=i%cols, left=c*colW+slack/2+(rnd(i,1)-.5)*Math.max(0,slack-10);
       var rot=((rnd(i,3)-.5)*6).toFixed(1), rm=((i%2?1:-1)*(0.5+rnd(i,4))).toFixed(1);
-      return '<button type="button" class="stag" data-sid="'+x.id+'" data-i="'+i+'" aria-pressed="false" style="--x:'+left.toFixed(1)+'px;--t:0px;--w:'+tw+'px;--r:'+rot+'deg;--rm:'+rm+'deg;--z:'+(1+Math.floor(rnd(i,5)*9))+'">'+
-        '<span class="hole" aria-hidden="true"></span><span class="catno" aria-hidden="true">No. '+x.no+'</span>'+quoted(x.q)+'</button>';
+      return '<button type="button" class="stag" data-sid="'+x.id+'" data-i="'+i+'" aria-pressed="false" style="--x:'+left.toFixed(1)+'px;--t:0px;--w:'+tw+'px;--r:'+rot+'deg;--rm:'+rm+'deg;--off:'+((rnd(i,6)-.5)*12).toFixed(1)+'px;--z:'+(1+Math.floor(rnd(i,5)*9))+'">'+
+        labelHTML(x,i)+'</button>';
     }).join('');
     field.classList.toggle('is-empty',on.length===S.length);
     if(on.length===S.length){ field.innerHTML='<p class="pile-empty">The pile is empty. Every specimen is in the case below.</p>'; field.style.height=''; }
@@ -547,7 +600,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
       items.forEach(function(id){var x=byId[id], el=keep[id];
         if(el){ el.classList.remove('just'); delete keep[id]; }
         else{ var t=document.createElement('div');
-          t.innerHTML='<div class="ptag'+(just===id?' just':'')+'" data-sid="'+id+'"><span class="pin" aria-hidden="true"></span><span class="catno" aria-hidden="true">No. '+x.no+'</span><button type="button" class="ptag-q" aria-label="'+esc('Return to the pile: \u201C'+x.q+'\u201D')+'">'+quoted(x.q)+'</button>'+specHTML(x.no)+'<span class="back">'+esc(x.n)+'</span></div>';
+          var ix=S.indexOf(x);
+          t.innerHTML='<div class="ptag'+(just===id?' just':'')+'" data-sid="'+id+'" style="--mr:'+((rnd(ix,7)-.5)*3).toFixed(1)+'deg"><button type="button" class="ptag-q" aria-label="'+esc('Return to the pile: \u201C'+x.q+'\u201D')+'">'+labelHTML(x,ix,true)+'</button>'+specHTML(x.no)+'<span class="back">'+esc(x.n)+'</span></div>';
           el=t.firstChild; }
         box.appendChild(el);
       });
@@ -593,7 +647,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   var tallyWanted=false, caseVisible=false;
   function syncTally(){ $('tally').hidden=!(tallyWanted && !caseVisible); }
   if('IntersectionObserver' in window){
-    new IntersectionObserver(function(es){ caseVisible=es[0].isIntersecting; syncTally(); },{threshold:0.25}).observe($('case'));
+    new IntersectionObserver(function(es){ caseVisible=es[0].isIntersecting; syncTally(); },{threshold:0,rootMargin:'0px 0px -40% 0px'}).observe($('case'));
   }
   var bayNames=['Healthy','Settled','Dysfunctional'];
   function toggle(e){
@@ -627,7 +681,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   render();
   // warm the engravings once the reader reaches for the pile, not for everyone who only reads the page
   var preDone=false, pre=function(){ if(preDone) return; preDone=true;
-    Object.keys(SP).forEach(function(no){var im=new Image(); im.src=specSrc(no);});};
+    Object.keys(SP).forEach(function(no){var im=new Image(); im.src=specSrc(no);});
+    ['mount','label-pin'].forEach(function(f){var im=new Image(); im.src=LB+f+'.webp';});};
   ['pointerover','focusin','touchstart'].forEach(function(ev){$('field').addEventListener(ev,pre,{once:true,passive:true});});
 })();
 </script>
